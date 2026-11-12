@@ -31,7 +31,7 @@
 
     const list = document.getElementById('list');
 
-    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${dir}?ref=${branch}`)
+    fetch(`https://api.github.com/repos/${owner}/${repo}/contents${dir ? '/' + dir : ''}?ref=${branch}`, { headers: { Accept: 'application/vnd.github+json' } })
       .then(r => { if (!r.ok) throw new Error('GitHub API: ' + r.status); return r.json(); })
       .then(files => {
         const pages = files
@@ -53,7 +53,8 @@
         }
       })
       .catch(err => {
-        list.innerHTML = '<li class="info">Nie udało się pobrać listy: ' + err.message + '</li>';
+        console.error(err);
+        list.innerHTML = '<li class="info">Nie udało się pobrać listy: ' + err.message + ' (' + owner + '/' + repo + '/' + dir + ')</li>';
       });
   </script>
 </body>
