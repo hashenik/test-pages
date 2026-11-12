@@ -1,1 +1,60 @@
-strony testowe
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strony testowe</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }
+    h1 { font-size: 1.5rem; }
+    ul { list-style: none; padding: 0; }
+    li { border-bottom: 1px solid #ddd; }
+    a { display: block; padding: .75rem .25rem; text-decoration: none; color: #0969da; }
+    a:hover { background: #f3f4f6; }
+    .info { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Strony testowe</h1>
+  <ul id="list"><li class="info">Ładowanie…</li></ul>
+
+  <script>
+    // Domyślnie wykrywane z adresu https://<owner>.github.io/<repo>/...
+    // Przy własnej domenie wpisz wartości ręcznie.
+    const parts  = location.pathname.split('/').filter(Boolean);
+    const owner  = location.hostname.endsWith('.github.io') ? location.hostname.split('.')[0] : 'hashenik';
+    const repo   = location.hostname.endsWith('.github.io') && parts[0] ? parts[0] : 'test-pages';
+    const branch = 'main';
+
+    // Folder, w którym leży ten index.html (pusty = katalog główny repo)
+    const dir = parts.slice(1).filter(p => !p.endsWith('.html')).join('/');
+
+    const list = document.getElementById('list');
+
+    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${dir}?ref=${branch}`)
+      .then(r => { if (!r.ok) throw new Error('GitHub API: ' + r.status); return r.json(); })
+      .then(files => {
+        const pages = files
+          .filter(f => f.type === 'file' && /\.html?$/i.test(f.name) && !/^index\.html?$/i.test(f.name))
+          .sort((a, b) => a.name.localeCompare(b.name, 'pl'));
+
+        list.innerHTML = '';
+        if (!pages.length) {
+          list.innerHTML = '<li class="info">Brak stron testowych.</li>';
+          return;
+        }
+        for (const f of pages) {
+          const a = document.createElement('a');
+          a.href = encodeURIComponent(f.name);
+          a.textContent = f.name.replace(/\.html?$/i, '');
+          const li = document.createElement('li');
+          li.appendChild(a);
+          list.appendChild(li);
+        }
+      })
+      .catch(err => {
+        list.innerHTML = '<li class="info">Nie udało się pobrać listy: ' + err.message + '</li>';
+      });
+  </script>
+</body>
+</html>
