@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nova Łazienna, Toruń | Zabytkowa oficyna na Starym Mieście | Prototyp</title>
+<meta name="description" content="Nova Łazienna: butikowa rewitalizacja zabytkowej oficyny przy ul. Łazienna 24A na Starym Mieście w Toruniu. Lokale, galeria, lokalizacja i kontakt z biurem sprzedaży Inside Park.">
+<meta name="robots" content="noindex"><!-- prototyp: w produkcji usunąć -->
+<link rel="canonical" href="https://insidepark.pl/inwestycje/lazienna-24a/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Nova Łazienna, Toruń">
+<meta property="og:description" content="Zabytkowa oficyna na Starym Mieście w Toruniu. Historia w nowej formie.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232C4747'/%3E%3Cpath d='M18 50V26a14 14 0 0 1 28 0v24' fill='none' stroke='%23ECEAE3' stroke-width='3'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-style='italic' font-size='17' text-anchor='middle' fill='%23ECEAE3'%3E24a%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Instrument+Sans:wght@400..600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ApartmentComplex","name":"Nova Łazienna",
+ "address":{"@type":"PostalAddress","streetAddress":"ul. Łazienna 24A","postalCode":"87-100","addressLocality":"Toruń","addressCountry":"PL"},
+ "geo":{"@type":"GeoCoordinates","latitude":53.009782,"longitude":18.588683}}
+</script>
+<style>
+/* Nova Łazienna · kierunek „Podwórze”
+   Układ: album architektoniczny na 12 kolumnach; pionowe kadry (wąska oficyna), numer adresowy 24a jako znak. */
+:root{
+  --tynk:#ECEAE3;        /* tło: tynk wapienny, chłodny */
+  --kamien:#DDDBD0;      /* powierzchnia alternatywna */
+  --atrament:#1C2727;    /* tekst */
+  --wisla:#2C4747;       /* kolor główny: zieleń wiślana */
+  --wisla-noc:#1A2A2A;   /* sekcje ciemne */
+  --zendrowka:#8C3D2B;   /* akcent: cegła zendrówka */
+  --linia:rgba(28,39,39,.18);
+  --mgla:#5A6665;        /* tekst pomocniczy */
+  --st-dostepny:#2B6449; --st-rezerwacja:#8A5E0C; --st-sprzedany:#6C7371;
+  --display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+  --gutter:clamp(18px,4vw,56px);
+  --max:1320px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--tynk);color:var(--atrament);font:400 clamp(1rem,.96rem + .2vw,1.09rem)/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,p,figure,dl,dd,ul,ol{margin:0;padding:0}
+ul,ol{list-style:none}
+h1,h2,h3{font-family:var(--display);font-weight:340;line-height:1.04;letter-spacing:-.015em;text-wrap:balance;font-variation-settings:"opsz" 144}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--zendrowka);outline-offset:3px}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
+.skip{position:absolute;left:-999px;top:0;background:var(--atrament);color:var(--tynk);padding:10px 16px;z-index:100}
+.skip:focus{left:8px;top:8px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* etykiety */
+.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mgla);font-weight:500}
+.chip{display:inline-block;font-size:.64rem;letter-spacing:.12em;font-weight:600;padding:2px 6px;border:1px solid currentColor;color:var(--zendrowka);vertical-align:middle;line-height:1.3}
+
+/* przyciski */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:48px;padding:0 1.5em;border:1px solid var(--wisla);background:var(--wisla);color:var(--tynk);text-decoration:none;font-weight:500;font-size:.95rem;cursor:pointer;transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.btn:hover{background:var(--wisla-noc);border-color:var(--wisla-noc)}
+.btn--ghost{background:transparent;color:var(--atrament);border-color:var(--atrament)}
+.btn--ghost:hover{background:var(--atrament);color:var(--tynk)}
+.btn--jasny{background:var(--tynk);color:var(--wisla-noc);border-color:var(--tynk)}
+.btn--jasny:hover{background:transparent;color:var(--tynk);border-color:var(--tynk)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.link{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:2px;transition:background-size .3s var(--ease)}
+.link:hover{background-size:0 1px;background-position:100% 100%}
+
+/* pasek prototypu */
+.proto{background:var(--wisla-noc);color:var(--tynk);font-size:.78rem;padding:7px var(--gutter);text-align:center}
+.proto b{font-weight:600;letter-spacing:.1em}
+
+/* nawigacja */
+.top{position:sticky;top:0;z-index:40;background:rgba(236,234,227,.93);backdrop-filter:blur(8px);border-bottom:1px solid transparent;transition:border-color .3s}
+.top.is-scrolled{border-color:var(--linia)}
+.top__in{display:flex;align-items:center;gap:24px;min-height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.brand svg{width:34px;height:40px;flex:none}
+.brand__name{font-family:var(--display);font-size:1.25rem;letter-spacing:-.01em;line-height:1}
+.brand__sub{display:block;font:500 .62rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--mgla);margin-top:5px}
+.nav{display:flex;gap:26px;font-size:.9rem}
+.nav a{text-decoration:none;padding:12px 0;position:relative}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:var(--zendrowka);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1)}
+.top .btn{min-height:42px;font-size:.86rem}
+.burger{display:none;width:48px;height:48px;border:1px solid var(--linia);background:none;cursor:pointer;align-items:center;justify-content:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:20px;height:1.5px;background:var(--atrament);position:relative;transition:transform .3s var(--ease),background .2s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+@media (max-width:1020px){
+  .burger{display:flex}
+  .top .btn{display:none}
+  .nav{position:fixed;inset:0;top:var(--top-h,100px);background:var(--tynk);flex-direction:column;gap:0;padding:12px var(--gutter) 40px;overflow:auto;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s}
+  .nav.is-open{opacity:1;transform:none;visibility:visible}
+  .nav a{font-family:var(--display);font-size:1.9rem;padding:16px 0;border-bottom:1px solid var(--linia)}
+  .nav a::after{display:none}
+  .nav .nav__cta{display:flex;margin-top:28px;font-family:var(--body);font-size:1rem;border:1px solid var(--wisla);background:var(--wisla);color:var(--tynk);justify-content:center;min-height:52px;align-items:center}
+}
+@media (min-width:1021px){.nav .nav__cta{display:none}}
+
+/* sloty na fotografie */
+.slot{position:relative;aspect-ratio:var(--ar,2/3);background:var(--ton,var(--kamien));overflow:hidden;display:block;width:100%;border:0;padding:0;text-align:left;color:var(--atrament)}
+.slot::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 22px,rgba(28,39,39,.045) 22px 23px)}
+.slot::after{content:"";position:absolute;inset:14px;border:1px solid rgba(28,39,39,.22);pointer-events:none}
+.slot__meta{position:absolute;left:28px;right:28px;bottom:26px;display:grid;gap:4px}
+.slot__no{position:absolute;left:28px;top:24px;font-size:.68rem;letter-spacing:.16em;font-weight:500}
+.slot__t{font-family:var(--display);font-size:clamp(1.05rem,1rem + .5vw,1.4rem);line-height:1.15}
+.slot__f{font-size:.7rem;color:var(--mgla);word-break:break-all}
+.slot--ciemny{--ton:var(--wisla);color:var(--tynk)}
+.slot--ciemny::before{background:repeating-linear-gradient(135deg,transparent 0 22px,rgba(236,234,227,.06) 22px 23px)}
+.slot--ciemny::after{border-color:rgba(236,234,227,.3)}
+.slot--ciemny .slot__f{color:rgba(236,234,227,.7)}
+.slot--cegla{--ton:#C9B7A6}
+.slot--mgla{--ton:#CBD0CB}
+button.slot{cursor:zoom-in}
+button.slot .slot__in{position:absolute;inset:0;transition:transform .6s var(--ease)}
+button.slot:hover .slot__in{transform:scale(1.025)}
+
+/* HERO */
+.hero{padding-block:clamp(28px,5vw,64px) clamp(56px,8vw,112px)}
+.hero__grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;align-items:end}
+.hero__txt{grid-column:1/8;padding-bottom:clamp(0px,3vw,40px);position:relative;z-index:2}
+.hero__fig{grid-column:8/13;position:relative}
+.hero h1{font-size:clamp(3.4rem,1.2rem + 9.2vw,9.6rem);font-weight:300;letter-spacing:-.035em;line-height:.9;margin:22px 0 0}
+.hero h1 em{font-style:italic;font-weight:300;display:block;padding-left:.55em}
+.hero__fig .slot__meta{bottom:auto;top:54px}
+.hero__lead{font-family:var(--display);font-size:clamp(1.3rem,1.1rem + 1vw,1.9rem);line-height:1.25;font-style:italic;margin-top:clamp(24px,3vw,40px);color:var(--wisla)}
+.hero__p{max-width:44ch;margin-top:16px;color:#33403F}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero__by{margin-top:36px;padding-top:16px;border-top:1px solid var(--linia);display:flex;flex-wrap:wrap;gap:8px 28px;font-size:.84rem;color:var(--mgla)}
+.hero__no{position:absolute;left:-.42em;bottom:-.2em;font:italic 300 clamp(6rem,3rem + 11vw,13.5rem)/.8 var(--display);font-variation-settings:"opsz" 144;color:var(--zendrowka);letter-spacing:-.05em;pointer-events:none;z-index:3}
+@media (max-width:860px){
+  .hero__grid{display:block}
+  .hero__fig{margin:28px 0 56px;width:min(100%,460px);margin-left:auto}
+  .hero__fig .slot{--ar:4/5}
+  .hero__no{left:-.1em}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero__txt>*{animation:wejscie .7s var(--ease) both}
+  .hero__txt>*:nth-child(2){animation-delay:.08s}.hero__txt>*:nth-child(3){animation-delay:.16s}
+  .hero__txt>*:nth-child(4){animation-delay:.22s}.hero__txt>*:nth-child(5){animation-delay:.28s}.hero__txt>*:nth-child(6){animation-delay:.34s}
+  .hero__fig .slot{animation:odslona .9s var(--ease) both}
+  .hero__no{animation:wejscie .9s .35s var(--ease) both}
+  @keyframes wejscie{from{opacity:0;transform:translateY(14px)}}
+  @keyframes odslona{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+}
+
+/* sekcje */
+.sec{padding-block:clamp(64px,9vw,136px)}
+.sec--kamien{background:var(--kamien)}
+.sec--noc{background:var(--wisla-noc);color:var(--tynk)}
+.sec--noc .eyebrow,.sec--noc .mgla{color:rgba(236,234,227,.66)}
+.head{display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;margin-bottom:clamp(32px,5vw,72px);align-items:end}
+.head__no{grid-column:1/3;font:italic 300 clamp(2.6rem,2rem + 3vw,5rem)/.9 var(--display);color:var(--zendrowka)}
+.sec--noc .head__no{color:#D9A08E}
+.head__t{grid-column:3/10}
+.head h2{font-size:clamp(2.1rem,1.3rem + 3.6vw,4.6rem);margin-top:12px}
+.head__a{grid-column:10/13;justify-self:end;font-size:.9rem}
+@media (max-width:760px){.head{display:block}.head__no{margin-bottom:14px}.head__a{margin-top:18px;display:inline-block}}
+.mgla{color:var(--mgla)}
+.prose p{max-width:62ch}
+.prose p+p{margin-top:1.1em}
+.prose .lead{font-family:var(--display);font-size:clamp(1.35rem,1.1rem + 1.1vw,2rem);line-height:1.28;font-weight:340;max-width:30ch}
+
+/* 01 inwestycja */
+.intro{display:grid;grid-template-columns:repeat(12,1fr);gap:40px 24px}
+.intro__a{grid-column:3/8}
+.intro__b{grid-column:9/13}
+.facts{border-top:1px solid var(--atrament)}
+.facts div{display:grid;grid-template-columns:9.5em 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--linia);font-size:.94rem}
+.facts dt{color:var(--mgla);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding-top:.25em}
+.note{font-size:.8rem;color:var(--mgla);margin-top:12px;max-width:52ch}
+.ways{grid-column:3/13;display:grid;grid-template-columns:1.25fr 1fr 1fr;border-top:1px solid var(--atrament);margin-top:clamp(16px,3vw,40px)}
+.ways li{padding:26px 28px 6px 0;border-right:1px solid var(--linia)}
+.ways li+li{padding-left:28px}
+.ways li:last-child{border-right:0}
+.ways b{display:block;font:340 1.6rem/1.1 var(--display);margin:10px 0 10px}
+.ways span{font-size:.72rem;letter-spacing:.14em;color:var(--zendrowka);font-weight:600}
+.ways p{font-size:.93rem;color:#33403F}
+@media (max-width:900px){
+  .intro__a,.intro__b,.ways{grid-column:1/-1}
+  .ways{grid-template-columns:1fr}
+  .ways li,.ways li+li{padding:22px 0;border-right:0;border-bottom:1px solid var(--linia)}
+}
+
+/* 02 historia */
+.story{display:grid;grid-template-columns:repeat(12,1fr);gap:48px 24px;align-items:start}
+.story__fig{grid-column:1/5;position:sticky;top:100px}
+.story__txt{grid-column:6/12}
+.story__txt>p:first-of-type::first-letter{font:300 4.6em/.78 var(--display);float:left;padding:.08em .1em 0 0;color:#D9A08E}
+.tl{margin-top:48px;border-top:1px solid rgba(236,234,227,.28)}
+.tl li{display:grid;grid-template-columns:8.5em 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(236,234,227,.16)}
+.tl time,.tl .when{font:italic 340 1.35rem/1.1 var(--display)}
+.tl p{font-size:.94rem}
+.tl .todo{color:rgba(236,234,227,.62)}
+.tl .todo .when{font:500 .68rem/1.5 var(--body);letter-spacing:.14em;text-transform:uppercase;border:1px dashed rgba(236,234,227,.5);padding:3px 7px;justify-self:start;align-self:start}
+@media (max-width:900px){.story__fig{grid-column:1/-1;position:static;max-width:380px}.story__txt{grid-column:1/-1}}
+@media (max-width:480px){.tl li{grid-template-columns:1fr;gap:6px}}
+
+/* 03 galeria */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tab{min-height:44px;padding:0 18px;border:1px solid var(--linia);background:none;cursor:pointer;font-size:.88rem;transition:background .25s,color .25s,border-color .25s}
+.tab[aria-pressed="true"]{background:var(--atrament);color:var(--tynk);border-color:var(--atrament)}
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start}
+.gal>li{grid-column:span 3}
+.gal>li.w5{grid-column:span 5}.gal>li.w4{grid-column:span 4}.gal>li.w6{grid-column:span 6}
+.gal>li.d1{margin-top:72px}
+.gal>li[hidden]{display:none}
+.gal.is-filtered>li{grid-column:span 4;margin-top:0}
+@media (max-width:900px){.gal{gap:14px}.gal>li,.gal>li.w5,.gal>li.w4,.gal>li.w6,.gal.is-filtered>li{grid-column:span 6;margin-top:0}.gal>li.w6{grid-column:1/-1}}
+@media (max-width:520px){.gal>li.w5{grid-column:1/-1}.slot__meta,.slot__no{left:20px;right:20px}}
+.film{margin-top:40px;padding-top:22px;border-top:1px solid var(--linia);display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;justify-content:space-between}
+
+/* 04 lokale */
+.demo-bar{border:1px solid var(--zendrowka);padding:16px 20px;display:flex;gap:16px;align-items:flex-start;margin-bottom:28px;background:rgba(140,61,43,.05)}
+.demo-bar p{font-size:.9rem;max-width:78ch}
+.filters{display:grid;grid-template-columns:1.4fr repeat(3,1fr) 1.2fr 1fr 1.2fr auto;gap:12px;align-items:end;margin-bottom:8px}
+.f label,.f legend{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mgla);margin-bottom:6px;font-weight:500;padding:0}
+.f fieldset{border:0;padding:0;margin:0;min-width:0}
+.f input,.f select,.form input,.form select,.form textarea{width:100%;min-height:46px;padding:0 12px;border:1px solid rgba(28,39,39,.4);background:rgba(255,255,255,.45);border-radius:0;transition:border-color .2s,background .2s}
+.f input:hover,.f select:hover,.form input:hover,.form select:hover,.form textarea:hover{border-color:var(--atrament)}
+.range{display:flex;gap:6px;align-items:center}
+.f-toggle{display:none}
+.bar{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:center;padding:16px 0;font-size:.88rem}
+.states{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--mgla)}
+.states button{min-height:32px;padding:0 10px;border:1px dashed var(--mgla);background:none;cursor:pointer;font-size:.76rem}
+.states button[aria-pressed="true"]{border-style:solid;background:var(--atrament);color:var(--tynk);border-color:var(--atrament)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto}
+th{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mgla);font-weight:500;text-align:left;padding:0;border-bottom:1px solid var(--atrament);white-space:nowrap}
+th button{all:unset;cursor:pointer;display:flex;gap:6px;align-items:center;padding:14px 12px 12px 0;width:100%;box-sizing:border-box}
+th button:focus-visible{outline:2px solid var(--zendrowka)}
+th button::after{content:"↕";opacity:.35;font-size:.9em}
+th[aria-sort="ascending"] button::after{content:"↑";opacity:1;color:var(--zendrowka)}
+th[aria-sort="descending"] button::after{content:"↓";opacity:1;color:var(--zendrowka)}
+th.plain{padding:14px 12px 12px 0}
+td{padding:18px 12px 18px 0;border-bottom:1px solid var(--linia);vertical-align:middle}
+td.num,th.num{text-align:right}
+th.num button{justify-content:flex-end}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:rgba(255,255,255,.4)}
+.u-no{font:340 1.5rem/1 var(--display)}
+.st{display:inline-flex;align-items:center;gap:8px;font-size:.84rem;white-space:nowrap}
+.st::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor}
+.st--dostepny{color:var(--st-dostepny)}
+.st--zarezerwowany{color:var(--st-rezerwacja)}.st--zarezerwowany::before{border-radius:0;transform:rotate(45deg)}
+.st--sprzedany{color:var(--st-sprzedany)}.st--sprzedany::before{background:none;border:1.5px solid currentColor}
+tr.is-sold td:not(:last-child){color:var(--st-sprzedany)}
+.more{all:unset;cursor:pointer;font-size:.86rem;font-weight:500;padding:12px 0;white-space:nowrap;border-bottom:1px solid currentColor;line-height:1}
+.more:focus-visible{outline:2px solid var(--zendrowka);outline-offset:3px}
+.cards{display:none}
+.card{border-top:1px solid var(--atrament);padding:20px 0 26px}
+.card__h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.card dl{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin:16px 0 18px;font-variant-numeric:tabular-nums}
+.card dt{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mgla)}
+.card .btn{width:100%}
+.state{border-top:1px solid var(--atrament);padding:56px 0;text-align:left;max-width:52ch}
+.state h3{font-size:1.9rem;margin-bottom:10px}
+.state .btn{margin-top:20px}
+.skel div{height:62px;border-bottom:1px solid var(--linia);position:relative;overflow:hidden}
+.skel div::before{content:"";position:absolute;left:0;top:22px;height:18px;width:70%;background:linear-gradient(90deg,rgba(28,39,39,.08),rgba(28,39,39,.16),rgba(28,39,39,.08));background-size:200% 100%}
+@media (prefers-reduced-motion:no-preference){.skel div::before{animation:sk 1.2s linear infinite}@keyframes sk{to{background-position:-200% 0}}}
+.legal{font-size:.8rem;color:var(--mgla);margin-top:22px;max-width:86ch}
+@media (max-width:1100px){.filters{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:760px){
+  .tw{display:none}.cards{display:block}
+  .f-toggle{display:flex;width:100%;margin-bottom:12px}
+  .filters{grid-template-columns:1fr 1fr;display:none}
+  .filters.is-open{display:grid}
+  .filters .f--wide{grid-column:1/-1}
+}
+
+/* okna dialogowe */
+dialog{border:0;padding:0;background:var(--tynk);color:var(--atrament);max-width:none;max-height:none}
+dialog::backdrop{background:rgba(20,30,30,.72)}
+.x{position:absolute;right:10px;top:10px;width:48px;height:48px;border:0;background:none;cursor:pointer;font-size:1.6rem;line-height:1;z-index:2;color:inherit}
+#unit{width:min(920px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto}
+.unit{display:grid;grid-template-columns:1fr 1fr}
+.unit__plan{padding:20px}
+.unit__plan .slot{--ar:1/1}
+.unit__b{padding:44px 36px 32px 16px}
+.unit__b h3{font-size:2.6rem;margin:8px 0 18px}
+.unit__b .facts div{grid-template-columns:8.5em 1fr;padding:10px 0}
+.unit__act{display:grid;gap:10px;margin-top:22px}
+@media (max-width:720px){.unit{grid-template-columns:1fr}.unit__b{padding:8px 20px 24px}.unit__plan{padding:56px 20px 12px}}
+#lb{width:100vw;height:100dvh;background:var(--wisla-noc);color:var(--tynk)}
+#lb[open]{display:grid;grid-template-rows:1fr auto;grid-template-columns:auto 1fr auto;align-items:center}
+.lb__stage{grid-column:2;display:flex;justify-content:center;align-items:center;height:100%;padding:60px 8px 8px;min-height:0;touch-action:pan-y}
+.lb__stage .slot{height:100%;width:auto;max-width:100%}
+.lb__nav{width:56px;height:56px;margin:0 clamp(4px,2vw,24px);border:1px solid rgba(236,234,227,.4);background:none;color:inherit;font-size:1.3rem;cursor:pointer;transition:background .25s,color .25s}
+.lb__nav:hover{background:var(--tynk);color:var(--wisla-noc)}
+.lb__cap{grid-column:1/-1;display:flex;justify-content:space-between;gap:20px;padding:14px var(--gutter) 20px;font-size:.86rem}
+@media (max-width:600px){.lb__nav{position:absolute;bottom:64px;z-index:2}.lb__nav--p{left:8px}.lb__nav--n{right:8px}.lb__stage{grid-column:1/-1;padding-bottom:76px}}
+@media (prefers-reduced-motion:no-preference){dialog[open]{animation:dlg .35s var(--ease)}@keyframes dlg{from{opacity:0;transform:translateY(10px)}}}
+
+/* 05 lokalizacja */
+.loc{display:grid;grid-template-columns:repeat(12,1fr);gap:40px 24px;align-items:start}
+.loc__map{grid-column:1/8;background:var(--tynk);border:1px solid var(--linia)}
+.loc__txt{grid-column:9/13}
+.loc__map figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;padding:14px 18px;border-top:1px solid var(--linia);font-size:.82rem}
+.map text{font-family:var(--body);fill:var(--atrament)}
+.poi{margin-top:28px;border-top:1px solid var(--atrament)}
+.poi li{padding:13px 0;border-bottom:1px solid var(--linia);display:flex;justify-content:space-between;gap:16px;font-size:.95rem}
+.poi span{color:var(--mgla);font-size:.8rem;text-align:right}
+.addr{font:340 clamp(1.5rem,1.2rem + 1vw,2.1rem)/1.15 var(--display);margin:10px 0 18px}
+@media (max-width:900px){.loc__map,.loc__txt{grid-column:1/-1}}
+
+/* 06 kontakt */
+.kontakt{display:grid;grid-template-columns:repeat(12,1fr);gap:48px 24px}
+.kontakt__a{grid-column:1/6}
+.kontakt__b{grid-column:7/13}
+.adv{display:grid;gap:0;border-top:1px solid rgba(236,234,227,.3);margin-top:28px}
+.adv li{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid rgba(236,234,227,.16);align-items:center}
+.adv__ph{width:64px;height:64px;border:1px dashed rgba(236,234,227,.5);display:grid;place-items:center;font:italic 340 1.3rem var(--display)}
+.adv b{font:340 1.4rem/1.1 var(--display);display:block}
+.adv small{color:rgba(236,234,227,.66);font-size:.8rem}
+.adv a{font-size:.86rem;display:inline-block;margin-top:6px}
+.tel{margin-top:28px;display:grid;gap:10px}
+.tel a{font:340 clamp(1.5rem,1.2rem + 1vw,2rem)/1.1 var(--display);text-decoration:none;font-variant-numeric:tabular-nums}
+.tel a:hover{color:#D9A08E}
+.tel small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(236,234,227,.66);margin-bottom:2px}
+.form{background:var(--tynk);color:var(--atrament);padding:clamp(22px,3.4vw,44px);display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form h3{grid-column:1/-1;font-size:1.9rem;margin-bottom:4px}
+.form .full{grid-column:1/-1}
+.form label{display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mgla);margin-bottom:6px;font-weight:500}
+.form textarea{min-height:112px;padding:10px 12px;resize:vertical}
+.form [aria-invalid="true"]{border-color:#A3261B;background:#fff}
+.err{color:#A3261B;font-size:.8rem;margin-top:5px;min-height:0}
+.ck{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;font-size:.84rem;line-height:1.45}
+.ck input{width:22px;height:22px;min-height:0;margin:1px 0 0;accent-color:var(--wisla)}
+.ck label{all:unset;cursor:pointer}
+.form__msg{grid-column:1/-1;border:1px solid var(--zendrowka);padding:14px 16px;font-size:.9rem;background:rgba(140,61,43,.05)}
+.form__msg[hidden]{display:none}
+@media (max-width:900px){.kontakt__a,.kontakt__b{grid-column:1/-1}}
+@media (max-width:520px){.form{grid-template-columns:1fr}}
+
+/* stopka */
+.foot{padding:56px 0 40px;font-size:.88rem;border-top:1px solid var(--linia)}
+.foot__g{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px 24px}
+.foot h3{font:500 .7rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--mgla);margin-bottom:14px}
+.foot__ip{font:340 1.7rem/1.1 var(--display)}
+.foot li{padding:3px 0}
+.foot details{margin-top:40px;border-top:1px solid var(--linia);padding-top:18px}
+.foot summary{cursor:pointer;font-weight:500;padding:8px 0}
+.foot details ul{list-style:disc;padding-left:1.2em;margin-top:10px;color:#33403F;max-width:86ch}
+.foot details li{padding:4px 0}
+.foot__end{margin-top:32px;color:var(--mgla);font-size:.78rem;display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between}
+@media (max-width:760px){.foot__g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+<div class="proto" role="note"><b>PROTOTYP</b> · dane lokali oznaczone DEMO nie są ofertą · formularz nie wysyła wiadomości · zdjęcia do osadzenia</div>
+
+<header class="top" id="top">
+  <div class="wrap top__in">
+    <a class="brand" href="#tresc" aria-label="Nova Łazienna, początek strony">
+      <svg viewBox="0 0 34 40" aria-hidden="true"><path d="M3 39V15a14 14 0 0 1 28 0v24" fill="none" stroke="#2C4747" stroke-width="1.4"/><path d="M0 39.3h34" stroke="#2C4747" stroke-width="1.4"/><text x="17" y="33" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="12.5" fill="#8C3D2B">24a</text></svg>
+      <span><span class="brand__name">Nova Łazienna</span><span class="brand__sub">Toruń · Stare Miasto</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Główna">
+      <a href="#inwestycja">Inwestycja</a>
+      <a href="#historia">Historia</a>
+      <a href="#galeria">Architektura</a>
+      <a href="#lokale">Lokale</a>
+      <a href="#lokalizacja">Lokalizacja</a>
+      <a href="#kontakt">Kontakt</a>
+      <a class="nav__cta" href="#kontakt">Zapytaj o dostępność</a>
+    </nav>
+    <a class="btn" href="#kontakt">Zapytaj o dostępność</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span></span></button>
+  </div>
+</header>
+
+<main id="tresc">
+
+<!-- MODUŁ 01 · HERO, wariant C/B: Architectural Frame w układzie editorial split -->
+<section class="hero wrap" aria-labelledby="h1">
+  <div class="hero__grid">
+    <div class="hero__txt">
+      <p class="eyebrow">ul. Łazienna 24A · Stare Miasto · Toruń</p>
+      <h1 id="h1">Nova <em>Łazienna</em></h1>
+      <p class="hero__lead">Historia w nowej formie.</p>
+      <p class="hero__p">Zabytkowa oficyna w podwórzu toruńskiej Starówki, odrestaurowana z zachowaniem historycznych detali i podzielona na lokale dla inwestorów oraz nabywców indywidualnych.</p>
+      <div class="hero__cta">
+        <a class="btn" href="#lokale">Zobacz dostępne lokale</a>
+        <a class="btn btn--ghost" href="#inwestycja">Poznaj inwestycję</a>
+      </div>
+      <p class="hero__by"><span>Inwestycja Inside Park</span><span>Butikowa rewitalizacja</span></p>
+    </div>
+    <div class="hero__fig">
+      <figure class="slot slot--ciemny" style="--ar:3/4">
+        <span class="slot__no">FOT. 01</span>
+        <figcaption class="slot__meta"><span class="slot__t">Miejsce na zdjęcie główne budynku</span><span class="slot__f">materiał źródłowy: lazienna-24-final.png</span></figcaption>
+      </figure>
+      <span class="hero__no" aria-hidden="true">24a</span>
+    </div>
+  </div>
+</section>
+
+<!-- MODUŁ 02 · WPROWADZENIE -->
+<section class="sec sec--kamien" id="inwestycja" aria-labelledby="h-inw">
+  <div class="wrap">
+    <div class="head">
+      <span class="head__no" aria-hidden="true">01</span>
+      <div class="head__t"><p class="eyebrow">Inwestycja</p><h2 id="h-inw">Dom w drugiej linii zabudowy, pierwszy adres w mieście</h2></div>
+    </div>
+    <div class="intro">
+      <div class="intro__a prose">
+        <p class="lead">Z ulicy widać tylko bramę. Nova Łazienna stoi za nią, w podwórzu, kilka minut spacerem od Rynku Staromiejskiego i wiślanego bulwaru.</p>
+        <p>To niewielka, butikowa rewitalizacja zabytkowej oficyny w historycznym centrum Torunia. Budynek odrestaurowano z dbałością o detale konserwatorskie i wyposażono we współczesne rozwiązania techniczne.</p>
+        <p>Takich adresów na Starym Mieście nie przybywa. Liczba lokali w historycznej zabudowie jest ograniczona, a każdy z nich ma własny układ i charakter. Dlatego inwestycja jest adresowana przede wszystkim do osób, które szukają nieruchomości pod wynajem i myślą o kapitale w długim horyzoncie.</p>
+      </div>
+      <div class="intro__b">
+        <dl class="facts">
+          <div><dt>Adres</dt><dd>ul. Łazienna 24A, 87-100 Toruń</dd></div>
+          <div><dt>Dzielnica</dt><dd>Stare Miasto</dd></div>
+          <div><dt>Budynek</dt><dd>Zabytkowa oficyna po rewitalizacji</dd></div>
+          <div><dt>Lokale</dt><dd>8 lokali<sup>*</sup></dd></div>
+          <div><dt>Sprzedaż</dt><dd>Inside Park S.A.</dd></div>
+        </dl>
+        <p class="note"><sup>*</sup> Liczba lokali wg ogłoszenia sprzedażowego Inside Park. Do potwierdzenia przed publikacją. Parametrów bez potwierdzonych danych (rok budowy, metraż całkowity, standard wykończenia) strona nie wyświetla.</p>
+      </div>
+      <ol class="ways" aria-label="Trzy scenariusze zakupu">
+        <li><span>I</span><b>Pojedynczy lokal</b><p>Zakup jednego lokalu we wspólnocie: na wynajem albo na własny adres na Starówce.</p></li>
+        <li><span>II</span><b>Pakiet inwestycyjny</b><p>Część lokali jest oferowana łącznie, z niezależnymi wejściami.<sup>*</sup></p></li>
+        <li><span>III</span><b>Cały budynek</b><p>Oficyna jako jedna nieruchomość, na przykład pod kameralny obiekt noclegowy.<sup>*</sup></p></li>
+      </ol>
+    </div>
+    <p class="note" style="margin-top:22px">Scenariusze opisują możliwe sposoby zakupu, nie prognozę wyniku finansowego. Inside Park nie gwarantuje stopy zwrotu ani wzrostu wartości nieruchomości.</p>
+  </div>
+</section>
+
+<!-- MODUŁ 03 · HISTORIA MIEJSCA (wersja skrócona: tylko potwierdzone fakty + pola do uzupełnienia) -->
+<section class="sec sec--noc" id="historia" aria-labelledby="h-his">
+  <div class="wrap">
+    <div class="head">
+      <span class="head__no" aria-hidden="true">02</span>
+      <div class="head__t"><p class="eyebrow">Historia miejsca</p><h2 id="h-his">Oficyna, czyli miasto od strony podwórza</h2></div>
+    </div>
+    <div class="story">
+      <div class="story__fig">
+        <figure class="slot slot--ciemny" style="--ar:2/3;--ton:#223636">
+          <span class="slot__no">ARCH. 01</span>
+          <figcaption class="slot__meta"><span class="slot__t">Miejsce na fotografię archiwalną lub detal sprzed rewitalizacji</span><span class="slot__f">materiał do pozyskania</span></figcaption>
+        </figure>
+      </div>
+      <div class="story__txt prose">
+        <p>Oficyna to budynek w głębi działki, za kamienicą frontową. W miastach o średniowiecznym układzie, takich jak Toruń, parcele są wąskie i długie, więc zabudowa rosła w głąb: od ulicy reprezentacyjny front, dalej podwórze, a przy nim skromniejsze, użytkowe skrzydła.</p>
+        <p>Dziś to właśnie one dają coś, czego front nie ma: ciszę. Okna wychodzą na dziedziniec, a nie na turystyczny trakt, choć do bulwaru i Rynku Staromiejskiego jest stąd krótki spacer.</p>
+        <p>Rewitalizacja przy Łaziennej 24A zachowała historyczny charakter budynku i dopisała do niego współczesny standard techniczny. Stare Miasto, w którym stoi, jest częścią średniowiecznego zespołu miejskiego Torunia wpisanego na Listę światowego dziedzictwa UNESCO.</p>
+        <ol class="tl" aria-label="Oś czasu">
+          <li><time datetime="1997">1997</time><p>Średniowieczny zespół miejski Torunia trafia na Listę światowego dziedzictwa UNESCO.</p></li>
+          <li class="todo"><span class="when">Do uzupełnienia</span><p>Datowanie oficyny i jej dawne funkcje. Źródło: kwerenda u Miejskiego Konserwatora Zabytków i w archiwum.</p></li>
+          <li class="todo"><span class="when">Do uzupełnienia</span><p>Zakres i kalendarium prac konserwatorskich: elewacja, klatka schodowa, stolarka.</p></li>
+          <li><span class="when">Dziś</span><p>Budynek odrestaurowany przez Inside Park. Lokale w sprzedaży.</p></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODUŁ 04 + 09 · ARCHITEKTURA I GALERIA -->
+<section class="sec" id="galeria" aria-labelledby="h-gal">
+  <div class="wrap">
+    <div class="head">
+      <span class="head__no" aria-hidden="true">03</span>
+      <div class="head__t"><p class="eyebrow">Architektura i detal</p><h2 id="h-gal">Klatka schodowa, korytarz, światło z podwórza</h2></div>
+    </div>
+    <div class="tabs" role="group" aria-label="Filtr galerii">
+      <button class="tab" data-g="all" aria-pressed="true">Wszystko</button>
+      <button class="tab" data-g="budynek" aria-pressed="false">Budynek i części wspólne</button>
+      <button class="tab" data-g="wnetrza" aria-pressed="false">Wnętrza</button>
+    </div>
+    <ul class="gal" id="gal"></ul>
+    <div class="film">
+      <p class="mgla" style="font-size:.86rem;max-width:60ch">Kadry są pionowe, bo taki jest budynek: wąski i wysoki. Ujęcia wnętrz wymagają oznaczenia, czy są fotografią, czy wizualizacją poglądową.</p>
+      <a class="link" href="https://www.youtube.com/watch?v=dPfqfPVaS8k" target="_blank" rel="noopener">Zobacz film o inwestycji w YouTube ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- MODUŁ 05 · DOSTĘPNE LOKALE -->
+<section class="sec sec--kamien" id="lokale" aria-labelledby="h-lok">
+  <div class="wrap">
+    <div class="head">
+      <span class="head__no" aria-hidden="true">04</span>
+      <div class="head__t"><p class="eyebrow">Dostępne lokale</p><h2 id="h-lok">Osiem lokali, każdy o innym układzie</h2></div>
+      <a class="head__a link" href="#kontakt">Zapytaj o pakiet inwestycyjny</a>
+    </div>
+    <div class="demo-bar" role="note">
+      <span class="chip">DEMO</span>
+      <p><strong>Poniższa lista zawiera dane przykładowe.</strong> Numery, metraże, ceny i statusy nie pochodzą z oferty Inside Park. W wersji produkcyjnej moduł pobiera dane z systemu voxDeveloper (inwestycja nr 7), który pozostaje jedynym źródłem cen i dostępności.</p>
+    </div>
+
+    <button class="btn btn--ghost f-toggle" id="fToggle" aria-expanded="false" aria-controls="filters">Filtry i sortowanie</button>
+    <form class="filters" id="filters" aria-label="Filtry lokali" onsubmit="return false">
+      <div class="f f--wide"><label for="q">Szukaj</label><input id="q" type="search" placeholder="Numer lub typ lokalu" autocomplete="off"></div>
+      <div class="f"><label for="fRooms">Pokoje</label><select id="fRooms"><option value="">Dowolnie</option><option>1</option><option>2</option><option>3</option></select></div>
+      <div class="f"><label for="fFloor">Piętro</label><select id="fFloor"><option value="">Dowolne</option><option value="0">Parter</option><option value="1">1. piętro</option><option value="2">2. piętro</option><option value="3">3. piętro</option></select></div>
+      <div class="f"><label for="fStatus">Status</label><select id="fStatus"><option value="">Wszystkie</option><option value="dostepny">Dostępny</option><option value="zarezerwowany">Zarezerwowany</option><option value="sprzedany">Sprzedany</option></select></div>
+      <div class="f"><fieldset><legend>Metraż, m²</legend><div class="range"><input id="fAmin" type="number" min="0" step="1" inputmode="numeric" placeholder="od" aria-label="Metraż od"><span aria-hidden="true">–</span><input id="fAmax" type="number" min="0" step="1" inputmode="numeric" placeholder="do" aria-label="Metraż do"></div></fieldset></div>
+      <div class="f"><label for="fPrice">Cena do, zł</label><input id="fPrice" type="number" min="0" step="10000" inputmode="numeric" placeholder="bez limitu"></div>
+      <div class="f"><label for="fSort">Sortowanie</label><select id="fSort"><option value="no:1">Numer lokalu</option><option value="price:1">Cena rosnąco</option><option value="price:-1">Cena malejąco</option><option value="area:1">Metraż rosnąco</option><option value="area:-1">Metraż malejąco</option><option value="floor:1">Piętro rosnąco</option></select></div>
+      <div class="f"><button type="button" class="btn btn--ghost" id="fReset">Wyczyść</button></div>
+    </form>
+
+    <div class="bar">
+      <p id="count" aria-live="polite"></p>
+      <div class="states" role="group" aria-label="Podgląd stanów modułu (narzędzie prototypu)">
+        <span>Stan źródła danych:</span>
+        <button data-s="ok" aria-pressed="true">Dane</button>
+        <button data-s="loading" aria-pressed="false">Ładowanie</button>
+        <button data-s="error" aria-pressed="false">Błąd</button>
+      </div>
+    </div>
+
+    <div id="units" aria-busy="false"></div>
+
+    <p class="legal">Ceny w wersji produkcyjnej: cena całkowita, cena za m², koszty dodatkowe oraz historia zmian ceny, w zakresie wymaganym przepisami o jawności cen dla danego rodzaju transakcji. Zakres obowiązków wymaga weryfikacji prawnej dla tej inwestycji. Prezentowane treści nie stanowią oferty w rozumieniu Kodeksu cywilnego.</p>
+  </div>
+</section>
+
+<!-- MODUŁ 07 · LOKALIZACJA -->
+<section class="sec" id="lokalizacja" aria-labelledby="h-loc">
+  <div class="wrap">
+    <div class="head">
+      <span class="head__no" aria-hidden="true">05</span>
+      <div class="head__t"><p class="eyebrow">Lokalizacja</p><h2 id="h-loc">Między Rynkiem a Wisłą</h2></div>
+    </div>
+    <div class="loc">
+      <figure class="loc__map">
+        <svg class="map" viewBox="0 0 640 440" role="img" aria-labelledby="mapT mapD">
+          <title id="mapT">Schemat położenia inwestycji</title>
+          <desc id="mapD">Ulica Łazienna biegnie od ulicy Szerokiej na południe do Bulwaru Filadelfijskiego nad Wisłą. Na zachód od niej ulica Żeglarska i Rynek Staromiejski, na wschód ulica Mostowa.</desc>
+          <rect width="640" height="440" fill="#ECEAE3"/>
+          <rect y="372" width="640" height="68" fill="#C9D3D0"/>
+          <text x="320" y="414" text-anchor="middle" font-size="15" letter-spacing="7" font-style="italic" style="font-family:Fraunces,Georgia,serif">WISŁA</text>
+          <path d="M0 352H640" stroke="#1C2727" stroke-width="1.2"/>
+          <text x="24" y="342" font-size="11" letter-spacing="1.5">BULWAR FILADELFIJSKI</text>
+          <g stroke="#1C2727" stroke-opacity=".35" stroke-width="1">
+            <path d="M40 96H600"/><path d="M230 96V352"/><path d="M470 96V352"/>
+          </g>
+          <path d="M350 96V352" stroke="#2C4747" stroke-width="2.4"/>
+          <rect x="70" y="26" width="120" height="70" fill="#DDDBD0" stroke="#1C2727" stroke-opacity=".35"/>
+          <text x="130" y="58" text-anchor="middle" font-size="11" letter-spacing="1.2">RYNEK</text>
+          <text x="130" y="74" text-anchor="middle" font-size="11" letter-spacing="1.2">STAROMIEJSKI</text>
+          <rect x="250" y="150" width="78" height="92" fill="none" stroke="#1C2727" stroke-opacity=".35" stroke-dasharray="3 3"/>
+          <text x="289" y="194" text-anchor="middle" font-size="10">Katedra</text>
+          <text x="289" y="208" text-anchor="middle" font-size="10">Świętych Janów</text>
+          <text x="420" y="88" font-size="11" letter-spacing="1.5">UL. SZEROKA</text>
+          <text transform="translate(222 330) rotate(-90)" font-size="11" letter-spacing="1.5">UL. ŻEGLARSKA</text>
+          <text transform="translate(342 330) rotate(-90)" font-size="11" letter-spacing="1.5" font-weight="600">UL. ŁAZIENNA</text>
+          <text transform="translate(462 210) rotate(-90)" font-size="11" letter-spacing="1.5">UL. MOSTOWA</text>
+          <circle cx="350" cy="262" r="20" fill="#8C3D2B" fill-opacity=".14"/>
+          <circle cx="350" cy="262" r="7" fill="#8C3D2B"/>
+          <path d="M357 262H392" stroke="#8C3D2B"/>
+          <text x="398" y="258" font-size="22" font-style="italic" fill="#8C3D2B" style="font-family:Fraunces,Georgia,serif;fill:#8C3D2B">24a</text>
+          <text x="398" y="276" font-size="10.5">Nova Łazienna</text>
+          <g transform="translate(596 44)" fill="none" stroke="#1C2727"><path d="M0 18V-14M-5 -6L0 -14L5 -6"/></g>
+          <text x="596" y="24" text-anchor="middle" font-size="10">N</text>
+        </svg>
+        <figcaption><span class="mgla">Schemat poglądowy, bez skali</span><a class="link" href="https://www.google.com/maps/search/?api=1&query=53.009782,18.588683" target="_blank" rel="noopener">Otwórz w Mapach Google ↗</a></figcaption>
+      </figure>
+      <div class="loc__txt">
+        <p class="eyebrow">Adres</p>
+        <p class="addr">ul. Łazienna 24A<br>87-100 Toruń</p>
+        <p>Łazienna prowadzi ze środka Starego Miasta prosto nad rzekę. Codzienne sprawy załatwia się tu pieszo: zakupy, kawa, kolacja, spacer bulwarem.</p>
+        <ul class="poi">
+          <li>Bulwar Filadelfijski i Wisła <span>spacerem</span></li>
+          <li>Rynek Staromiejski <span>spacerem</span></li>
+          <li>Restauracje i kawiarnie Starówki <span>w sąsiedztwie</span></li>
+          <li>Uczelnie i instytucje kultury <span>w pobliżu</span></li>
+          <li>Komunikacja miejska <span>w pobliżu</span></li>
+        </ul>
+        <p class="note">Strona nie podaje odległości ani czasów dojścia, dopóki nie zostaną zmierzone i potwierdzone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODUŁ 12 · KONTAKT -->
+<section class="sec sec--noc" id="kontakt" aria-labelledby="h-kon">
+  <div class="wrap">
+    <div class="head">
+      <span class="head__no" aria-hidden="true">06</span>
+      <div class="head__t"><p class="eyebrow">Kontakt</p><h2 id="h-kon">Porozmawiaj z doradcą</h2></div>
+    </div>
+    <div class="kontakt">
+      <div class="kontakt__a">
+        <p style="max-width:44ch">Doradczynie Inside Park odpowiedzą na pytania o lokale, pakiet inwestycyjny i warunki zakupu. Budynek można obejrzeć po umówieniu spotkania.</p>
+        <ul class="adv">
+          <li><span class="adv__ph" aria-hidden="true">MA</span><div><b>Magda Ahiejczyk</b><small>Doradca klienta</small><br><a class="link" href="https://calendar.app.google/xbzmk4DUHiefLrx96" target="_blank" rel="noopener">Umów prezentację ↗</a></div></li>
+          <li><span class="adv__ph" aria-hidden="true">WS</span><div><b>Wiktoria Stranc</b><small>Doradca klienta</small><br><a class="link" href="https://calendar.app.google/8SUboierP33L7dv46" target="_blank" rel="noopener">Umów prezentację ↗</a></div></li>
+        </ul>
+        <div class="tel">
+          <div><small>Sprzedaż</small><a href="tel:+48883356426">+48 883 356 426</a></div>
+          <div><small>Sprzedaż</small><a href="tel:+48664995577">+48 664 995 577</a></div>
+          <div><small>E-mail</small><a href="mailto:biuro@insidepark.pl">biuro@insidepark.pl</a></div>
+        </div>
+        <p class="mgla" style="font-size:.86rem;margin-top:24px">Biuro sprzedaży: ul. Prosta 12-14/1, Toruń<br>poniedziałek–piątek, 8:00–16:00</p>
+      </div>
+      <div class="kontakt__b">
+        <form class="form" id="form" novalidate>
+          <h3>Zapytaj o dostępność</h3>
+          <div><label for="cName">Imię i nazwisko</label><input id="cName" name="name" autocomplete="name" required aria-describedby="eName"><p class="err" id="eName"></p></div>
+          <div><label for="cPhone">Telefon (opcjonalnie)</label><input id="cPhone" name="phone" type="tel" autocomplete="tel"></div>
+          <div><label for="cMail">E-mail</label><input id="cMail" name="email" type="email" autocomplete="email" required aria-describedby="eMail"><p class="err" id="eMail"></p></div>
+          <div><label for="cUnit">Czego dotyczy pytanie</label><select id="cUnit" name="unit"><option value="">Cała inwestycja</option><option value="pakiet">Pakiet inwestycyjny</option></select></div>
+          <div class="full"><label for="cMsg">Wiadomość</label><textarea id="cMsg" name="msg"></textarea></div>
+          <div class="full ck"><input type="checkbox" id="cRodo" required aria-describedby="eRodo"><div><label for="cRodo">Zapoznałem(-am) się z informacją o przetwarzaniu danych. Administratorem danych jest Inside Park S.A. Dane posłużą wyłącznie do odpowiedzi na to zapytanie.</label><p class="err" id="eRodo"></p></div></div>
+          <div class="full ck"><input type="checkbox" id="cMkt"><div><label for="cMkt">Chcę otrzymywać informacje handlowe o inwestycjach Inside Park drogą elektroniczną (zgoda dobrowolna, niezależna od zapytania).</label></div></div>
+          <div class="full"><button class="btn" type="submit">Wyślij zapytanie</button></div>
+          <div class="form__msg" id="formMsg" role="status" tabindex="-1" hidden></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- MODUŁ 13 · STOPKA -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__g">
+      <div>
+        <h3>Inwestycja realizowana przez</h3>
+        <p class="foot__ip">Inside Park</p>
+        <p class="mgla" style="margin-top:6px;font-size:.78rem">Miejsce na właściwy logotyp Inside Park (plik od klienta).</p>
+        <p style="margin-top:16px">Inside Park S.A.<br>ul. Prosta 12-14/1, 87-100 Toruń<br>KRS 0000841673 · NIP 9562318255 · REGON 364767604</p>
+      </div>
+      <div>
+        <h3>Inne inwestycje</h3>
+        <ul>
+          <li><a class="link" href="https://insidepark.pl" target="_blank" rel="noopener">Bydgoska 33, Toruń</a></li>
+          <li><a class="link" href="https://insidepark.pl" target="_blank" rel="noopener">Stroma 3, Toruń</a></li>
+          <li style="margin-top:10px"><a class="link" href="https://insidepark.pl" target="_blank" rel="noopener">insidepark.pl ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Na tej stronie</h3>
+        <ul>
+          <li><a class="link" href="#lokale">Lokale</a></li>
+          <li><a class="link" href="#galeria">Galeria</a></li>
+          <li><a class="link" href="#lokalizacja">Lokalizacja</a></li>
+          <li><a class="link" href="#kontakt">Kontakt</a></li>
+        </ul>
+        <p class="mgla" style="margin-top:14px;font-size:.78rem">Polityka prywatności i klauzula informacyjna: do podlinkowania.</p>
+      </div>
+    </div>
+    <details>
+      <summary>Uwagi do prototypu: źródła, założenia i braki</summary>
+      <ul>
+        <li><strong>Potwierdzone na stronie insidepark.pl:</strong> nazwa, adres, charakter inwestycji (butikowa rewitalizacja zabytkowej oficyny, standard premium, grupa docelowa), opis otoczenia bez odległości, doradczynie i linki do kalendarza, telefony, e-mail, dane spółki, film, współrzędne mapy.</li>
+        <li><strong>Z ogłoszenia Inside Park w serwisie ogłoszeniowym, do potwierdzenia:</strong> 8 lokali, pakiet inwestycyjny z niezależnymi wejściami, scenariusz całego budynku.</li>
+        <li><strong>DEMO:</strong> cała lista lokali (numery, piętra, metraże, pokoje, ceny, statusy). Tabela źródłowa voxDeveloper nie była dostępna podczas analizy.</li>
+        <li><strong>Braki:</strong> historia i datowanie budynku, zakres prac konserwatorskich, rzuty, karty PDF, broszura, zdjęcia doradczyń, logotypy, odległości i czasy dojścia, opis standardu.</li>
+        <li><strong>Założenia do weryfikacji:</strong> schemat ulic na mapie, podział zdjęć na fotografie i wizualizacje, treści prawne formularza, zakres obowiązków jawności cen.</li>
+        <li><strong>Wyłączone moduły:</strong> interaktywny plan pięter, dziennik budowy, dokumenty do pobrania. Wrócą, gdy pojawią się dane i pliki.</li>
+      </ul>
+    </details>
+    <p class="foot__end"><span>© Inside Park S.A.</span><span>Prototyp projektowy. Znak „24a” to propozycja, nie zatwierdzony logotyp inwestycji.</span></p>
+  </div>
+</footer>
+
+<!-- Szczegóły lokalu -->
+<dialog id="unit" aria-labelledby="unitT"><button class="x" data-close aria-label="Zamknij">×</button><div id="unitBody"></div></dialog>
+<!-- Lightbox -->
+<dialog id="lb" aria-label="Galeria, widok pełnoekranowy">
+  <button class="x" data-close aria-label="Zamknij galerię">×</button>
+  <button class="lb__nav lb__nav--p" id="lbP" aria-label="Poprzednie zdjęcie">←</button>
+  <div class="lb__stage" id="lbS"></div>
+  <button class="lb__nav lb__nav--n" id="lbN" aria-label="Następne zdjęcie">→</button>
+  <p class="lb__cap"><span id="lbC" aria-live="polite"></span><span id="lbI"></span></p>
+</dialog>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+
+/* ---------- nawigacja ---------- */
+var top=$('#top'), nav=$('#nav'), burger=$('#burger');
+function setTopH(){document.documentElement.style.setProperty('--top-h',top.getBoundingClientRect().bottom+'px')}
+function menu(open){nav.classList.toggle('is-open',open);burger.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';if(open)setTopH()}
+burger.addEventListener('click',function(){menu(burger.getAttribute('aria-expanded')!=='true')});
+nav.addEventListener('click',function(e){if(e.target.closest('a'))menu(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('is-open')){menu(false);burger.focus()}});
+window.addEventListener('scroll',function(){top.classList.toggle('is-scrolled',window.scrollY>8)},{passive:true});
+window.addEventListener('resize',function(){if(window.innerWidth>1020)menu(false)});
+if('IntersectionObserver' in window){
+  var links={};$$('.nav a[href^="#"]:not(.nav__cta)').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){Object.keys(links).forEach(function(k){links[k].removeAttribute('aria-current')});if(links[e.target.id])links[e.target.id].setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
+  Object.keys(links).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+}
+
+/* ---------- galeria: sloty odpowiadają plikom z obecnej strony inwestycji ---------- */
+var PHOTOS=[
+ {t:'Klatka schodowa',f:'klatka-2.png',g:'budynek',ar:'2/3',c:'w5',tone:''},
+ {t:'Bieg schodów, detal balustrady',f:'lazienna24-klatka.png',g:'budynek',ar:'2/3',c:'w4 d1',tone:'slot--mgla'},
+ {t:'Klatka schodowa, widok z góry',f:'lazienna24-klatka-2.png',g:'budynek',ar:'2/3',c:'',tone:'slot--ciemny'},
+ {t:'Korytarz',f:'lazienna24-korytarz.png',g:'budynek',ar:'2/3',c:'d2',tone:'slot--cegla'},
+ {t:'Salon',f:'lazienna-24a-salon.png',g:'wnetrza',ar:'3/2',c:'w6',tone:'slot--mgla'},
+ {t:'Kuchnia',f:'lazienna24a-kuchnia.png',g:'wnetrza',ar:'2/3',c:'',tone:''},
+ {t:'Sypialnia',f:'lazienna-24a-sypialnia.png',g:'wnetrza',ar:'1/1',c:'',tone:'slot--cegla'},
+ {t:'Klatka schodowa, wejście',f:'klatka.png',g:'budynek',ar:'2/3',c:'w4',tone:'slot--ciemny'},
+ {t:'Ujęcie dodatkowe budynku',f:'lazienna-24-2-wersja.png',g:'budynek',ar:'2/3',c:'w4 d1',tone:''}
+];
+var gal=$('#gal'), shown=PHOTOS.slice();
+function slotHTML(p,i,tag){
+  return '<'+tag+' class="slot '+p.tone+'" style="--ar:'+p.ar+'"'+(tag==='button'?' type="button" data-i="'+i+'" aria-label="Powiększ: '+esc(p.t)+'"':'')+'><span class="slot__in"><span class="slot__no">FOT. '+String(i+2).padStart(2,'0')+(p.g==='wnetrza'?' · FOTOGRAFIA / WIZUALIZACJA':'')+'</span><span class="slot__meta"><span class="slot__t">'+esc(p.t)+'</span><span class="slot__f">materiał źródłowy: '+esc(p.f)+'</span></span></span></'+tag+'>';
+}
+gal.innerHTML=PHOTOS.map(function(p,i){return '<li class="'+p.c+'" data-g="'+p.g+'">'+slotHTML(p,i,'button')+'</li>'}).join('');
+$$('.tab').forEach(function(b){b.addEventListener('click',function(){
+  var g=b.dataset.g;$$('.tab').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+  gal.classList.toggle('is-filtered',g!=='all');
+  shown=[];$$('li',gal).forEach(function(li,i){var ok=g==='all'||li.dataset.g===g;li.hidden=!ok;if(ok)shown.push(PHOTOS[i])});
+})});
+
+/* lightbox */
+var lb=$('#lb'), lbS=$('#lbS'), cur=0, lbBack=null;
+function lbShow(n){cur=(n+shown.length)%shown.length;var p=shown[cur];lbS.innerHTML=slotHTML(p,PHOTOS.indexOf(p),'figure');$('#lbC').textContent=p.t;$('#lbI').textContent=(cur+1)+' / '+shown.length}
+gal.addEventListener('click',function(e){var b=e.target.closest('button.slot');if(!b)return;lbBack=b;lbShow(shown.indexOf(PHOTOS[+b.dataset.i]));lb.showModal()});
+$('#lbP').addEventListener('click',function(){lbShow(cur-1)});$('#lbN').addEventListener('click',function(){lbShow(cur+1)});
+lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')lbShow(cur-1);if(e.key==='ArrowRight')lbShow(cur+1)});
+var tx=null;lbS.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+lbS.addEventListener('touchend',function(e){if(tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>48)lbShow(cur+(d<0?1:-1));tx=null});
+lb.addEventListener('close',function(){if(lbBack)lbBack.focus()});
+$$('dialog').forEach(function(d){
+  d.addEventListener('click',function(e){if(e.target===d||e.target.closest('[data-close]'))d.close()});
+});
+
+/* ---------- lokale: DANE DEMO. W produkcji zastępuje je odpowiedź voxDeveloper. ---------- */
+var UNITS=[
+ {no:1,floor:0,rooms:1,area:28.40,ppm:11900,status:'dostepny'},
+ {no:2,floor:0,rooms:2,area:41.75,ppm:11400,status:'zarezerwowany'},
+ {no:3,floor:1,rooms:2,area:43.10,ppm:11600,status:'dostepny'},
+ {no:4,floor:1,rooms:1,area:31.20,ppm:11800,status:'sprzedany'},
+ {no:5,floor:2,rooms:2,area:44.60,ppm:11700,status:'dostepny'},
+ {no:6,floor:2,rooms:1,area:29.85,ppm:12100,status:'dostepny'},
+ {no:7,floor:3,rooms:3,area:58.30,ppm:11200,status:'zarezerwowany'},
+ {no:8,floor:3,rooms:2,area:39.90,ppm:12300,status:'dostepny'}
+].map(function(u){u.price=Math.round(u.area*u.ppm/100)*100;u.type=u.rooms===1?'Studio':u.rooms+'-pokojowy';u.id='L'+String(u.no).padStart(2,'0');return u});
+var ST={dostepny:'Dostępny',zarezerwowany:'Zarezerwowany',sprzedany:'Sprzedany'};
+var nf=new Intl.NumberFormat('pl-PL'), af=new Intl.NumberFormat('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2});
+var fl=function(n){return n===0?'Parter':n+'. piętro'};
+var zl=function(u){return u.status==='sprzedany'?'—':nf.format(u.price)+' zł'};
+var zlm=function(u){return u.status==='sprzedany'?'—':nf.format(u.ppm)+' zł/m²'};
+var box=$('#units'), count=$('#count'), state='ok', sort={k:'no',d:1}, timer;
+var F={q:$('#q'),rooms:$('#fRooms'),floor:$('#fFloor'),status:$('#fStatus'),amin:$('#fAmin'),amax:$('#fAmax'),price:$('#fPrice'),sort:$('#fSort')};
+
+function filtered(){
+  var q=F.q.value.trim().toLowerCase();
+  return UNITS.filter(function(u){
+    if(q&&(u.id+' '+u.no+' '+u.type+' '+fl(u.floor)).toLowerCase().indexOf(q)<0)return false;
+    if(F.rooms.value&&u.rooms!==+F.rooms.value)return false;
+    if(F.floor.value!==''&&u.floor!==+F.floor.value)return false;
+    if(F.status.value&&u.status!==F.status.value)return false;
+    if(F.amin.value&&u.area<+F.amin.value)return false;
+    if(F.amax.value&&u.area>+F.amax.value)return false;
+    if(F.price.value&&(u.status==='sprzedany'||u.price>+F.price.value))return false;
+    return true;
+  }).sort(function(a,b){return (a[sort.k]-b[sort.k])*sort.d||a.no-b.no});
+}
+function th(k,label,num){var s=sort.k===k?(sort.d>0?'ascending':'descending'):'none';return '<th scope="col" class="'+(num?'num':'')+'" aria-sort="'+s+'"><button type="button" data-k="'+k+'">'+label+'</button></th>'}
+function render(){
+  box.setAttribute('aria-busy',state==='loading');
+  if(state==='loading'){count.textContent='Pobieranie listy lokali…';box.innerHTML='<div class="skel" aria-hidden="true">'+'<div></div>'.repeat(5)+'</div>';return}
+  if(state==='error'){count.textContent='Lista lokali jest chwilowo niedostępna.';box.innerHTML='<div class="state" role="alert"><h3>Nie udało się pobrać listy lokali</h3><p>Źródło danych nie odpowiada, dlatego nie pokazujemy cen ani statusów, które mogłyby być nieaktualne. Spróbuj ponownie albo zapytaj doradcę o bieżącą dostępność.</p><button class="btn" type="button" id="retry">Spróbuj ponownie</button> <a class="btn btn--ghost" href="#kontakt">Zapytaj doradcę</a><p class="note">Symulacja stanu błędu w prototypie.</p></div>';return}
+  var list=filtered(), free=list.filter(function(u){return u.status==='dostepny'}).length;
+  count.innerHTML='Lokale: <strong>'+list.length+'</strong> z '+UNITS.length+', w tym dostępne: <strong>'+free+'</strong> <span class="chip">DEMO</span>';
+  if(!list.length){box.innerHTML='<div class="state"><h3>Żaden lokal nie spełnia tych kryteriów</h3><p>Poszerz zakres metrażu lub ceny albo wyczyść filtry, aby zobaczyć wszystkie lokale.</p><button class="btn" type="button" id="reset2">Wyczyść filtry</button></div>';return}
+  var rows=list.map(function(u){return '<tr class="'+(u.status==='sprzedany'?'is-sold':'')+'"><td><span class="u-no">'+u.id+'</span></td><td>'+u.type+'</td><td>'+fl(u.floor)+'</td><td class="num">'+u.rooms+'</td><td class="num">'+af.format(u.area)+' m²</td><td class="num">'+zl(u)+'</td><td class="num">'+zlm(u)+'</td><td><span class="st st--'+u.status+'">'+ST[u.status]+'</span></td><td class="num"><button class="more" type="button" data-u="'+u.no+'" aria-label="Szczegóły lokalu '+u.id+'">Szczegóły</button></td></tr>'}).join('');
+  var cards=list.map(function(u){return '<article class="card"><div class="card__h"><span class="u-no">'+u.id+' <span class="chip">DEMO</span></span><span class="st st--'+u.status+'">'+ST[u.status]+'</span></div><dl><div><dt>Typ</dt><dd>'+u.type+'</dd></div><div><dt>Piętro</dt><dd>'+fl(u.floor)+'</dd></div><div><dt>Powierzchnia</dt><dd>'+af.format(u.area)+' m²</dd></div><div><dt>Pokoje</dt><dd>'+u.rooms+'</dd></div><div><dt>Cena</dt><dd>'+zl(u)+'</dd></div><div><dt>Cena za m²</dt><dd>'+zlm(u)+'</dd></div></dl><button class="btn btn--ghost" type="button" data-u="'+u.no+'">Szczegóły lokalu '+u.id+'</button></article>'}).join('');
+  box.innerHTML='<div class="tw"><table><caption class="vh">Lista lokali, dane demonstracyjne</caption><thead><tr>'+th('no','Lokal')+'<th scope="col" class="plain">Typ</th>'+th('floor','Piętro')+th('rooms','Pokoje',1)+th('area','Powierzchnia',1)+th('price','Cena <span class="chip">DEMO</span>',1)+th('ppm','Cena za m²',1)+'<th scope="col" class="plain">Status</th><th scope="col" class="plain"><span class="vh">Akcje</span></th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="cards">'+cards+'</div>';
+}
+function setState(s){state=s;clearTimeout(timer);$$('.states button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.s===s)});render()}
+function load(){setState('loading');timer=setTimeout(function(){setState('ok')},900)}
+function reset(){$('#filters').reset();sort={k:'no',d:1};render()}
+$$('.states button').forEach(function(b){b.addEventListener('click',function(){b.dataset.s==='ok'?load():setState(b.dataset.s)})});
+Object.keys(F).forEach(function(k){F[k].addEventListener('input',function(){if(k==='sort'){var p=F.sort.value.split(':');sort={k:p[0],d:+p[1]}}if(state==='ok')render()})});
+$('#fReset').addEventListener('click',reset);
+var fT=$('#fToggle');fT.addEventListener('click',function(){var o=$('#filters').classList.toggle('is-open');fT.setAttribute('aria-expanded',o)});
+box.addEventListener('click',function(e){
+  var s=e.target.closest('th button');
+  if(s){var k=s.dataset.k;sort=sort.k===k?{k:k,d:-sort.d}:{k:k,d:1};F.sort.value=[].some.call(F.sort.options,function(o){return o.value===k+':'+sort.d})?k+':'+sort.d:F.sort.value;render();var again=$('th button[data-k="'+k+'"]',box);if(again)again.focus();return}
+  var u=e.target.closest('[data-u]');if(u){openUnit(+u.dataset.u,u);return}
+  if(e.target.id==='retry')load();
+  if(e.target.id==='reset2')reset();
+});
+
+/* szczegóły lokalu */
+var dlg=$('#unit'), back=null, cUnit=$('#cUnit');
+UNITS.forEach(function(u){if(u.status!=='sprzedany'){var o=document.createElement('option');o.value=u.id;o.textContent='Lokal '+u.id+' (DEMO)';cUnit.appendChild(o)}});
+function openUnit(no,from){
+  var u=UNITS.filter(function(x){return x.no===no})[0];back=from;
+  $('#unitBody').innerHTML='<div class="unit"><div class="unit__plan"><figure class="slot slot--mgla"><span class="slot__no">RZUT</span><figcaption class="slot__meta"><span class="slot__t">Miejsce na rzut lokalu '+u.id+'</span><span class="slot__f">plik rzutu niedostępny w prototypie</span></figcaption></figure></div><div class="unit__b"><p class="eyebrow">Lokal <span class="chip">DEMO</span></p><h3 id="unitT">'+u.id+' · '+u.type+'</h3><dl class="facts"><div><dt>Status</dt><dd><span class="st st--'+u.status+'">'+ST[u.status]+'</span></dd></div><div><dt>Piętro</dt><dd>'+fl(u.floor)+'</dd></div><div><dt>Powierzchnia</dt><dd>'+af.format(u.area)+' m²</dd></div><div><dt>Pokoje</dt><dd>'+u.rooms+'</dd></div><div><dt>Cena</dt><dd>'+zl(u)+'</dd></div><div><dt>Cena za m²</dt><dd>'+zlm(u)+'</dd></div><div><dt>Koszty dodatkowe</dt><dd class="mgla">ze źródła danych</dd></div><div><dt>Historia ceny</dt><dd class="mgla">ze źródła danych</dd></div></dl><div class="unit__act">'+(u.status==='sprzedany'?'<p class="note">Lokal sprzedany. Zapytaj doradcę o podobne lokale.</p><button class="btn" type="button" data-ask="">Zapytaj o podobny lokal</button>':'<button class="btn" type="button" data-ask="'+u.id+'">Zapytaj o lokal '+u.id+'</button>')+'<button class="btn btn--ghost" type="button" disabled aria-describedby="pdfN">Pobierz kartę lokalu (PDF)</button><p class="note" id="pdfN" style="margin-top:0">Karta PDF pojawi się po dostarczeniu pliku. Przycisk jest nieaktywny, bo prototyp nie udaje pobierania.</p></div></div></div>';
+  dlg.showModal();
+}
+dlg.addEventListener('click',function(e){var a=e.target.closest('[data-ask]');if(!a)return;cUnit.value=a.dataset.ask;back=null;dlg.close();document.getElementById('kontakt').scrollIntoView();setTimeout(function(){$('#cName').focus({preventScroll:true})},50)});
+dlg.addEventListener('close',function(){if(back&&document.contains(back))back.focus()});
+
+/* ---------- formularz: walidacja + jawna symulacja, bez wysyłki ---------- */
+var form=$('#form'), msg=$('#formMsg');
+function check(el,errId,text){var bad=el.type==='checkbox'?!el.checked:!el.checkValidity();el.setAttribute('aria-invalid',bad);$('#'+errId).textContent=bad?text:'';return bad?el:null}
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  var bad=[check($('#cName'),'eName','Podaj imię i nazwisko.'),check($('#cMail'),'eMail','Podaj poprawny adres e-mail, np. jan@example.com.'),check($('#cRodo'),'eRodo','Potwierdź zapoznanie się z informacją o przetwarzaniu danych.')].filter(Boolean);
+  if(bad.length){msg.hidden=true;bad[0].focus();return}
+  msg.hidden=false;
+  msg.innerHTML='<strong>Prototyp: wiadomość nie została wysłana.</strong> Formularz przeszedł walidację'+(cUnit.value?' (temat: '+esc(cUnit.options[cUnit.selectedIndex].text)+')':'')+'. W wersji produkcyjnej zapytanie trafi do biura sprzedaży Inside Park. Teraz skontaktuj się telefonicznie: +48 883 356 426 lub mailowo: biuro@insidepark.pl.';
+  msg.focus();
+});
+$$('#form [required]').forEach(function(el){el.addEventListener('input',function(){if(el.getAttribute('aria-invalid')==='true'){el.setAttribute('aria-invalid','false');$('#'+el.getAttribute('aria-describedby')).textContent=''}})});
+
+setTopH();load();
+})();
+</script>
+</body>
+</html>
