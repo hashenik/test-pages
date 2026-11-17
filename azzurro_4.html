@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Azzurro — restauracje włoskie w Toruniu · pizza, makarony, specjały domu</title>
+<meta name="description" content="Azzurro: trzy restauracje w Toruniu — na Skarpie (Wyszyńskiego 19/2), Andersa 72 i Włoskie Bistro (Szosa Chełmińska 176). Pizza, makarony, przystawki i specjały domu. Warsztaty kulinarne dla dzieci, sala bankietowa i catering.">
+<meta name="theme-color" content="#F7F2E9">
+<meta name="robots" content="noindex">
+<!-- noindex: to prototyp koncepcyjny. Usuń w wersji produkcyjnej. -->
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="Azzurro Restauracje">
+<meta property="og:title" content="Azzurro — dobry smak. Dobry czas.">
+<meta property="og:description" content="Trzy restauracje Azzurro w Toruniu. Pizza, makarony i specjały domu — na miejscu i na wynos.">
+<meta property="og:image" content="https://azzurro-restauracja.pl/wp-content/uploads/2022/04/skarpa-gotowe-zdjecia-22.jpg">
+
+<!-- Favicon roboczy: litera „a” na kolorze --brand-primary. Podmień na favicon wycięty z oryginalnego logo Azzurro. -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231F5E9E'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='46' font-style='italic' fill='%23F7F2E9'%3Ea%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://azzurro-restauracja.pl">
+<!-- Fonty: Instrument Serif + Hanken Grotesk (Google Fonts, licencja SIL OFL, pełne wsparcie latin-ext / polskich znaków). -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+
+<style>
+/* =========================================================================
+   AZZURRO ITALIAN EXPERIENCE — prototyp v1.0
+   Design tokens
+   ========================================================================= */
+:root{
+  /* --- Kolory marki ---------------------------------------------------
+     UWAGA: oryginalnego pliku logo ani arkusza stylów marki nie udało się
+     pobrać podczas przygotowania prototypu. Poniższe trzy wartości marki
+     są ROBOCZE (kierunek: „azzurro” = błękit). Przed prezentacją klientowi
+     zastąp je wartościami HEX odczytanymi z oryginalnego logo / brandbooka.
+     Cały interfejs korzysta wyłącznie z tych tokenów — podmiana w jednym miejscu. */
+  --brand-primary: #1F5E9E;          /* ROBOCZE — błękit azzurro */
+  --brand-primary-strong: #174A7E;   /* ROBOCZE — ciemniejszy wariant do tekstu i hover */
+  --brand-secondary: #13304D;        /* ROBOCZE — głęboki granat */
+  --brand-accent: #B8432B;           /* uzupełniający: pomodoro / terakota (paleta neutralna, nie marka) */
+  --brand-tint: #DCE6F0;
+
+  /* --- Paleta uzupełniająca: papier, len, espresso -------------------- */
+  --surface-main: #F7F2E9;
+  --surface-soft: #EEE5D5;
+  --surface-raised: #FCF9F4;
+  --surface-dark: #1D1915;
+  --surface-dark-2: #2A241E;
+  --text-primary: #211C17;
+  --text-secondary: #5C5248;
+  --text-on-dark: #F3ECE0;
+  --text-on-dark-2: #C2B7A8;
+  --border-subtle: rgba(33, 28, 23, .14);
+  --border-strong: rgba(33, 28, 23, .34);
+  --border-on-dark: rgba(243, 236, 224, .18);
+  --focus-on-dark: #9CC3EA;
+
+  /* --- Typografia ------------------------------------------------------ */
+  --font-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Hanken Grotesk", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --fs-hero: clamp(3.4rem, 1.6rem + 7.4vw, 8.75rem);
+  --fs-h1: clamp(2.9rem, 1.7rem + 5vw, 6.4rem);
+  --fs-h2: clamp(2.3rem, 1.5rem + 3vw, 4.4rem);
+  --fs-h3: clamp(1.6rem, 1.25rem + 1.2vw, 2.35rem);
+  --fs-lead: clamp(1.08rem, 1rem + .35vw, 1.3rem);
+  --fs-body: 1.0625rem;
+  --fs-small: .875rem;
+  --fs-micro: .75rem;
+
+  /* --- Układ ------------------------------------------------------------ */
+  --container: 1320px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section: clamp(4.5rem, 3rem + 6vw, 9rem);
+  --header-h: 72px;
+  --radius: 2px;
+
+  /* --- Ruch ------------------------------------------------------------- */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur-fast: 200ms;
+  --dur: 380ms;
+  --dur-slow: 520ms;
+}
+
+/* =========================================================================
+   Base
+   ========================================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{
+  margin:0;background:var(--surface-main);color:var(--text-primary);
+  font-family:var(--font-body);font-size:var(--fs-body);line-height:1.62;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  font-feature-settings:"kern","liga";
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.2em}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4{margin:0;font-weight:400}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+figure{margin:0}
+::selection{background:var(--brand-tint);color:var(--text-primary)}
+:focus-visible{outline:2px solid var(--brand-primary);outline-offset:3px;border-radius:1px}
+.on-dark :focus-visible{outline-color:var(--focus-on-dark)}
+[hidden]{display:none!important}
+a > svg,button > svg{width:1em;height:1em;flex:none}
+[tabindex="-1"]:focus{outline:none}
+section[id],[id][tabindex="-1"]{scroll-margin-top:calc(var(--header-h) + 12px)}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.grid12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter)}
+.section{padding-block:var(--section)}
+.section--soft{background:var(--surface-soft)}
+.section--dark{background:var(--surface-dark);color:var(--text-on-dark)}
+.section--brand{background:var(--brand-secondary);color:var(--text-on-dark)}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+
+/* Skip link */
+.skip{position:absolute;left:1rem;top:-100px;z-index:200;background:var(--text-primary);color:var(--surface-main);padding:.75rem 1rem;text-decoration:none;font-weight:600}
+.skip:focus{top:1rem}
+
+/* =========================================================================
+   Typography
+   ========================================================================= */
+.display{font-family:var(--font-display);font-weight:400;letter-spacing:-.012em;line-height:.98}
+.h1{font-family:var(--font-display);font-size:var(--fs-h1);line-height:.96;letter-spacing:-.015em}
+.h2{font-family:var(--font-display);font-size:var(--fs-h2);line-height:1;letter-spacing:-.012em}
+.h3{font-family:var(--font-display);font-size:var(--fs-h3);line-height:1.08}
+.h1 em,.h2 em,.h3 em,.display em{font-style:italic}
+.lead{font-size:var(--fs-lead);line-height:1.55;color:var(--text-secondary);max-width:38ch}
+.section--dark .lead,.section--brand .lead{color:var(--text-on-dark-2)}
+.prose{max-width:62ch;color:var(--text-secondary)}
+.prose p+p{margin-top:1em}
+.section--dark .prose,.section--brand .prose{color:var(--text-on-dark-2)}
+.eyebrow{
+  display:flex;align-items:baseline;gap:.75rem;
+  font-size:var(--fs-micro);font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brand-primary-strong);
+}
+.section--dark .eyebrow,.section--brand .eyebrow{color:#A9C8E8}
+.eyebrow__num{font-family:var(--font-display);font-style:italic;font-size:1.35rem;letter-spacing:0;text-transform:none;font-weight:400}
+.eyebrow::after{content:"";flex:0 0 48px;height:1px;background:currentColor;opacity:.55;transform:translateY(-.3em)}
+.sec-head{display:grid;gap:1.25rem;margin-bottom:clamp(2.25rem,4vw,3.75rem)}
+.sec-head .lead{margin-top:.25rem}
+.caption{font-size:var(--fs-micro);letter-spacing:.06em;color:var(--text-secondary)}
+.it{font-family:var(--font-display);font-style:italic}
+
+/* =========================================================================
+   Buttons & links
+   ========================================================================= */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.65rem;
+  min-height:50px;padding:.75rem 1.4rem;border:1px solid transparent;border-radius:var(--radius);
+  font-weight:600;font-size:.975rem;letter-spacing:.01em;text-decoration:none;line-height:1.2;
+  transition:background-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease);
+}
+.btn svg{width:18px;height:18px;flex:none;transition:transform var(--dur) var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn--primary{background:var(--brand-primary);color:#fff}
+.btn--primary:hover{background:var(--brand-primary-strong)}
+.btn--ghost{border-color:var(--border-strong);color:var(--text-primary);background:transparent}
+.btn--ghost:hover{border-color:var(--text-primary);background:var(--surface-raised)}
+.btn--light{background:var(--surface-main);color:var(--text-primary)}
+.btn--light:hover{background:#fff}
+.btn--outline-light{border-color:var(--border-on-dark);color:var(--text-on-dark)}
+.btn--outline-light:hover{border-color:var(--text-on-dark)}
+.btn--accent{background:var(--brand-accent);color:#fff}
+.btn--accent:hover{background:#9C3824}
+.btn-row{display:flex;flex-wrap:wrap;gap:.75rem}
+
+.link-arrow{
+  display:inline-flex;align-items:center;gap:.45rem;font-weight:600;text-decoration:none;
+  border-bottom:1px solid var(--border-strong);padding-block:.3rem;min-height:44px;
+  transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
+}
+.link-arrow:hover{border-color:currentColor;color:var(--brand-primary-strong)}
+.section--dark .link-arrow:hover,.section--brand .link-arrow:hover,.on-dark .link-arrow:hover{color:#fff}
+.link-arrow svg{width:16px;height:16px;transition:transform var(--dur) var(--ease)}
+.link-arrow:hover svg{transform:translateX(3px)}
+.link-arrow[target="_blank"]:hover svg{transform:translate(2px,-2px)}
+
+.chip{
+  display:inline-flex;align-items:center;gap:.4rem;min-height:44px;padding:.5rem 1rem;
+  border:1px solid var(--border-subtle);border-radius:999px;background:transparent;
+  font-size:.9375rem;font-weight:500;white-space:nowrap;
+  transition:background-color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
+}
+.chip:hover{border-color:var(--border-strong)}
+.chip[aria-pressed="true"]{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface-main)}
+.chip--loc[aria-pressed="true"]{background:var(--brand-primary);border-color:var(--brand-primary);color:#fff}
+
+/* =========================================================================
+   Prototype ribbon
+   ========================================================================= */
+.proto{
+  background:var(--surface-dark);color:var(--text-on-dark-2);font-size:.8125rem;line-height:1.4;
+}
+.proto .container{display:flex;align-items:center;gap:1rem;min-height:40px;padding-block:.4rem}
+.proto strong{color:var(--text-on-dark);font-weight:600}
+.proto__close{margin-left:auto;background:none;border:0;color:var(--text-on-dark);min-width:40px;min-height:36px;font-size:1.25rem;line-height:1}
+.badge-demo{
+  display:inline-flex;align-items:center;font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:.2rem .5rem;border:1px solid currentColor;border-radius:2px;line-height:1.2
+}
+
+/* =========================================================================
+   Header & navigation
+   ========================================================================= */
+.site-header{
+  position:sticky;top:0;z-index:50;background:rgba(247,242,233,.92);
+  -webkit-backdrop-filter:saturate(1.2) blur(10px);backdrop-filter:saturate(1.2) blur(10px);
+  border-bottom:1px solid transparent;transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+}
+.site-header.is-scrolled{border-color:var(--border-subtle);box-shadow:0 8px 24px -20px rgba(33,28,23,.45)}
+.site-header .container{display:flex;align-items:center;gap:1.5rem;height:var(--header-h)}
+/* LOGO — miejsce na oryginalny plik.
+   Prototyp pokazuje roboczy znak słowny „azzurro / restauracje” (tak jak nazwa witryny).
+   W produkcji zastąp zawartość .brand elementem <img src="logo-azzurro.svg" alt="Azzurro Restauracje">. */
+.brand{display:inline-flex;flex-direction:column;text-decoration:none;line-height:1;gap:.2rem;margin-right:auto}
+.brand__word{font-family:var(--font-display);font-size:2rem;letter-spacing:-.01em;color:var(--brand-primary-strong)}
+.brand__sub{font-size:.625rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--text-secondary);padding-left:.1rem}
+.nav{display:flex;align-items:center}
+.nav__list{display:flex;align-items:center;gap:.25rem}
+.nav__item{position:relative}
+.nav__link{
+  display:inline-flex;align-items:center;gap:.35rem;min-height:44px;padding:.5rem .7rem;
+  font-size:.9375rem;font-weight:500;text-decoration:none;background:none;border:0;position:relative;
+}
+.nav__link::after{
+  content:"";position:absolute;left:.7rem;right:.7rem;bottom:.45rem;height:1px;background:var(--brand-primary);
+  transform:scaleX(0);transform-origin:left;transition:transform var(--dur) var(--ease);
+}
+.nav__link:hover::after,.nav__link[aria-current="page"]::after,.nav__link.is-active::after{transform:scaleX(1)}
+.nav__link[aria-current="page"],.nav__link.is-active{color:var(--brand-primary-strong)}
+.nav__link svg{width:12px;height:12px;transition:transform var(--dur-fast) var(--ease)}
+.nav__link[aria-expanded="true"] svg{transform:rotate(180deg)}
+.nav__pop{
+  position:absolute;top:calc(100% + 6px);left:-.5rem;min-width:280px;background:var(--surface-raised);
+  border:1px solid var(--border-subtle);box-shadow:0 18px 40px -24px rgba(33,28,23,.45);padding:.5rem;
+  animation:popIn var(--dur-fast) var(--ease);
+}
+.nav__pop a{display:grid;gap:.1rem;padding:.7rem .8rem;text-decoration:none;border-radius:var(--radius)}
+.nav__pop a:hover,.nav__pop a[aria-current="page"]{background:var(--surface-soft)}
+.nav__pop strong{font-family:var(--font-display);font-weight:400;font-size:1.3rem;line-height:1.1}
+.nav__pop small{font-size:.8125rem;color:var(--text-secondary)}
+.header-cta{margin-left:.75rem}
+.burger{display:none;align-items:center;gap:.5rem;min-height:44px;padding:.5rem .75rem;background:none;border:1px solid var(--border-subtle);border-radius:var(--radius);font-weight:600;font-size:.9375rem}
+.burger__icon{width:18px;height:12px;position:relative}
+.burger__icon::before,.burger__icon::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:currentColor;transition:transform var(--dur) var(--ease),top var(--dur) var(--ease)}
+.burger__icon::before{top:2px}.burger__icon::after{top:9px}
+.burger[aria-expanded="true"] .burger__icon::before{top:5.5px;transform:rotate(45deg)}
+.burger[aria-expanded="true"] .burger__icon::after{top:5.5px;transform:rotate(-45deg)}
+
+.mnav{
+  position:fixed;inset:var(--header-h) 0 0 0;z-index:49;background:var(--surface-main);overflow-y:auto;
+  padding:1.5rem var(--gutter) calc(2rem + env(safe-area-inset-bottom));
+  animation:fadeUp var(--dur) var(--ease);
+}
+.mnav[hidden]{display:none}
+.mnav__list a{display:flex;justify-content:space-between;align-items:baseline;padding:.85rem 0;border-bottom:1px solid var(--border-subtle);text-decoration:none;font-family:var(--font-display);font-size:2rem;line-height:1.1}
+.mnav__list a[aria-current="page"]{color:var(--brand-primary-strong)}
+.mnav__list a small{font-family:var(--font-body);font-size:.8125rem;color:var(--text-secondary)}
+.mnav__group{margin-top:1.75rem}
+.mnav__group h2{font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--text-secondary);margin-bottom:.5rem}
+.mnav__locs a{display:grid;grid-template-columns:1fr auto;gap:.15rem 1rem;padding:.8rem 0;border-bottom:1px solid var(--border-subtle);text-decoration:none}
+.mnav__locs strong{font-weight:600}
+.mnav__locs span{color:var(--text-secondary);font-size:.875rem;grid-column:1}
+.mnav .btn{width:100%;margin-top:1.75rem}
+
+/* =========================================================================
+   Media / photos / placeholders
+   ========================================================================= */
+.media{display:block;position:relative;overflow:hidden;background:#E5D9C4;aspect-ratio:var(--ar,4/3)}
+.media img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);transition:transform 900ms var(--ease)}
+a:hover > .media img,.media--zoom:hover img{transform:scale(1.025)}
+.media__ph{
+  position:absolute;inset:0;display:none;place-content:center;justify-items:center;gap:.6rem;padding:1.25rem;text-align:center;
+  color:var(--text-secondary);font-size:.8125rem;line-height:1.4;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 15px, rgba(31,94,158,.07) 15px 16px),
+    var(--surface-soft);
+}
+.media__ph svg{width:36px;height:36px;opacity:.55}
+.media__ph .badge-demo{color:var(--brand-accent)}
+.media.is-missing img{display:none}
+.media.is-missing .media__ph,.media--demo .media__ph{display:grid}
+.media__cap{
+  position:absolute;left:0;bottom:0;padding:.4rem .7rem;background:var(--surface-main);
+  font-size:var(--fs-micro);letter-spacing:.06em;color:var(--text-secondary);
+}
+.section--dark .media__cap{background:var(--surface-dark);color:var(--text-on-dark-2)}
+
+/* =========================================================================
+   Reveal animations
+   ========================================================================= */
+[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity var(--dur-slow) var(--ease),transform var(--dur-slow) var(--ease)}
+[data-reveal].is-visible{opacity:1;transform:none}
+.media[data-reveal]{transform:none;clip-path:inset(0 0 10% 0);transition:opacity var(--dur-slow) var(--ease),clip-path 700ms var(--ease)}
+.media[data-reveal].is-visible{clip-path:inset(0 0 0 0)}
+.view{animation:viewIn var(--dur) var(--ease)}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes popIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}
+
+/* =========================================================================
+   Hero (home)
+   ========================================================================= */
+.hero{padding-block:clamp(1.5rem,3vw,3rem) clamp(3.5rem,6vw,6rem);position:relative}
+.hero__grid{align-items:center;row-gap:2rem}
+.hero__text{grid-column:1 / span 6;grid-row:1;position:relative;z-index:2}
+.hero__kicker{display:flex;align-items:center;gap:.75rem;font-size:var(--fs-small);font-weight:600;letter-spacing:.04em;color:var(--text-secondary);margin-bottom:1.5rem}
+.hero__kicker::before{content:"";width:36px;height:2px;background:var(--brand-primary)}
+.hero__title{font-family:var(--font-display);font-size:var(--fs-hero);line-height:.9;letter-spacing:-.02em;margin-left:-.04em}
+.hero__title .ln{display:block}
+.hero__title em{font-style:italic;color:var(--brand-primary-strong);padding-left:clamp(0rem,4vw,3.5rem)}
+.hero__lead{margin-top:clamp(1.5rem,3vw,2.25rem);font-size:var(--fs-lead);color:var(--text-secondary);max-width:34ch}
+.hero__cta{margin-top:2rem}
+.hero__places{margin-top:clamp(2.5rem,5vw,4rem);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--border-subtle)}
+.hero__places a{display:grid;gap:.15rem;padding:.9rem 1rem .9rem 0;text-decoration:none;font-size:var(--fs-small);border-right:1px solid var(--border-subtle);margin-right:1rem}
+.hero__places a:last-child{border-right:0;margin-right:0}
+.hero__places strong{font-family:var(--font-display);font-weight:400;font-size:1.3rem;line-height:1.1}
+.hero__places a:hover strong{color:var(--brand-primary-strong)}
+.hero__visual{grid-column:7 / -1;grid-row:1;position:relative}
+.hero__photo{aspect-ratio:auto;height:min(78vh,760px);min-height:440px}
+.hero__inset{position:absolute;left:-18%;bottom:-7%;width:42%;border:10px solid var(--surface-main);--ar:4/5;z-index:3}
+.hero__photo .media__cap{left:auto;right:0}
+@media (prefers-reduced-motion:no-preference){
+  .hero__title .ln{animation:rise 520ms var(--ease) both}
+  .hero__title .ln:nth-child(2){animation-delay:90ms}
+  .hero__lead,.hero__cta{animation:fadeUp 480ms var(--ease) 180ms both}
+}
+.strip{border-block:1px solid var(--border-subtle);overflow:hidden}
+.strip .container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;padding-block:1.1rem}
+.strip span{font-family:var(--font-display);font-style:italic;font-size:clamp(1.15rem,1rem + .6vw,1.6rem);color:var(--text-secondary)}
+.strip span b{font-style:normal;font-family:var(--font-body);font-size:var(--fs-micro);letter-spacing:.14em;color:var(--brand-primary-strong);font-weight:600;margin-right:.6rem;vertical-align:.25em}
+
+/* =========================================================================
+   Menu widget
+   ========================================================================= */
+.menu-preview__grid{row-gap:2.5rem}
+.menu-preview__aside{grid-column:1 / span 4}
+.menu-preview__main{grid-column:5 / -1}
+.menu-preview__photo{margin-top:2rem;--ar:4/5}
+.mw__locs{display:flex;flex-wrap:wrap;gap:.5rem}
+.mw__label{font-size:var(--fs-micro);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary);margin:1.75rem 0 .75rem}
+.mw__label:first-child{margin-top:0}
+.mw__cats{display:flex;flex-wrap:wrap;gap:.5rem}
+.mw--preview .mw__cats{flex-direction:column;flex-wrap:nowrap;gap:0;border-top:1px solid var(--border-subtle)}
+.mw--preview .mw__cats .chip{
+  border:0;border-bottom:1px solid var(--border-subtle);border-radius:0;justify-content:space-between;width:100%;
+  min-height:56px;padding:.6rem 0;font-family:var(--font-display);font-size:1.6rem;font-weight:400;background:none;color:var(--text-primary)
+}
+.mw--preview .mw__cats .chip small{font-family:var(--font-body);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary)}
+.mw--preview .mw__cats .chip[aria-pressed="true"]{color:var(--brand-primary-strong);background:none}
+.mw--preview .mw__cats .chip[aria-pressed="true"] .num{color:var(--brand-primary)}
+.mw--preview .mw__cats .chip .num{font-style:italic;color:var(--text-secondary);margin-right:.6rem;font-size:1.1rem}
+.mw__toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem;margin-bottom:1.75rem}
+.mw__search{position:relative;flex:1 1 280px;max-width:420px}
+.mw__search input{
+  width:100%;min-height:50px;padding:.7rem 1rem .7rem 2.75rem;border:1px solid var(--border-strong);border-radius:var(--radius);
+  background:var(--surface-raised);font:inherit;color:inherit;
+}
+.mw__search input::placeholder{color:#857a6e}
+.mw__search svg{position:absolute;left:.95rem;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--text-secondary);pointer-events:none}
+.mw__count{font-size:var(--fs-small);color:var(--text-secondary)}
+.mw__catbar{display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:thin;padding-bottom:.25rem;margin-bottom:2rem;-webkit-overflow-scrolling:touch}
+.mw__catbar--sticky{position:sticky;top:var(--header-h);z-index:5;background:var(--surface-main);padding-block:.75rem;margin-block:-.75rem 1.25rem;border-bottom:1px solid var(--border-subtle)}
+.mw__list{min-height:200px}
+.mw__list > *{animation:fadeUp var(--dur) var(--ease) both}
+.mw__group + .mw__group{margin-top:clamp(2.5rem,5vw,4rem)}
+.mw__group-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-bottom:2px solid var(--text-primary);padding-bottom:.6rem;margin-bottom:.5rem}
+.mw__group-head h3{font-family:var(--font-display);font-size:clamp(1.8rem,1.4rem + 1.4vw,2.6rem);line-height:1}
+.mw__group-head span{font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary);font-weight:600}
+.mw__note{font-size:var(--fs-small);color:var(--text-secondary);margin:.75rem 0 .25rem;max-width:70ch}
+.dishes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(1.5rem,3vw,3rem)}
+.mw--preview .dishes{grid-template-columns:1fr 1fr}
+.dish{padding:1.1rem 0 1.15rem;border-bottom:1px solid var(--border-subtle)}
+.dish__head{display:flex;align-items:baseline;gap:.6rem}
+.dish__name{font-family:var(--font-display);font-size:1.45rem;line-height:1.15}
+.dish__leader{flex:1;border-bottom:1px dotted var(--border-strong);transform:translateY(-.3em);min-width:1rem}
+.dish__price{font-weight:600;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.dish__desc{margin-top:.35rem;font-size:.9375rem;line-height:1.55;color:var(--text-secondary)}
+.dish__tags{display:flex;gap:.4rem;margin-top:.55rem}
+.tag{font-size:.6875rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border-radius:2px;border:1px solid}
+.tag--ostre{color:var(--brand-accent);border-color:rgba(184,67,43,.45)}
+.tag--weganskie{color:#3E6A2E;border-color:rgba(62,106,46,.45)}
+.mw__more{margin-top:1.5rem;font-size:var(--fs-small);color:var(--text-secondary)}
+.mw__empty{padding:3rem 1.5rem;text-align:center;border:1px dashed var(--border-strong);display:grid;gap:1rem;justify-items:center}
+.mw__empty p{font-family:var(--font-display);font-size:1.75rem;line-height:1.1}
+.mw__foot{margin-top:2.25rem;padding-top:1.5rem;border-top:1px solid var(--border-subtle);display:grid;gap:1.25rem}
+.mw__links{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem}
+.source-note{font-size:var(--fs-micro);line-height:1.5;color:var(--text-secondary);letter-spacing:.02em;max-width:80ch}
+.source-note b{font-weight:600}
+
+/* =========================================================================
+   Places (home: three restaurants)
+   ========================================================================= */
+.places{display:grid;gap:clamp(4rem,8vw,8rem)}
+.place{align-items:center}
+.place__media{display:block;text-decoration:none}
+.place__num{font-family:var(--font-display);font-style:italic;font-size:1.25rem;color:var(--brand-primary);margin-bottom:.75rem}
+.place__name{font-family:var(--font-display);font-size:clamp(2.3rem,1.6rem + 2.6vw,3.8rem);line-height:.98;letter-spacing:-.012em}
+.place__name span{display:block;font-family:var(--font-body);font-size:var(--fs-micro);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:.6rem}
+.place__addr{margin-top:1rem;font-weight:500}
+.place__desc{margin-top:1rem;color:var(--text-secondary);max-width:44ch}
+.place__links{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.5rem;margin-top:1.75rem}
+.place--1 .place__media{grid-column:1 / span 7;--ar:16/11}
+.place--1 .place__body{grid-column:9 / -1}
+.place--2 .place__body{grid-column:1 / span 4;grid-row:1}
+.place--2 .place__media{grid-column:6 / span 6;grid-row:1;--ar:4/5}
+.place--3{align-items:end}
+.place--3 .place__media{grid-column:1 / span 9;grid-row:1;--ar:16/9}
+.place--3 .place__body{grid-column:8 / -1;grid-row:1;background:var(--surface-raised);padding:clamp(1.5rem,3vw,2.5rem);margin-bottom:-3rem;position:relative;z-index:2;border-top:3px solid var(--brand-primary)}
+.status{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--fs-small);font-weight:500;margin-top:.75rem}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:#9A8F82}
+.status.is-open::before{background:#3E8A4F;box-shadow:0 0 0 3px rgba(62,138,79,.18)}
+
+/* =========================================================================
+   Together / workshops / banquet / catering / gallery (home)
+   ========================================================================= */
+.together__grid{align-items:center;row-gap:3rem}
+.together__photo{grid-column:1 / span 6;--ar:4/5}
+.together__body{grid-column:8 / -1}
+.together__list{margin-top:2rem;border-top:1px solid var(--border-on-dark)}
+.together__list li{display:flex;gap:1.25rem;align-items:baseline;padding:1rem 0;border-bottom:1px solid var(--border-on-dark)}
+.together__list li span{font-family:var(--font-display);font-style:italic;color:#A9C8E8;font-size:1.2rem;min-width:2ch}
+
+.ws__grid{row-gap:3rem;align-items:start}
+.ws__body{grid-column:1 / span 5;position:sticky;top:calc(var(--header-h) + 2rem)}
+.ws__mosaic{grid-column:7 / -1;display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem}
+.ws__mosaic .media:nth-child(1){grid-column:1 / span 6;--ar:16/9}
+.ws__mosaic .media:nth-child(2){grid-column:1 / span 3;--ar:1/1}
+.ws__mosaic .media:nth-child(3){grid-column:4 / span 3;--ar:1/1;margin-top:2.5rem}
+.facts{display:grid;gap:0;margin-top:2rem;border-top:1px solid var(--border-subtle)}
+.facts > div{display:grid;grid-template-columns:minmax(120px,38%) 1fr;gap:1rem;padding:.95rem 0;border-bottom:1px solid var(--border-subtle)}
+.facts dt{font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--text-secondary);padding-top:.2rem}
+.facts dd{margin:0}
+.section--dark .facts,.section--dark .facts > div{border-color:var(--border-on-dark)}
+.section--dark .facts dt{color:var(--text-on-dark-2)}
+
+.banquet{position:relative}
+.banquet__photo{--ar:21/9;min-height:360px}
+.banquet__card{
+  position:relative;z-index:2;background:var(--surface-main);max-width:560px;margin:-7rem 0 0 auto;
+  padding:clamp(1.75rem,4vw,3rem);border-top:3px solid var(--brand-primary)
+}
+
+.catering__grid{row-gap:2.5rem;align-items:end}
+.catering__head{grid-column:1 / span 6}
+.catering__list{grid-column:8 / -1;border-top:1px solid var(--border-on-dark)}
+.catering__list li{display:grid;grid-template-columns:auto 1fr;gap:.25rem 1.25rem;padding:1.1rem 0;border-bottom:1px solid var(--border-on-dark)}
+.catering__list .it{font-size:1.15rem;color:#A9C8E8;grid-row:span 2}
+.catering__list strong{font-family:var(--font-display);font-weight:400;font-size:1.6rem;line-height:1.1}
+.catering__list p{font-size:var(--fs-small);color:var(--text-on-dark-2)}
+
+/* Gallery grid */
+.gal{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:clamp(80px,8.5vw,128px);gap:.75rem;grid-auto-flow:dense}
+.gal__item{position:relative;padding:0;border:0;background:var(--surface-soft);overflow:hidden;grid-column:span 4;grid-row:span 3;cursor:zoom-in}
+.gal__item .media{position:absolute;inset:0;aspect-ratio:auto;height:100%}
+.gal__item:nth-child(6n+1){grid-column:span 5;grid-row:span 4}
+.gal__item:nth-child(6n+2){grid-column:span 4;grid-row:span 3}
+.gal__item:nth-child(6n+3){grid-column:span 3;grid-row:span 3}
+.gal__item:nth-child(6n+4){grid-column:span 3;grid-row:span 3}
+.gal__item:nth-child(6n+5){grid-column:span 4;grid-row:span 4}
+.gal__item:nth-child(6n){grid-column:span 4;grid-row:span 2}
+.gal__item:hover img{transform:scale(1.03)}
+.gal__item--demo{cursor:default}
+@media (min-width:760px){
+  .gal--home .gal__item:nth-child(n){grid-column:auto;grid-row:auto}
+  .gal--home .gal__item:nth-child(1){grid-column:1 / 7;grid-row:1 / 5}
+  .gal--home .gal__item:nth-child(2){grid-column:7 / 10;grid-row:1 / 3}
+  .gal--home .gal__item:nth-child(3){grid-column:10 / 13;grid-row:1 / 4}
+  .gal--home .gal__item:nth-child(4){grid-column:7 / 10;grid-row:3 / 5}
+  .gal--home .gal__item:nth-child(5){grid-column:1 / 4;grid-row:5 / 8}
+  .gal--home .gal__item:nth-child(6){grid-column:4 / 10;grid-row:5 / 8}
+  .gal--home .gal__item:nth-child(7){grid-column:10 / 13;grid-row:4 / 8}
+}
+.gal__filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+
+/* =========================================================================
+   Page heads (subpages)
+   ========================================================================= */
+.page-head{padding-block:clamp(2.5rem,6vw,5.5rem) clamp(2rem,4vw,3.5rem)}
+.page-head .h1{margin-top:1.25rem;max-width:14ch}
+.page-head .lead{margin-top:1.5rem;max-width:46ch}
+.crumbs{font-size:var(--fs-small);color:var(--text-secondary)}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.crumbs span[aria-hidden]{margin-inline:.5rem}
+
+.split{row-gap:2.5rem;align-items:start}
+.split__a{grid-column:1 / span 5}
+.split__b{grid-column:7 / -1}
+
+/* =========================================================================
+   Location page
+   ========================================================================= */
+.loc-hero{padding-block:clamp(1.5rem,3vw,2.5rem) 0}
+.loc-hero__grid{align-items:end;row-gap:2rem}
+.loc-hero__text{grid-column:1 / span 5;padding-bottom:clamp(1rem,3vw,3rem)}
+.loc-hero__photo{grid-column:6 / -1;aspect-ratio:auto;height:min(70vh,640px);min-height:380px}
+.loc-hero__name{font-family:var(--font-display);font-size:var(--fs-h1);line-height:.92;letter-spacing:-.018em;margin-top:1rem}
+.loc-hero__name small{display:block;font-family:var(--font-body);font-size:var(--fs-micro);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:1rem}
+.loc-hero__name em{color:var(--brand-primary-strong)}
+.loc-hero__addr{margin-top:1.5rem;font-size:var(--fs-lead);font-weight:500}
+/* wariant B: zdjęcie po lewej */
+.loc-hero--b .loc-hero__text{grid-column:8 / -1;grid-row:1}
+.loc-hero--b .loc-hero__photo{grid-column:1 / span 7;grid-row:1}
+/* wariant C: szeroki kadr, tekst pod spodem */
+.loc-hero--c .loc-hero__photo{grid-column:1 / -1;grid-row:2;height:min(62vh,600px)}
+.loc-hero--c .loc-hero__text{grid-column:1 / span 9;grid-row:1;padding-bottom:0}
+.quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--border-strong);margin-top:clamp(2rem,4vw,3rem)}
+.quick a,.quick button{
+  display:grid;gap:.15rem;align-content:center;min-height:88px;padding:1rem 1.25rem;text-align:left;
+  background:none;border:0;border-right:1px solid var(--border-subtle);text-decoration:none;
+  transition:background-color var(--dur-fast) var(--ease)
+}
+.quick > :last-child{border-right:0}
+.quick a:hover,.quick button:hover{background:var(--surface-soft)}
+.quick small{font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--text-secondary)}
+.quick strong{font-family:var(--font-display);font-weight:400;font-size:1.5rem;line-height:1.15}
+.loc-about{grid-column:1 / span 6}
+.loc-services{grid-column:8 / -1}
+.svc{display:grid;gap:.25rem;padding:1.15rem 0;border-bottom:1px solid var(--border-subtle);text-decoration:none}
+.svc:first-child{border-top:1px solid var(--border-subtle)}
+.svc strong{font-family:var(--font-display);font-weight:400;font-size:1.6rem;line-height:1.1}
+.svc span{font-size:var(--fs-small);color:var(--text-secondary)}
+.svc:hover strong{color:var(--brand-primary-strong)}
+.loc-gal{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:.75rem}
+.loc-gal > :nth-child(1){grid-column:1 / span 7;--ar:4/3}
+.loc-gal > :nth-child(2){grid-column:8 / -1;--ar:4/5}
+.loc-gal > :nth-child(3){grid-column:3 / span 5;--ar:1/1;margin-top:-4rem}
+.loc-gal > :nth-child(4){grid-column:8 / span 4;--ar:4/3}
+.loc-gal button{padding:0;border:0;background:none;cursor:zoom-in;display:block;width:100%}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums lining-nums}
+.hours th,.hours td{padding:.85rem 0;border-bottom:1px solid var(--border-subtle);text-align:left;font-weight:400}
+.hours td{text-align:right}
+.hours tr.is-today th,.hours tr.is-today td{font-weight:600;color:var(--brand-primary-strong)}
+.hours tr.is-today th::after{content:"dziś";font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;margin-left:.6rem;padding:.1rem .4rem;border:1px solid currentColor;border-radius:2px;vertical-align:.15em}
+.addr-card{background:var(--surface-raised);padding:clamp(1.5rem,3vw,2.5rem);border-top:3px solid var(--brand-primary)}
+.addr-card address{font-style:normal;font-family:var(--font-display);font-size:2rem;line-height:1.1}
+.contact-lines{display:grid;gap:.25rem;margin-top:1.25rem}
+.contact-lines a{font-weight:600;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.contact-lines a:hover{color:var(--brand-primary-strong);text-decoration:underline}
+.contact-lines a svg{width:18px;height:18px;margin-right:.2rem}
+.ws-head-text{grid-column:1 / span 6}
+.ws-head-photo{grid-column:7 / -1}
+.others{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gutter)}
+.other{display:grid;grid-template-columns:40% 1fr;gap:1.5rem;align-items:center;text-decoration:none}
+.other .media{--ar:1/1}
+.other strong{font-family:var(--font-display);font-weight:400;font-size:2rem;line-height:1.05;display:block}
+.other span{font-size:var(--fs-small);color:var(--text-secondary)}
+.other:hover strong{color:var(--brand-primary-strong)}
+
+/* Contact page */
+.cblocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gutter)}
+.cblock{border-top:2px solid var(--text-primary);padding-top:1.5rem;display:grid;gap:1rem;align-content:start}
+.cblock h2{font-family:var(--font-display);font-size:2.2rem;line-height:1}
+.cblock h2 small{display:block;font-family:var(--font-body);font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--text-secondary);margin-bottom:.4rem}
+.cblock address{font-style:normal;font-weight:500}
+.cblock .hours th,.cblock .hours td{padding:.45rem 0;font-size:.9375rem}
+.mini-hours{font-size:.9375rem;color:var(--text-secondary)}
+
+/* =========================================================================
+   Footer
+   ========================================================================= */
+.site-footer{background:var(--surface-dark);color:var(--text-on-dark);padding-block:clamp(4rem,7vw,6.5rem) 2rem}
+.footer__top{row-gap:3rem}
+.footer__brand{grid-column:1 / span 4}
+.footer__brand .brand__word{color:var(--text-on-dark);font-size:2.6rem}
+.footer__brand .brand__sub{color:var(--text-on-dark-2)}
+.footer__brand p{margin-top:1.25rem;color:var(--text-on-dark-2);max-width:32ch}
+.footer__locs{grid-column:6 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gutter)}
+.footer__loc h3{font-family:var(--font-display);font-size:1.6rem;line-height:1.1}
+.footer__loc a{text-decoration:none}
+.footer__loc a:hover{text-decoration:underline}
+.footer__loc p,.footer__loc li{font-size:.9375rem;color:var(--text-on-dark-2)}
+.footer__loc ul{display:grid;gap:.15rem;margin-top:.75rem}
+.footer__loc li a{color:var(--text-on-dark);display:inline-flex;min-height:32px;align-items:center}
+.footer__mid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem;margin-top:clamp(3rem,6vw,5rem);padding-block:1.5rem;border-block:1px solid var(--border-on-dark)}
+.footer__nav{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem}
+.footer__nav a{text-decoration:none;min-height:40px;display:inline-flex;align-items:center}
+.footer__nav a:hover{text-decoration:underline}
+.footer__social{display:flex;gap:.5rem}
+.footer__social a{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:0 1rem;border:1px solid var(--border-on-dark);border-radius:var(--radius);text-decoration:none;font-size:.9375rem}
+.footer__social a:hover{border-color:var(--text-on-dark)}
+.footer__social svg{width:18px;height:18px}
+.footer__legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:1.5rem;font-size:.8125rem;color:var(--text-on-dark-2)}
+
+/* =========================================================================
+   Utilities: back-to-top, action bar, lightbox
+   ========================================================================= */
+.to-top{
+  position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:40;width:50px;height:50px;
+  display:grid;place-items:center;border-radius:50%;border:1px solid var(--border-strong);background:var(--surface-raised);
+  opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)
+}
+.to-top.is-visible{opacity:1;transform:none;pointer-events:auto}
+.to-top svg{width:18px;height:18px}
+.actionbar{display:none}
+@media (max-width:759px){
+  body.has-actionbar{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+  body.has-actionbar .actionbar{
+    display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:45;
+    background:var(--surface-dark);color:var(--text-on-dark);padding-bottom:env(safe-area-inset-bottom);
+    border-top:1px solid var(--border-on-dark)
+  }
+  .actionbar a,.actionbar button{display:grid;justify-items:center;gap:.2rem;padding:.65rem .25rem;min-height:64px;background:none;border:0;color:inherit;text-decoration:none;font-size:.75rem;font-weight:600;letter-spacing:.02em}
+  .actionbar svg{width:20px;height:20px}
+  body.has-actionbar .to-top{bottom:calc(80px + env(safe-area-inset-bottom))}
+}
+.lb{border:0;padding:0;margin:0;max-width:none;max-height:none;width:100vw;height:100vh;height:100dvh;background:transparent;color:var(--text-on-dark)}
+.lb::backdrop{background:rgba(18,15,12,.94)}
+.lb[open]{display:grid;grid-template-rows:auto 1fr auto;animation:fadeUp var(--dur) var(--ease)}
+.lb__top{display:flex;justify-content:space-between;align-items:center;padding:1rem var(--gutter)}
+.lb__count{font-size:var(--fs-small);color:var(--text-on-dark-2);font-variant-numeric:tabular-nums}
+.lb__stage{position:relative;display:grid;place-items:center;padding:0 clamp(3.5rem,8vw,6rem);min-height:0}
+.lb__stage img{max-width:100%;max-height:calc(100dvh - 170px);object-fit:contain;animation:fadeUp var(--dur) var(--ease)}
+.lb__err{display:none;font-size:var(--fs-small);color:var(--text-on-dark-2);text-align:center;max-width:36ch}
+.lb.is-missing .lb__err{display:block}
+.lb.is-missing img{display:none}
+.lb__btn{
+  display:grid;place-items:center;width:52px;height:52px;border-radius:50%;
+  background:rgba(243,236,224,.08);border:1px solid var(--border-on-dark);color:var(--text-on-dark);
+  transition:background-color var(--dur-fast) var(--ease)
+}
+.lb__btn:hover{background:rgba(243,236,224,.18)}
+.lb__btn svg{width:20px;height:20px}
+.lb__prev,.lb__next{position:absolute;top:50%;transform:translateY(-50%)}
+.lb__prev{left:var(--gutter)}.lb__next{right:var(--gutter)}
+.lb__cap{padding:1rem var(--gutter) 1.5rem;text-align:center;font-size:var(--fs-small);color:var(--text-on-dark-2)}
+.lb :focus-visible{outline-color:var(--focus-on-dark)}
+
+.notice{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem 1.5rem;background:var(--surface-raised);border-left:3px solid var(--brand-accent);font-size:var(--fs-small);color:var(--text-secondary)}
+.notice strong{color:var(--text-primary)}
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width:1180px){
+  .nav__link{padding-inline:.5rem;font-size:.9rem}
+  .nav__link::after{left:.5rem;right:.5rem}
+}
+@media (max-width:1079px){
+  .nav{display:none}
+  .burger{display:inline-flex}
+  .ws-head-text,.ws-head-photo{grid-column:1 / -1}
+  .hero__text{grid-column:1 / span 7}
+  .hero__visual{grid-column:7 / -1}
+  .hero__inset{left:-10%;width:46%}
+  .menu-preview__aside{grid-column:1 / -1}
+  .menu-preview__main{grid-column:1 / -1}
+  .menu-preview__photo{display:none}
+  .mw--preview .mw__cats{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;border:0;gap:.5rem}
+  .mw--preview .mw__cats .chip{width:auto;border:1px solid var(--border-subtle);border-radius:999px;min-height:44px;padding:.45rem 1rem;font-family:var(--font-body);font-size:.9375rem;font-weight:500}
+  .mw--preview .mw__cats .chip small{display:none}
+  .mw--preview .mw__cats .chip .num{display:none}
+  .mw--preview .mw__cats .chip[aria-pressed="true"]{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface-main)}
+  .place--1 .place__media{grid-column:1 / span 7}
+  .place--1 .place__body{grid-column:8 / -1}
+  .place--2 .place__body{grid-column:1 / span 5}
+  .place--2 .place__media{grid-column:6 / -1}
+  .place--3 .place__media{grid-column:1 / -1}
+  .place--3 .place__body{grid-column:4 / -1;grid-row:2;margin:-4rem 0 0 0}
+  .together__photo{grid-column:1 / span 6}
+  .together__body{grid-column:7 / -1}
+  .ws__body{grid-column:1 / -1;position:static}
+  .ws__mosaic{grid-column:1 / -1}
+  .catering__head,.catering__list{grid-column:1 / -1}
+  .footer__brand{grid-column:1 / -1}
+  .footer__locs{grid-column:1 / -1}
+  .loc-hero__text{grid-column:1 / span 6}
+  .loc-hero__photo{grid-column:7 / -1}
+  .loc-hero--b .loc-hero__text{grid-column:7 / -1}
+  .loc-hero--b .loc-hero__photo{grid-column:1 / span 6}
+  .loc-hero--c .loc-hero__text{grid-column:1 / -1}
+  .loc-about,.loc-services{grid-column:1 / -1}
+  .split__a,.split__b{grid-column:1 / -1}
+  .cblocks{grid-template-columns:1fr 1fr}
+}
+@media (max-width:759px){
+  :root{--header-h:64px}
+  .brand__word{font-size:1.75rem}
+  .site-header .container{gap:.6rem}
+  .header-cta{margin-left:0;min-height:44px;padding:.5rem .9rem;font-size:.875rem}
+  .burger{padding:.5rem .7rem}
+  .proto .container{font-size:.75rem}
+  .hero{padding-top:0}
+  .hero__grid{display:flex;flex-direction:column-reverse;align-items:stretch}
+  .hero__visual{margin-inline:calc(var(--gutter) * -1)}
+  .hero__photo{height:auto;min-height:0;aspect-ratio:4/4.2}
+  .hero__inset{display:none}
+  .hero__note{position:static;margin:.5rem var(--gutter) 0}
+  .hero__title{font-size:clamp(3.1rem,15vw,4.6rem)}
+  .hero__cta .btn{flex:1 1 100%}
+  .hero__places{grid-template-columns:1fr;margin-top:2rem}
+  .hero__places a{border-right:0;margin-right:0;border-bottom:1px solid var(--border-subtle);grid-template-columns:1fr auto;align-items:baseline}
+  .strip .container{justify-content:flex-start;gap:.25rem 1.25rem}
+  .dishes,.mw--preview .dishes{grid-template-columns:1fr}
+  .dish__name{font-size:1.35rem}
+  .mw__locs{flex-wrap:nowrap;overflow-x:auto}
+  .mw__search{max-width:none}
+  .places{gap:4.5rem}
+  .place .place__media,.place .place__body{grid-column:1 / -1!important;grid-row:auto!important}
+  .place--2 .place__media{order:-1}
+  .place__media{margin-inline:calc(var(--gutter) * -1)}
+  .place--3 .place__body{margin:-2.5rem 0 0 0;padding:1.5rem}
+  .together__photo,.together__body{grid-column:1 / -1}
+  .together__photo{--ar:4/3}
+  .ws__mosaic .media:nth-child(3){margin-top:0}
+  .banquet__photo{--ar:4/3;min-height:0}
+  .banquet__card{margin:-3rem var(--gutter) 0}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:44vw}
+  .gal__item,.gal__item:nth-child(n){grid-column:span 1;grid-row:span 1}
+  .gal__item:nth-child(5n+1){grid-column:span 2;grid-row:span 1}
+  .footer__locs{grid-template-columns:1fr}
+  .footer__mid{flex-direction:column}
+  .loc-hero__grid{display:flex;flex-direction:column;align-items:stretch}
+  .proto__long{display:none}
+  .proto__short{display:inline!important}
+  .loc-hero__photo,.loc-hero--c .loc-hero__photo{height:auto;min-height:0;aspect-ratio:4/3.4;margin-inline:calc(var(--gutter) * -1);order:-1}
+  .loc-hero--c .loc-hero__photo{order:0}
+  .quick{grid-template-columns:1fr 1fr}
+  .quick > :nth-child(2){border-right:0}
+  .quick > :nth-child(-n+2){border-bottom:1px solid var(--border-subtle)}
+  .quick a,.quick button{min-height:76px;padding:.85rem 1rem}
+  .loc-gal{grid-template-columns:1fr 1fr}
+  .loc-gal > :nth-child(n){grid-column:span 1;margin-top:0;--ar:1/1}
+  .loc-gal > :nth-child(1){grid-column:1 / -1;--ar:4/3}
+  .others{grid-template-columns:1fr}
+  .cblocks{grid-template-columns:1fr}
+  .facts > div{grid-template-columns:1fr;gap:.25rem}
+  .mw__catbar--sticky{margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:1ms!important;animation-delay:0ms!important;transition-duration:1ms!important;scroll-behavior:auto!important}
+  [data-reveal]{opacity:1;transform:none;clip-path:none}
+}
+@media print{
+  .site-header,.proto,.actionbar,.to-top,.site-footer .footer__social{display:none}
+  [data-reveal]{opacity:1;transform:none;clip-path:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-skip>Przejdź do treści</a>
+
+<div class="proto" role="note" aria-label="Informacja o prototypie" id="proto">
+  <div class="container">
+    <span class="badge-demo" aria-hidden="true">Prototyp</span>
+    <p><span class="proto__long"><strong>Koncepcja nowej strony Azzurro.</strong> Dane z azzurro-restauracja.pl (stan na 17.11.2026). Logo, kolory marki i część zdjęć to miejsca robocze — oznaczone jako DEMO.</span><span class="proto__short" style="display:none"><strong>Koncepcja strony.</strong> Elementy DEMO do podmiany.</span></p>
+    <button class="proto__close" type="button" aria-label="Ukryj informację o prototypie" data-proto-close>×</button>
+  </div>
+</div>
+
+<header class="site-header" id="site-header">
+  <div class="container">
+    <a class="brand" href="#/" aria-label="Azzurro Restauracje — strona główna">
+      <span class="brand__word" aria-hidden="true">azzurro</span>
+      <span class="brand__sub" aria-hidden="true">restauracje</span>
+    </a>
+    <nav class="nav" aria-label="Główna nawigacja">
+      <ul class="nav__list" id="nav-list"></ul>
+    </nav>
+    <a class="btn btn--primary header-cta" href="#/menu">Zobacz menu</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" data-burger>
+      <span class="burger__icon" aria-hidden="true"></span><span class="visually-hidden" data-burger-label>Otwórz nawigację</span>
+    </button>
+  </div>
+</header>
+<div class="mnav" id="mnav" hidden></div>
+
+<main id="main" tabindex="-1"></main>
+
+<footer class="site-footer on-dark" id="site-footer"></footer>
+
+<nav class="actionbar on-dark" aria-label="Szybkie akcje lokalu" id="actionbar"></nav>
+
+<button class="to-top" type="button" aria-label="Wróć na górę strony" data-to-top>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<dialog class="lb on-dark" id="lightbox" aria-label="Podgląd zdjęcia">
+  <div class="lb__top">
+    <p class="lb__count" data-lb-count aria-live="polite"></p>
+    <button class="lb__btn" type="button" data-lb-close aria-label="Zamknij podgląd (Esc)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="lb__stage">
+    <button class="lb__btn lb__prev" type="button" data-lb-prev aria-label="Poprzednie zdjęcie">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <img alt="" data-lb-img>
+    <p class="lb__err">Zdjęcie z oficjalnej strony nie wczytało się. W wersji produkcyjnej pliki będą serwowane lokalnie.</p>
+    <button class="lb__btn lb__next" type="button" data-lb-next aria-label="Następne zdjęcie">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <p class="lb__cap" data-lb-cap></p>
+</dialog>
+
+<p class="visually-hidden" aria-live="polite" id="route-status"></p>
+
+<noscript><p style="padding:2rem;max-width:60ch">Ten prototyp korzysta z JavaScript do nawigacji między widokami. Włącz JavaScript, aby go obejrzeć.</p></noscript>
+
+<script>
+(() => {
+'use strict';
+
+/* =========================================================================
+   1. DANE — jedno źródło prawdy
+   Źródło: https://azzurro-restauracja.pl (strona główna, /menu/*, /warsztaty/,
+   /sala-bankietowa/, /galeria/) oraz https://azzurro.catering — stan na 17.11.2026.
+   Wszystkie dane wymagają ponownej weryfikacji przed publikacją.
+   ========================================================================= */
+
+const SOURCE = { site: 'https://azzurro-restauracja.pl', checked: '17.11.2026' };
+const UP = 'https://azzurro-restauracja.pl/wp-content/uploads/';
+
+/* Zdjęcia: wyłącznie pliki z oficjalnej strony (hotlink na potrzeby prototypu).
+   Opisy alt są ogólne — po przejrzeniu kadrów doprecyzuj, co przedstawiają. */
+const PHOTOS = {
+  skarpa:  { src: UP + '2022/04/skarpa-gotowe-zdjecia-22.jpg', alt: 'Azzurro na Skarpie', caption: 'Azzurro na Skarpie', cat: 'restauracje' },
+  andersa: { src: UP + '2022/04/WhatsApp-Image-2025-07-20-at-09.01.55.jpeg', alt: 'Azzurro Andersa', caption: 'Azzurro Andersa', cat: 'restauracje' },
+  bistro:  { src: UP + '2022/04/bistro-gotowe-zdjecia-21.jpg', alt: 'Azzurro Włoskie Bistro', caption: 'Azzurro Włoskie Bistro', cat: 'restauracje' },
+  ws1: { src: UP + '2024/01/warsztaty-_5-1-1024x575.jpg', alt: 'Warsztaty kulinarne dla dzieci w Azzurro na Skarpie', caption: 'Warsztaty kulinarne', cat: 'wydarzenia' },
+  ws2: { src: UP + '2024/01/warsztaty_2-1-1024x576.jpg', alt: 'Warsztaty kulinarne dla dzieci w Azzurro na Skarpie', caption: 'Warsztaty kulinarne', cat: 'wydarzenia' },
+  ws3: { src: UP + '2024/01/warsztaty-6-1024x575.jpg', alt: 'Warsztaty kulinarne dla dzieci w Azzurro na Skarpie', caption: 'Warsztaty kulinarne', cat: 'wydarzenia' },
+  ws4: { src: UP + '2024/01/warsztaty_1-1024x576.jpg', alt: 'Warsztaty kulinarne dla dzieci w Azzurro na Skarpie', caption: 'Warsztaty kulinarne', cat: 'wydarzenia' },
+  ws5: { src: UP + '2024/01/warsztaty_3-1024x575.jpg', alt: 'Warsztaty kulinarne dla dzieci w Azzurro na Skarpie', caption: 'Warsztaty kulinarne', cat: 'wydarzenia' },
+  ws6: { src: UP + '2024/01/warsztaty-4-1024x576.jpg', alt: 'Warsztaty kulinarne dla dzieci w Azzurro na Skarpie', caption: 'Warsztaty kulinarne', cat: 'wydarzenia' },
+  sb1: { src: UP + '2024/02/s_b_1-edited-1.jpg', alt: 'Sala bankietowa w Azzurro na Skarpie', caption: 'Sala bankietowa — Azzurro na Skarpie', cat: 'restauracje' },
+  sb2: { src: UP + '2024/02/sb_5-edited-1.jpg', alt: 'Sala bankietowa w Azzurro na Skarpie', caption: 'Sala bankietowa — Azzurro na Skarpie', cat: 'restauracje' },
+  sb3: { src: UP + '2024/02/s_b-6-edited-1.jpg', alt: 'Sala bankietowa w Azzurro na Skarpie', caption: 'Sala bankietowa — Azzurro na Skarpie', cat: 'restauracje' },
+  sb4: { src: UP + '2024/02/sala-b-2-edited.jpeg', alt: 'Sala bankietowa w Azzurro na Skarpie', caption: 'Sala bankietowa — Azzurro na Skarpie', cat: 'restauracje' },
+};
+/* Najnowsze zdjęcia z /galeria/ (kwiecień 2026) — treść kadrów do opisania i skategoryzowania. */
+[
+  'WhatsApp-Image-2026-01-17-at-14.17.35.jpeg',
+  'WhatsApp-Image-2026-03-25-at-23.16.14.jpeg',
+  'WhatsApp-Image-2026-03-26-at-23.13.21.jpeg',
+  'WhatsApp-Image-2026-03-26-at-23.13.23.jpeg',
+  'WhatsApp-Image-2026-03-26-at-23.16.12.jpeg',
+  'WhatsApp-Image-2026-03-31-at-16.28.33.jpeg',
+  'WhatsApp-Image-2026-03-31-at-16.28.32.jpeg',
+].forEach((f, i) => {
+  PHOTOS['n' + (i + 1)] = { src: UP + '2026/04/' + f, alt: 'Zdjęcie z galerii Azzurro (#azzurrotorun)', caption: 'Z galerii #azzurrotorun', cat: 'najnowsze' };
+});
+
+/* Miejsca na zdjęcia, których brakuje w materiałach źródłowych (oznaczone DEMO). */
+const DEMO = {
+  pizza:     { label: 'Zdjęcie pizzy z karty Azzurro — do sesji', cat: 'jedzenie' },
+  pasta:     { label: 'Zdjęcie makaronu z karty Azzurro — do sesji', cat: 'jedzenie' },
+  antipasti: { label: 'Zdjęcie przystawek do podziału — do sesji', cat: 'jedzenie' },
+  insalate:  { label: 'Zdjęcie sałatki z karty Azzurro — do sesji', cat: 'jedzenie' },
+  casa:      { label: 'Zdjęcie specjału domu — do sesji', cat: 'jedzenie' },
+  interior:  { label: 'Zdjęcie wnętrza lokalu — do sesji', cat: 'restauracje' },
+  kitchen:   { label: 'Kuchnia / przygotowanie pizzy — do sesji', cat: 'restauracje' },
+};
+
+/* Godziny otwarcia — indeks wg Date.getDay(): 0 = niedziela. Identyczne dla trzech lokali wg strony. */
+const HOURS_STANDARD = [
+  ['12:00', '21:00'], // niedziela
+  ['11:00', '21:00'], // poniedziałek
+  ['11:00', '21:00'],
+  ['11:00', '21:00'],
+  ['11:00', '21:00'], // czwartek
+  ['11:00', '21:30'], // piątek
+  ['12:00', '21:30'], // sobota
+];
+const DAY_NAMES = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
+const WEEK_ORDER = [1, 2, 3, 4, 5, 6, 0];
+
+const BRAND = {
+  name: 'Azzurro Restauracje',
+  email: 'azzurro.restauracja@gmail.com',
+  facebook: 'https://www.facebook.com/AzzurroNaSkarpie',
+  instagram: 'https://www.instagram.com/azzurro.restauracje/',
+  menuPdf: UP + '2022/04/menu-06_2026.pdf',
+  menuPdfEn: UP + '2022/04/english-menu-06_2026.pdf',
+  // Strona /sala-bankietowa/ i /warsztaty/: widoczny tekst = poniższe dane, ale linki tel:/mailto: w kodzie strony
+  // prowadzą do innych wartości (+48 508 754 424 / azzurro.restauracja@gmail.com). Do potwierdzenia z klientem.
+  events: { email: 'azzurro.imprezy@gmail.com', phone: '507 484 839' },
+  workshopsPdf: UP + '2026/04/WARSZTATY-2026.pdf',
+};
+
+const CATERING = {
+  url: 'https://azzurro.catering/',
+  phone: '535 122 227',
+  email: 'kontakt@azzurro.catering',
+  address: 'ul. Szosa Bydgoska 3 (Centrum Targowe Park), Toruń',
+  offers: [
+    { name: 'Catering okolicznościowy', text: 'Zestawy na rodzinne uroczystości w domu: zimne przystawki, dania na ciepło z dodatkami i deser — z dowozem lub do odbioru.' },
+    { name: 'Catering firmowy', text: 'Obsługa spotkań, firmowych wydarzeń i konferencji z menu dobranym do charakteru imprezy.' },
+    { name: 'Catering bankietowy', text: 'Większe przyjęcia i bankiety — menu ustalane indywidualnie.' },
+    { name: 'Zimne patery', text: 'Patery i przekąski na zimno — wygodne na spotkania i przyjęcia.' },
+  ],
+};
+
+/* Karta menu — wg strony identyczna w trzech lokalach (5 kategorii, 42 pozycje, karta „06_2026”).
+   Struktura pozwala przypisać lokalowi inną kartę (LOCATIONS[].menuId) lub nadpisać pozycje. */
+const MENUS = {
+  'karta-06-2026': {
+    label: 'Karta 06/2026',
+    categories: [
+      { id: 'antipasti', name: 'antipasti e contorni', pl: 'Przystawki i dodatki', demo: 'antipasti', items: [
+        { n: 'zuppa di pomodoro (200 ml)', d: 'krem z pomidorów z oliwą bazyliową i grana padano, podany z paluchem chlebowym', p: 13 },
+        { n: 'zuppa di pomodoro (350 ml)', d: 'krem z pomidorów z oliwą bazyliową i grana padano, podany z paluchami chlebowymi', p: 19 },
+        { n: 'pane all’aglio', d: 'domowe pieczywo z masłem czosnkowym (przystawka dla 2 os.)', p: 14 },
+        { n: 'pane con pomodorini', d: 'domowe pieczywo z masłem czosnkowym i pomidorkami koktajlowymi z oliwą bazyliową (przystawka dla 2 os.)', p: 27 },
+        { n: 'focaccia toscana', d: 'pieczywo focaccia, podane z domowym paté z wątróbek i karmelizowaną cebulą (przystawka dla 2–3 os.)', p: 33 },
+        { n: 'grissini con la nduja', d: 'domowe paluchy chlebowe podane z zapiekanym sosem z pikantnej mięsnej pasty nduja i grana padano (przystawka dla 2–3 os.)', p: 33, t: ['ostre'] },
+        { n: 'funghi al forno', d: 'pieczarki zapiekane w sosie śmietanowym z gorgonzolą, czosnkiem, rozmarynem i mozzarellą, podane z paluchem chlebowym', p: 25 },
+        { n: 'formaggio di capra', d: 'ser kozi zapiekany z karmelizowaną cebulą, podany z paluchem chlebowym', p: 25 },
+        { n: 'insalata mista', d: 'mix sałat, marchewka, biała rzodkiew, pomidory, oliwki, cebula, vinegret', p: 15 },
+      ]},
+      { id: 'insalate', name: 'insalate', pl: 'Sałatki', demo: 'insalate', items: [
+        { n: 'insalata con formaggio di capra', d: 'mix sałat, pomidory, oliwki, cebula, suszone pomidory, ser kozi, grillowana papryka, prażone pestki dyni, grana padano, dressing balsamiczny, paluchy chlebowe', p: 39 },
+        { n: 'insalata con gorgonzola', d: 'mix sałat, pomidory, oliwki, gorgonzola, marynowana gruszka, prażone pestki dyni, grana padano, dressing balsamiczny, paluchy chlebowe', p: 39 },
+        { n: 'insalata di cesare', d: 'mix sałat, grillowany kurczak, klasyczny dressing Cezara, grzanki croutons, oliwki, grana padano', p: 40 },
+      ]},
+      { id: 'pasta', name: 'pasta', pl: 'Makarony', demo: 'pasta', items: [
+        { n: 'tagliatelle al ragù', d: 'pasta z klasycznym włoskim długo gotowanym sosem z mieloną wołowiną, pomidorami, warzywami, boczkiem pancetta, czerwonym winem i grana padano', p: 42 },
+        { n: 'spaghetti con verdure', d: 'pasta w sosie pomidorowym z grillowaną cukinią, papryką, bakłażanem, cebulą, oliwkami, rzepą brokułową, szpinakiem i grana padano', p: 40 },
+        { n: 'tagliatelle con pollo e spinacci', d: 'pasta w sosie śmietanowo-szpinakowym z kurczakiem, gorgonzolą, czerwoną cebulą, grana padano i prażonymi pestkami dyni', p: 42 },
+        { n: 'spaghetti con salsiccia', d: 'pasta z pikantnym sosem pomidorowym, włoską kiełbasą salsiccia veneta, czerwoną cebulą, koprem włoskim i grana padano', p: 42, t: ['ostre'] },
+        { n: 'tagliatelle con salmone', d: 'pasta z wędzonym łososiem, zielonym groszkiem i czerwoną cebulą w sosie śmietanowym z grana padano', p: 43 },
+      ]},
+      { id: 'pizza', name: 'pizza', pl: 'Pizza', demo: 'pizza',
+        note: 'Możliwa zamiana spodu na bezglutenowy (dopłata 2 zł, średnica 26–28 cm). W restauracjach używamy mąki pszennej, dlatego gotowy produkt może zawierać gluten i jest nieodpowiedni dla osób uczulonych.',
+        items: [
+        { n: 'pomodoro', d: 'sos z pomidorów, mozzarella', p: 34 },
+        { n: 'zucchini', d: 'oliwa, mozzarella, cukinia', p: 36 },
+        { n: 'classica', d: 'sos z pomidorów, mozzarella, pomidory, oliwa bazyliowa', p: 40 },
+        { n: 'con verdure', d: 'sos z pomidorów, mozzarella, grillowana cukinia, bakłażan, rzepa brokułowa, cebula, papryka, oliwki', p: 40 },
+        { n: 'capricciosa', d: 'sos z pomidorów, mozzarella, pieczarki, włoska szynka cotto', p: 41 },
+        { n: 'diavola', d: 'sos z pomidorów, mozzarella, pikantne salami spianata, peperoncino, chili', p: 41, t: ['ostre'] },
+        { n: 'salami', d: 'sos z pomidorów, mozzarella, włoskie salami, czerwona cebula', p: 41 },
+        { n: 'siciliana', d: 'sos z pomidorów, mozzarella, tuńczyk, kapary, oliwki, anchois, rukola', p: 41 },
+        { n: 'gorgonzola e funghi', d: 'oliwa, mozzarella, pieczarki, gorgonzola', p: 41 },
+        { n: 'pollo con funghi', d: 'sos śmietanowo-czosnkowy, mozzarella, kurczak, smażona czerwona cebula, pieczarki', p: 42 },
+        { n: 'quattro formaggi', d: 'sos z pomidorów, mozzarella, pecorino, gorgonzola, grana padano, zielone pesto', p: 43 },
+        { n: 'pollo e pesto', d: 'sos z pomidorów, mozzarella, kurczak, suszone pomidory, zielone pesto, rukola, grana padano', p: 42 },
+        { n: 'con salsiccia', d: 'sos z pomidorów, mozzarella, włoska kiełbasa salsiccia veneta, koper włoski, chili, smażona czerwona cebula, rzepa brokułowa', p: 42, t: ['ostre'] },
+        { n: 'pere e formaggio di capra', d: 'oliwa, mozzarella, marynowana gruszka, ser kozi, rukola', p: 43 },
+        { n: 'nduja', d: 'sos z pomidorów, mozzarella, wieprzowa pikantna pasta nduja, suszone pomidory, rukola', p: 44, t: ['ostre'] },
+        { n: 'di parma', d: 'sos z pomidorów, mozzarella, szynka prosciutto crudo, rukola, oliwki, grana padano', p: 45 },
+        { n: 'con gamberi', d: 'sos z pomidorów, mozzarella, krewetki, rukola', p: 46 },
+      ]},
+      { id: 'casa', name: 'specialità della casa', pl: 'Specjały domu', demo: 'casa', items: [
+        { n: 'salmone', d: 'grillowany filet z łososia w delikatnym cytrynowo-maślanym sosie, z pomidorkami koktajlowymi, kaparami i oliwkami, podany z sałatką oraz paluchami chlebowymi lub ryżem', p: 60 },
+        { n: 'panuozzo con pollo', d: 'grillowany filet z kurczaka z sałatą, mozzarellą, papryką grillowaną i majonezem, serwowany w domowym pieczywie panuozzo, podany z sałatką', p: 44 },
+        { n: 'panuozzo burger', d: 'burger wołowy z karmelizowaną cebulą, rukolą, mozzarellą, pomidorem i autorskim włoskim sosem, serwowany w domowym pieczywie panuozzo, podany z sałatką', p: 46 },
+        { n: 'gnocchi al pomodoro', d: 'ziemniaczane gnocchi w sosie pomidorowym z suszonymi pomidorami, zielonym pesto i grana padano, podane z sałatką', p: 43 },
+        { n: 'polpette vegane', d: 'wegańskie pulpeciki z ciecierzycy w sosie pomidorowym z papryką, cebulą i bazylią, podane z sałatką oraz paluchami chlebowymi lub kaszą farro', p: 45, t: ['wegańskie'] },
+        { n: 'verdure al forno', d: 'grillowane warzywa (cukinia, bakłażan, papryka, cebula) zapiekane w sosie pomidorowym z serem kozim, podane z sałatką oraz paluchami chlebowymi lub kaszą farro', p: 45 },
+        { n: 'pollo con gnocchi e spinacci', d: 'grillowany filet z kurczaka z ziemniaczanymi gnocchi w sosie śmietanowym z suszonymi pomidorami, szpinakiem, czerwoną cebulą i grana padano, podany z sałatką', p: 48 },
+        { n: 'filetto di maiale con funghi', d: 'polędwiczki wieprzowe duszone w sosie śmietanowym z białym winem, pieczarkami, cebulą i rozmarynem, podane z sałatką oraz dodatkiem do wyboru: kasza farro / ziemniaczane gnocchi / paluchy chlebowe', p: 49 },
+      ]},
+    ],
+  },
+};
+
+const LOCATIONS = [
+  {
+    id: 'na-skarpie',
+    name: 'Azzurro na Skarpie',
+    short: 'na Skarpie',
+    title: 'na <em>Skarpie</em>',
+    street: 'ul. Wyszyńskiego 19/2',
+    city: 'Toruń',
+    postal: '87-100',
+    phones: ['517 774 242', '517 797 775'],
+    hours: HOURS_STANDARD,
+    mapQuery: 'Azzurro na Skarpie, Wyszyńskiego 19, Toruń',
+    mapShort: 'https://goo.gl/maps/pLaThyAheZD6DHZv7',
+    orderUrl: 'https://jedzcochcesz.pl/restaurants/azzurro-na-skarpie',
+    specialsPdf: UP + '2026/10/specjaly.pdf',
+    menuId: 'karta-06-2026',
+    photo: PHOTOS.skarpa,
+    gallery: [PHOTOS.skarpa, PHOTOS.sb4, PHOTOS.sb1, PHOTOS.ws2],
+    variant: 'a',
+    intro: 'Restauracja na osiedlu Na Skarpie, przy ul. Wyszyńskiego. To tutaj działa nasza sala bankietowa i tu odbywają się kulinarne warsztaty dla dzieci — najczęściej w soboty, co najmniej raz w miesiącu.',
+    services: ['sala', 'warsztaty', 'catering'],
+  },
+  {
+    id: 'andersa',
+    name: 'Azzurro Andersa',
+    short: 'Andersa',
+    title: '<em>Andersa</em>',
+    street: 'ul. Andersa 72',
+    city: 'Toruń',
+    postal: '',
+    phones: ['56 647 11 16'],
+    hours: HOURS_STANDARD,
+    mapQuery: 'Azzurro, Andersa 72, Toruń',
+    mapShort: 'https://maps.app.goo.gl/mu8QTS65e7RDso5Q9',
+    orderUrl: 'https://jedzcochcesz.pl/restaurants/azzurro',
+    specialsPdf: UP + '2026/10/specjaly.pdf',
+    menuId: 'karta-06-2026',
+    photo: PHOTOS.andersa,
+    gallery: [PHOTOS.andersa, DEMO.interior, DEMO.kitchen, DEMO.pizza],
+    variant: 'b',
+    intro: 'Najnowszy adres Azzurro — lokal przy ul. Andersa 72 na toruńskim lewobrzeżu. Ta sama karta co w pozostałych restauracjach: pizza, makarony, sałatki i specjały domu, na miejscu albo na wynos.',
+    services: ['catering'],
+  },
+  {
+    id: 'wloskie-bistro',
+    name: 'Azzurro Włoskie Bistro',
+    short: 'Włoskie Bistro',
+    title: 'Włoskie <em>Bistro</em>',
+    street: 'ul. Szosa Chełmińska 176',
+    city: 'Toruń',
+    postal: '',
+    phones: ['517 244 550', '501 943 852'],
+    hours: HOURS_STANDARD,
+    mapQuery: 'Azzurro Włoskie Bistro, Szosa Chełmińska 176, Toruń',
+    mapShort: 'https://goo.gl/maps/fiTnd1kpan311aJcA',
+    orderUrl: 'https://jedzcochcesz.pl/restaurants/azzurro-szosa-chelminska',
+    specialsPdf: UP + '2026/08/specjaly-1.pdf',
+    menuId: 'karta-06-2026',
+    photo: PHOTOS.bistro,
+    gallery: [PHOTOS.bistro, DEMO.interior, DEMO.pasta, DEMO.kitchen],
+    variant: 'c',
+    intro: 'Włoskie Bistro przy Szosie Chełmińskiej 176. Wpadnij na pizzę, makaron albo jeden ze specjałów domu — na miejscu lub na wynos.',
+    services: ['catering'],
+  },
+];
+const LOC = Object.fromEntries(LOCATIONS.map(l => [l.id, l]));
+
+const SERVICES = {
+  sala: { name: 'Sala bankietowa', text: 'Kameralne przyjęcia rodzinne i spotkania firmowe — do 36–38 gości.', href: '#/sala-bankietowa' },
+  warsztaty: { name: 'Warsztaty kulinarne', text: 'Dla dzieci i rodzin — pizza, makarony, gnocchi, a przed świętami pierniki.', href: '#/warsztaty' },
+  catering: { name: 'Azzurro Catering', text: 'Catering okolicznościowy, firmowy i bankietowy w Toruniu i okolicy.', href: '#/catering' },
+};
+
+const GALLERY = [
+  PHOTOS.skarpa, PHOTOS.ws1, PHOTOS.n1, PHOTOS.sb4, PHOTOS.bistro, PHOTOS.n2,
+  PHOTOS.andersa, PHOTOS.ws3, PHOTOS.n3, PHOTOS.sb1, PHOTOS.n4, PHOTOS.ws2,
+  PHOTOS.n5, PHOTOS.sb2, PHOTOS.ws4, PHOTOS.n6, PHOTOS.sb3, PHOTOS.ws5,
+  PHOTOS.n7, PHOTOS.ws6,
+  DEMO.pizza, DEMO.pasta, DEMO.antipasti, DEMO.casa,
+];
+const GALLERY_FILTERS = [
+  { id: 'all', label: 'Wszystkie' },
+  { id: 'jedzenie', label: 'Jedzenie' },
+  { id: 'restauracje', label: 'Restauracje' },
+  { id: 'wydarzenia', label: 'Wydarzenia' },
+  { id: 'najnowsze', label: 'Najnowsze' },
+];
+
+/* =========================================================================
+   2. HELPERY
+   ========================================================================= */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = (s = '') => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const telHref = p => 'tel:+48' + p.replace(/\D/g, '');
+const mapHref = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+const zl = n => n + ' zł';
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ł/g, 'l');
+const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const ICON = {
+  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>',
+  ext: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 16L17 7M9 7h8v8"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s7-6.1 7-12a7 7 0 10-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>',
+  menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3v8a2 2 0 002 2v8M10 3v8M8 3v6M16 21V3c2 0 3 2 3 6s-1 5-3 5"/></svg>',
+  bag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>',
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>',
+  caret: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>',
+  photo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/></svg>',
+  fb: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg>',
+  ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg>',
+};
+
+/** Zdjęcie lub placeholder DEMO. p: obiekt z PHOTOS lub DEMO. */
+/* ar: proporcje kadru (null = sterowane z CSS przez --ar); tag: 'span' wewnątrz <button>. */
+function media(p, { ar = null, cls = '', eager = false, caption = '', reveal = true, pos = '', tag = 'figure' } = {}) {
+  const style = `${ar ? `--ar:${ar};` : ''}${pos ? `--pos:${pos};` : ''}`;
+  const st = style ? ` style="${style}"` : '';
+  const rev = reveal ? ' data-reveal' : '';
+  const inner = tag === 'span' ? 'span' : 'div';
+  if (!p || !p.src) {
+    const label = (p && p.label) || 'Miejsce na zdjęcie';
+    return `<${tag} class="media media--demo ${cls}"${st}${rev}>
+      <${inner} class="media__ph" role="img" aria-label="Miejsce na zdjęcie (DEMO): ${esc(label)}">${ICON.photo}<span class="badge-demo">DEMO</span><span>${esc(label)}</span></${inner}>
+    </${tag}>`;
+  }
+  const capTag = tag === 'figure' ? 'figcaption' : 'span';
+  return `<${tag} class="media ${cls}"${st}${rev}>
+    <img src="${esc(p.src)}" alt="${esc(p.alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+    <${inner} class="media__ph" aria-hidden="true">${ICON.photo}<span class="badge-demo">DEMO</span><span>Zdjęcie z oficjalnej strony nie wczytało się — w produkcji plik lokalny</span></${inner}>
+    ${caption ? `<${capTag} class="media__cap">${esc(caption)}</${capTag}>` : ''}
+  </${tag}>`;
+}
+
+function toMin(t) { const [h, m] = t.split(':').map(Number); return h * 60 + m; }
+function statusFor(loc, now = new Date()) {
+  const d = now.getDay();
+  const today = loc.hours[d];
+  const m = now.getHours() * 60 + now.getMinutes();
+  if (today && m >= toMin(today[0]) && m < toMin(today[1])) return { open: true, text: `Otwarte teraz · do ${today[1]}` };
+  if (today && m < toMin(today[0])) return { open: false, text: `Zamknięte · otwieramy dziś o ${today[0]}` };
+  const next = loc.hours[(d + 1) % 7];
+  return { open: false, text: `Zamknięte · otwieramy jutro o ${next[0]}` };
+}
+const statusHtml = loc => { const s = statusFor(loc); return `<p class="status${s.open ? ' is-open' : ''}">${s.text}</p>`; };
+
+function hoursTable(loc, caption = 'Godziny otwarcia') {
+  const today = new Date().getDay();
+  return `<table class="hours">
+    <caption class="visually-hidden">${esc(caption)} — ${esc(loc.name)}</caption>
+    <tbody>${WEEK_ORDER.map(d => `<tr${d === today ? ' class="is-today"' : ''}><th scope="row">${DAY_NAMES[d]}</th><td>${loc.hours[d][0]}–${loc.hours[d][1]}</td></tr>`).join('')}</tbody>
+  </table>`;
+}
+function hoursCompact(loc) {
+  // Grupuje kolejne dni o tych samych godzinach (pn–czw 11:00–21:00 itd.)
+  const short = ['nd', 'pn', 'wt', 'śr', 'czw', 'pt', 'sob'];
+  const groups = [];
+  WEEK_ORDER.forEach(d => {
+    const v = loc.hours[d].join('–');
+    const last = groups[groups.length - 1];
+    if (last && last.v === v) last.to = d; else groups.push({ from: d, to: d, v });
+  });
+  return groups.map(g => `${short[g.from]}${g.from !== g.to ? '–' + short[g.to] : ''} ${g.v}`).join(' · ');
+}
+
+const secHead = (num, eyebrow, title, lead = '', id = '') => `
+  <header class="sec-head">
+    <p class="eyebrow"><span class="eyebrow__num">${num}</span>${eyebrow}</p>
+    <h2 class="h2"${id ? ` id="${id}"` : ''}>${title}</h2>
+    ${lead ? `<p class="lead">${lead}</p>` : ''}
+  </header>`;
+
+const ext = (href, label, cls = 'link-arrow') => `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener">${label}${ICON.ext}<span class="visually-hidden"> (otwiera się w nowej karcie)</span></a>`;
+
+/* =========================================================================
+   3. MENU WIDGET (podgląd na stronie głównej, pełne menu, menu lokalu)
+   ========================================================================= */
+let widgetSeq = 0;
+function MenuWidget({ mode = 'full', loc = 'na-skarpie', fixed = false, onLoc = null, sticky = false } = {}) {
+  const id = 'mw' + (++widgetSeq);
+  const state = { loc: LOC[loc] ? loc : 'na-skarpie', cat: mode === 'preview' ? 'pizza' : 'all', q: '' };
+  const menuOf = l => MENUS[LOC[l].menuId];
+  const cats = menuOf(state.loc).categories;
+
+  const locButtons = fixed ? '' : `
+    <p class="mw__label" id="${id}-loc-l">Restauracja</p>
+    <div class="mw__locs" role="group" aria-labelledby="${id}-loc-l">
+      ${LOCATIONS.map(l => `<button type="button" class="chip chip--loc" data-loc="${l.id}" aria-pressed="${l.id === state.loc}">${esc(l.short)}</button>`).join('')}
+    </div>`;
+
+  const catButtons = mode === 'preview'
+    ? cats.map((c, i) => `<button type="button" class="chip" data-cat="${c.id}" aria-pressed="${c.id === state.cat}"><span><span class="num">${['I', 'II', 'III', 'IV', 'V'][i] || i + 1}</span>${esc(c.name)}</span><small>${esc(c.pl)}</small></button>`).join('')
+    : [`<button type="button" class="chip" data-cat="all" aria-pressed="true">Wszystko</button>`]
+        .concat(cats.map(c => `<button type="button" class="chip" data-cat="${c.id}" aria-pressed="false">${esc(c.pl)}</button>`)).join('');
+
+  let html;
+  if (mode === 'preview') {
+    html = `<div class="mw mw--preview grid12 menu-preview__grid" data-mw="${id}">
+      <div class="menu-preview__aside">
+        ${locButtons}
+        <p class="mw__label" id="${id}-cat-l">Kategoria</p>
+        <div class="mw__cats" role="group" aria-labelledby="${id}-cat-l">${catButtons}</div>
+        <div class="menu-preview__photo" data-mw-photo></div>
+      </div>
+      <div class="menu-preview__main">
+        <p class="visually-hidden" aria-live="polite" data-mw-status></p>
+        <div class="mw__list" data-mw-list></div>
+        <div class="mw__foot" data-mw-foot></div>
+      </div>
+    </div>`;
+  } else {
+    html = `<div class="mw mw--full" data-mw="${id}">
+      ${fixed ? '' : `<div style="margin-bottom:1.75rem">${locButtons}</div>`}
+      <div class="mw__toolbar">
+        <div class="mw__search">
+          <label class="visually-hidden" for="${id}-q">Szukaj w menu</label>
+          ${ICON.search}
+          <input id="${id}-q" type="search" inputmode="search" autocomplete="off" placeholder="Szukaj: gorgonzola, gnocchi, ostre…" data-mw-q>
+        </div>
+        <p class="mw__count" data-mw-count aria-hidden="true"></p>
+      </div>
+      <div class="mw__catbar${sticky ? ' mw__catbar--sticky' : ''}" role="group" aria-label="Kategorie menu">${catButtons}</div>
+      <p class="visually-hidden" aria-live="polite" data-mw-status></p>
+      <div class="mw__list" data-mw-list></div>
+      <div class="mw__foot" data-mw-foot></div>
+    </div>`;
+  }
+
+  function dishHtml(it) {
+    const tags = (it.t || []).map(t => `<li class="tag tag--${norm(t).replace(/[^a-z]/g, '')}">${esc(t)}</li>`).join('');
+    return `<li class="dish">
+      <div class="dish__head"><h4 class="dish__name">${esc(it.n)}</h4><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">${zl(it.p)}</span></div>
+      <p class="dish__desc">${esc(it.d)}</p>
+      ${tags ? `<ul class="dish__tags" aria-label="Oznaczenia">${tags}</ul>` : ''}
+    </li>`;
+  }
+
+  function render(root) {
+    const l = LOC[state.loc];
+    const menu = menuOf(state.loc);
+    const q = norm(state.q.trim());
+    const list = $('[data-mw-list]', root);
+    const showCats = (q || state.cat === 'all') ? menu.categories : menu.categories.filter(c => c.id === state.cat);
+    let total = 0;
+    const groups = showCats.map(c => {
+      let items = c.items;
+      if (q) items = items.filter(it => norm(`${it.n} ${it.d} ${(it.t || []).join(' ')} ${c.name} ${c.pl}`).includes(q));
+      if (!items.length) return '';
+      total += items.length;
+      let shown = items, more = 0;
+      if (mode === 'preview' && items.length > 6) { shown = items.slice(0, 6); more = items.length - 6; }
+      return `<section class="mw__group" aria-labelledby="${id}-g-${c.id}">
+        <div class="mw__group-head"><h3 id="${id}-g-${c.id}">${esc(c.name)}</h3>${norm(c.pl) !== norm(c.name) ? `<span>${esc(c.pl)}</span>` : ''}</div>
+        ${c.note && !q ? `<p class="mw__note">${esc(c.note)}</p>` : ''}
+        <ul class="dishes">${shown.map(dishHtml).join('')}</ul>
+        ${more ? `<p class="mw__more">…i jeszcze ${more} ${more === 1 ? 'pozycja' : (more < 5 ? 'pozycje' : 'pozycji')} w tej kategorii. <a href="#/menu?lokal=${l.id}">Zobacz pełne menu</a></p>` : ''}
+      </section>`;
+    }).join('');
+
+    list.innerHTML = groups || `<div class="mw__empty">
+      <p>Nic nie znaleźliśmy dla „${esc(state.q)}”.</p>
+      <span class="caption">Spróbuj innej nazwy lub składnika — np. „gorgonzola”, „łosoś”, „gnocchi”.</span>
+      <button type="button" class="btn btn--ghost" data-mw-clear>Wyczyść wyszukiwanie</button>
+    </div>`;
+
+    const status = $('[data-mw-status]', root);
+    const countText = q ? `${total} ${total === 1 ? 'pozycja' : (total % 10 >= 2 && total % 10 <= 4 && (total % 100 < 10 || total % 100 >= 20) ? 'pozycje' : 'pozycji')} dla „${state.q.trim()}”` : '';
+    if (status) status.textContent = q ? `Wyniki wyszukiwania: ${countText}.` : `Pokazano: ${showCats.map(c => c.pl).join(', ')} — ${l.name}.`;
+    const count = $('[data-mw-count]', root);
+    if (count) count.textContent = countText;
+
+    $$('[data-cat]', root).forEach(b => b.setAttribute('aria-pressed', String(!q && b.dataset.cat === state.cat)));
+    $$('[data-loc]', root).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.loc === state.loc)));
+
+    const photo = $('[data-mw-photo]', root);
+    if (photo) {
+      const c = menu.categories.find(x => x.id === state.cat) || menu.categories[0];
+      photo.innerHTML = media(DEMO[c.demo], { ar: '4/5', reveal: false });
+    }
+
+    $('[data-mw-foot]', root).innerHTML = `
+      <div class="mw__links">
+        ${mode === 'preview' ? `<a class="link-arrow" href="#/menu?lokal=${l.id}">Pełne menu — ${esc(l.short)}${ICON.arrow}</a>` : ''}
+        ${ext(l.orderUrl, 'Zamów na wynos — Jedz Co Chcesz')}
+        ${ext(l.specialsPdf, 'Aktualne specjały (PDF)')}
+        ${ext(BRAND.menuPdf, 'Karta PDF')}
+        ${ext(BRAND.menuPdfEn, 'Menu in English (PDF)')}
+      </div>
+      <p class="source-note"><b>${esc(l.name)}</b> · ${esc(menu.label)}. Według strony karta jest obecnie wspólna dla trzech lokali; specjały mogą się różnić. Ceny i składy z azzurro-restauracja.pl (stan na ${SOURCE.checked}) — do weryfikacji przed publikacją. Oznaczenie „ostre” wynika z opisu dania w karcie; o alergeny zapytaj obsługę.</p>`;
+  }
+
+  function mount(root) {
+    root = root.matches && root.matches('[data-mw]') ? root : $(`[data-mw="${id}"]`, root);
+    if (!root) return;
+    root.addEventListener('click', e => {
+      const c = e.target.closest('[data-cat]');
+      const lb = e.target.closest('[data-loc]');
+      if (c) { state.cat = c.dataset.cat; state.q = ''; const qi = $('[data-mw-q]', root); if (qi) qi.value = ''; render(root); }
+      if (lb) { state.loc = lb.dataset.loc; render(root); if (onLoc) onLoc(state.loc); }
+      if (e.target.closest('[data-mw-clear]')) { state.q = ''; const qi = $('[data-mw-q]', root); qi.value = ''; render(root); qi.focus(); }
+    });
+    const qi = $('[data-mw-q]', root);
+    if (qi) {
+      let t;
+      qi.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { state.q = qi.value; if (state.q.trim()) state.cat = 'all'; render(root); }, 120); });
+      qi.addEventListener('keydown', e => { if (e.key === 'Escape' && qi.value) { e.stopPropagation(); qi.value = ''; state.q = ''; render(root); } });
+    }
+    render(root);
+  }
+  return { html, mount };
+}
+
+/* =========================================================================
+   4. KOMPONENTY WSPÓLNE
+   ========================================================================= */
+function galleryGrid(items, groupId) {
+  let photoIndex = -1;
+  return `<div class="gal gal--${groupId}" data-gallery="${groupId}">
+    ${items.map(p => {
+      if (!p.src) return `<div class="gal__item gal__item--demo">${media(p, { reveal: false })}</div>`;
+      photoIndex++;
+      return `<button type="button" class="gal__item" data-lb-index="${photoIndex}" aria-label="Powiększ zdjęcie: ${esc(p.caption || p.alt)}">${media(p, { reveal: false, tag: 'span' })}</button>`;
+    }).join('')}
+  </div>`;
+}
+function bindGallery(root, items) {
+  const photos = items.filter(p => p.src);
+  $$('[data-lb-index]', root).forEach(btn => btn.addEventListener('click', () => Lightbox.open(photos, Number(btn.dataset.lbIndex), btn)));
+}
+
+function serviceLinks(ids) {
+  return ids.map(k => {
+    const s = SERVICES[k];
+    return `<a class="svc" href="${s.href}"><strong>${s.name}</strong><span>${s.text}</span></a>`;
+  }).join('');
+}
+
+/* =========================================================================
+   5. WIDOKI
+   ========================================================================= */
+const HOME_GALLERY = [PHOTOS.skarpa, PHOTOS.ws4, PHOTOS.n1, PHOTOS.sb2, PHOTOS.andersa, PHOTOS.bistro, PHOTOS.ws5];
+function viewHome() {
+  const mw = MenuWidget({ mode: 'preview', loc: 'na-skarpie' });
+  const placeBlock = (l, i) => `
+    <article class="place place--${i + 1} grid12" aria-labelledby="place-${l.id}">
+      <a class="place__media" href="#/lokale/${l.id}" tabindex="-1" aria-hidden="true">${media(l.photo, { caption: l.photo.caption })}</a>
+      <div class="place__body" data-reveal>
+        <p class="place__num">0${i + 1}</p>
+        <h3 class="place__name" id="place-${l.id}"><span>Azzurro</span>${l.title}</h3>
+        <p class="place__addr">${esc(l.street)}, ${esc(l.city)}</p>
+        ${statusHtml(l)}
+        <p class="place__desc">${esc(l.intro)}</p>
+        <ul class="place__links">
+          <li><a class="btn btn--primary" href="#/lokale/${l.id}">Poznaj lokal ${ICON.arrow}</a></li>
+          <li><a class="link-arrow" href="#/menu?lokal=${l.id}">Menu</a></li>
+          <li>${ext(mapHref(l.mapQuery), 'Mapa')}</li>
+          <li><a class="link-arrow" href="${telHref(l.phones[0])}">Zadzwoń</a></li>
+        </ul>
+      </div>
+    </article>`;
+
+  const html = `
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container grid12 hero__grid">
+      <div class="hero__text">
+        <p class="hero__kicker">Azzurro · trzy restauracje w Toruniu</p>
+        <h1 class="hero__title" id="hero-title" tabindex="-1"><span class="visually-hidden">Azzurro — </span><span class="ln">Dobry smak.</span><span class="ln"><em>Dobry czas.</em></span></h1>
+        <p class="hero__lead">Wpadnij na pizzę, makaron albo coś wyjątkowego. Wybierz jedną z naszych restauracji w Toruniu i poczuj się jak u siebie.</p>
+        <div class="btn-row hero__cta">
+          <a class="btn btn--primary" href="#/menu">Odkryj nasze menu ${ICON.arrow}</a>
+          <button class="btn btn--ghost" type="button" data-scroll="#restauracje">Znajdź restaurację</button>
+        </div>
+        <nav class="hero__places" aria-label="Nasze restauracje">
+          ${LOCATIONS.map(l => `<a href="#/lokale/${l.id}"><strong>${esc(l.short)}</strong><span class="caption">${esc(l.street.replace('ul. ', ''))}</span></a>`).join('')}
+        </nav>
+      </div>
+      <div class="hero__visual">
+        ${media(PHOTOS.skarpa, { cls: 'hero__photo', eager: true, reveal: false, caption: 'fot. Azzurro na Skarpie' })}
+        ${media(PHOTOS.bistro, { cls: 'hero__inset', reveal: false })}
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <div class="container">
+      <span><b>I</b>antipasti</span><span><b>II</b>insalate</span><span><b>III</b>pasta</span><span><b>IV</b>pizza</span><span><b>V</b>specialità della casa</span>
+    </div>
+  </div>
+
+  <section class="section" aria-labelledby="menu-title">
+    <div class="container">
+      ${secHead('01', 'Menu', 'Co dziś <em>dobrego?</em>', 'Wybierz restaurację i zajrzyj do karty. Pizza, makarony, sałatki, przystawki do podziału i specjały domu.', 'menu-title')}
+      ${mw.html}
+    </div>
+  </section>
+
+  <section class="section section--soft" id="restauracje" aria-labelledby="places-title" tabindex="-1">
+    <div class="container">
+      ${secHead('02', 'Restauracje', 'Trzy miejsca. <em>Jeden dobry smak.</em>', 'Ta sama karta i ta sama kuchnia — w trzech częściach Torunia.', 'places-title')}
+      <div class="places">${LOCATIONS.map(placeBlock).join('')}</div>
+    </div>
+  </section>
+
+  <section class="section section--dark on-dark" aria-labelledby="together-title">
+    <div class="container grid12 together__grid">
+      ${media(PHOTOS.sb4, { cls: 'together__photo', caption: 'Azzurro na Skarpie' })}
+      <div class="together__body" data-reveal>
+        ${secHead('03', 'Przy wspólnym stole', 'Najlepiej smakuje <em>razem.</em>', '', 'together-title')}
+        <div class="prose">
+          <p>Pizza na środku stołu, makaron każdemu po swojemu, focaccia albo grissini do podziału na dwie, trzy osoby. W karcie Azzurro sporo dań jest pomyślanych właśnie tak — żeby jeść razem.</p>
+        </div>
+        <ul class="together__list">
+          <li><span>a</span>Rodzinny obiad w weekend</li>
+          <li><span>b</span>Lunch z przyjaciółmi albo z pracy</li>
+          <li><span>c</span>Urodziny, komunia, spotkanie firmowe — w sali bankietowej</li>
+          <li><span>d</span>Kolacja na wynos, kiedy nie chce się wychodzić</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ws-title">
+    <div class="container grid12 ws__grid">
+      <div class="ws__body" data-reveal>
+        ${secHead('04', 'Warsztaty kulinarne', 'Małe ręce. <em>Wielka frajda.</em>', '', 'ws-title')}
+        <div class="prose"><p>Dzieci same przygotowują włoskie dania — pizzę, makarony, gnocchi — pod okiem doświadczonych prowadzących. Najlepsza nagroda? Zjeść to, co się samemu zrobiło. Przed świętami pieczemy też pierniki.</p></div>
+        <dl class="facts">
+          <div><dt>Gdzie</dt><dd>Azzurro na Skarpie, ul. Wyszyńskiego 19/2</dd></div>
+          <div><dt>Kiedy</dt><dd>Co najmniej raz w miesiącu, najczęściej w soboty</dd></div>
+          <div><dt>Terminy</dt><dd>Ogłaszamy na ${ext(BRAND.facebook, 'Facebooku', '')} i ${ext(BRAND.instagram, 'Instagramie', '')}</dd></div>
+        </dl>
+        <div class="btn-row" style="margin-top:2rem"><a class="btn btn--primary" href="#/warsztaty">Poznaj warsztaty ${ICON.arrow}</a></div>
+      </div>
+      <div class="ws__mosaic">
+        ${media(PHOTOS.ws1)}${media(PHOTOS.ws2)}${media(PHOTOS.ws3)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft banquet" aria-labelledby="sb-title">
+    <div class="container">
+      ${media(PHOTOS.sb1, { cls: 'banquet__photo', caption: 'Sala bankietowa — Azzurro na Skarpie' })}
+      <div class="banquet__card" data-reveal>
+        ${secHead('05', 'Sala bankietowa', 'Wyjątkowe chwile przy <em>wspólnym stole.</em>', '', 'sb-title')}
+        <div class="prose"><p>Kameralna sala w Azzurro na Skarpie — na rodzinne uroczystości i firmowe spotkania, maksymalnie dla 36–38 gości. Menu ustalamy indywidualnie, z uwzględnieniem Państwa oczekiwań i budżetu; poza kuchnią włoską także dania kuchni tradycyjnej.</p></div>
+        <div class="btn-row" style="margin-top:1.75rem"><a class="btn btn--primary" href="#/sala-bankietowa">Sprawdź ofertę sali ${ICON.arrow}</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--brand on-dark" aria-labelledby="cat-title">
+    <div class="container grid12 catering__grid">
+      <div class="catering__head" data-reveal>
+        ${secHead('06', 'Azzurro Catering', 'Smak Azzurro również <em>poza restauracją.</em>', 'Na rodzinne uroczystości, firmowe spotkania i większe przyjęcia — w Toruniu i najbliższej okolicy.', 'cat-title')}
+        <div class="btn-row">${ext(CATERING.url, 'Przejdź do azzurro.catering', 'btn btn--light')}</div>
+      </div>
+      <ul class="catering__list">
+        ${CATERING.offers.slice(0, 3).map((o, i) => `<li><span class="it">${['i', 'ii', 'iii'][i]}</span><strong>${o.name}</strong><p>${o.text}</p></li>`).join('')}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="gal-title">
+    <div class="container">
+      ${secHead('07', 'Galeria', 'Zajrzyj do <em>Azzurro.</em>', 'Zdjęcia z naszych restauracji, sali i warsztatów. Więcej na Instagramie #azzurrotorun.', 'gal-title')}
+      ${galleryGrid(HOME_GALLERY, 'home')}
+      <div class="btn-row" style="margin-top:2rem"><a class="btn btn--ghost" href="#/galeria">Cała galeria ${ICON.arrow}</a>${ext(BRAND.instagram, 'Instagram @azzurro.restauracje')}</div>
+    </div>
+  </section>`;
+
+  return {
+    html,
+    mount(root) {
+      mw.mount(root);
+      bindGallery(root, HOME_GALLERY);
+    },
+  };
+}
+
+function viewMenu(params) {
+  const start = LOC[params.get('lokal')] ? params.get('lokal') : 'na-skarpie';
+  const mw = MenuWidget({ mode: 'full', loc: start, sticky: true, onLoc: id => history.replaceState(null, '', '#/menu?lokal=' + id) });
+  return {
+    title: 'Menu — pizza, makarony, specjały domu | Azzurro Toruń',
+    desc: 'Menu restauracji Azzurro w Toruniu: antipasti, sałatki, makarony, pizza i specjały domu. Wybierz lokal, przeglądaj kategorie i szukaj dań.',
+    html: `
+    <section class="page-head">
+      <div class="container">
+        <p class="crumbs"><a href="#/">Strona główna</a><span aria-hidden="true">/</span>Menu</p>
+        <h1 class="h1" tabindex="-1">Menu <em>Azzurro</em></h1>
+        <p class="lead">Antipasti, sałatki, makarony, pizza i specjały domu. Wybierz restaurację, przeglądaj kategorie albo wyszukaj danie po nazwie lub składniku.</p>
+      </div>
+    </section>
+    <section class="section" style="padding-top:0" aria-labelledby="karta-h">
+      <div class="container"><h2 class="visually-hidden" id="karta-h">Karta menu</h2>${mw.html}</div>
+    </section>`,
+    mount: root => mw.mount(root),
+  };
+}
+
+function viewLocation(id) {
+  const l = LOC[id];
+  if (!l) return viewNotFound();
+  const mw = MenuWidget({ mode: 'full', loc: l.id, fixed: true, sticky: true });
+  const others = LOCATIONS.filter(x => x.id !== l.id);
+  const phones = l.phones.map(p => `<a href="${telHref(p)}">${ICON.phone}&nbsp;${p}</a>`).join('');
+  return {
+    title: `${l.name} — ${l.street.replace('ul. ', '')}, Toruń | menu, godziny, dojazd`,
+    desc: `${l.name}, ${l.street}, Toruń. Menu, godziny otwarcia, telefon, dojazd i zamówienia na wynos.`,
+    bar: l,
+    html: `
+    <section class="loc-hero loc-hero--${l.variant}" aria-labelledby="loc-title">
+      <div class="container">
+        <p class="crumbs"><a href="#/">Strona główna</a><span aria-hidden="true">/</span>Restauracje<span aria-hidden="true">/</span>${esc(l.short)}</p>
+        <div class="grid12 loc-hero__grid" style="margin-top:1.5rem">
+          <div class="loc-hero__text">
+            <h1 class="loc-hero__name" id="loc-title" tabindex="-1"><small>Azzurro</small>${l.title}</h1>
+            <p class="loc-hero__addr">${esc(l.street)}, ${esc(l.city)}</p>
+            ${statusHtml(l)}
+          </div>
+          ${media(l.photo, { cls: 'loc-hero__photo', eager: true, reveal: false, caption: l.photo.caption })}
+        </div>
+        <div class="quick">
+          <button type="button" data-scroll="#menu-lokalu"><small>Karta</small><strong>Menu</strong></button>
+          <a href="${telHref(l.phones[0])}"><small>Rezerwacje i pytania</small><strong>Zadzwoń</strong></a>
+          <a href="${mapHref(l.mapQuery)}" target="_blank" rel="noopener"><small>Google Maps</small><strong>Dojazd</strong><span class="visually-hidden"> (otwiera się w nowej karcie)</span></a>
+          <a href="${esc(l.orderUrl)}" target="_blank" rel="noopener"><small>Jedz Co Chcesz</small><strong>Na wynos</strong><span class="visually-hidden"> (otwiera się w nowej karcie)</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="about-title">
+      <div class="container grid12" style="row-gap:3rem">
+        <div class="loc-about" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__num">i</span>O miejscu</p>
+          <h2 class="h3" id="about-title" style="margin-top:1rem;max-width:22ch">${esc(l.intro)}</h2>
+        </div>
+        <div class="loc-services" data-reveal>
+          <p class="eyebrow" style="margin-bottom:1rem"><span class="eyebrow__num">ii</span>W tym lokalu i w Azzurro</p>
+          ${serviceLinks(l.services)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="menu-lokalu" aria-labelledby="lmenu-title" tabindex="-1">
+      <div class="container">
+        ${secHead('iii', 'Menu', `Menu — <em>${esc(l.short)}</em>`, 'Przełączaj kategorie albo wyszukaj danie. Na wynos zamówisz przez Jedz Co Chcesz.', 'lmenu-title')}
+        ${mw.html}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="lgal-title">
+      <div class="container">
+        ${secHead('iv', 'Galeria', 'Wnętrza <em>i kuchnia</em>', '', 'lgal-title')}
+        <div class="loc-gal" data-loc-gal>
+          ${l.gallery.map((p, i) => p.src
+            ? `<button type="button" data-lb-index="${l.gallery.slice(0, i).filter(x => x.src).length}" aria-label="Powiększ zdjęcie: ${esc(p.caption)}">${media(p, { tag: 'span' })}</button>`
+            : media(p)).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" aria-labelledby="hours-title">
+      <div class="container grid12 split">
+        <div class="split__a" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__num">v</span>Godziny otwarcia</p>
+          <h2 class="h2" id="hours-title" style="margin:1rem 0 1.5rem">Zapraszamy</h2>
+          ${hoursTable(l)}
+          <p class="source-note" style="margin-top:1rem">Godziny wg strony azzurro-restauracja.pl. W święta mogą się różnić — w razie wątpliwości zadzwoń.</p>
+        </div>
+        <div class="split__b" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__num">vi</span>Adres i kontakt</p>
+          <div class="addr-card" style="margin-top:1.5rem">
+            <address>${esc(l.street)}<br>${l.postal ? esc(l.postal) + ' ' : ''}${esc(l.city)}</address>
+            <div class="contact-lines">${phones}<a href="mailto:${BRAND.email}">${esc(BRAND.email)}</a></div>
+            <div class="btn-row" style="margin-top:1.5rem">
+              ${ext(mapHref(l.mapQuery), 'Wyznacz trasę', 'btn btn--primary')}
+              ${ext(l.orderUrl, 'Zamów na wynos', 'btn btn--ghost')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="others-title">
+      <div class="container">
+        ${secHead('vii', 'Pozostałe restauracje', 'Azzurro <em>w Toruniu</em>', '', 'others-title')}
+        <div class="others">
+          ${others.map(o => `<a class="other" href="#/lokale/${o.id}">${media(o.photo, { ar: '1/1' })}<div><strong>${esc(o.name)}</strong><span>${esc(o.street)}</span>${statusHtml(o)}</div></a>`).join('')}
+        </div>
+      </div>
+    </section>`,
+    mount(root) {
+      mw.mount(root);
+      bindGallery($('[data-loc-gal]', root), l.gallery);
+    },
+  };
+}
+
+function viewWorkshops() {
+  const skarpa = LOC['na-skarpie'];
+  const photos = [PHOTOS.ws1, PHOTOS.ws2, PHOTOS.ws3, PHOTOS.ws4, PHOTOS.ws5, PHOTOS.ws6];
+  return {
+    title: 'Warsztaty kulinarne dla dzieci — Azzurro na Skarpie, Toruń',
+    desc: 'Kulinarne warsztaty dla dzieci i rodzin w Azzurro na Skarpie: pizza, makarony, gnocchi, a przed świętami pierniki. Grupy przedszkolne i szkolne w dni powszednie.',
+    html: `
+    <section class="page-head">
+      <div class="container grid12" style="row-gap:2.5rem;align-items:end">
+        <div class="ws-head-text">
+          <p class="crumbs"><a href="#/">Strona główna</a><span aria-hidden="true">/</span>Warsztaty</p>
+          <h1 class="h1" tabindex="-1">Małe ręce. <em>Wielka frajda.</em></h1>
+          <p class="lead">Kulinarne warsztaty dla najmłodszych w Azzurro na Skarpie. Dzieci gotują same — pod opieką doświadczonych prowadzących — a potem zjadają to, co przygotowały.</p>
+        </div>
+        <div class="ws-head-photo">${media(PHOTOS.ws1, { ar: '16/10', eager: true, reveal: false })}</div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:clamp(2rem,4vw,3rem)" aria-labelledby="ws-how">
+      <div class="container grid12 split">
+        <div class="split__a" data-reveal>
+          ${secHead('i', 'Na czym polegają', 'Gotujemy <em>po włosku</em>', '', 'ws-how')}
+          <div class="prose">
+            <p>Tematem warsztatów są głównie włoskie dania: pizza, makarony i gnocchi. W okresie bożonarodzeniowym prowadzimy też bardzo lubiane warsztaty piernikowe.</p>
+            <p>Najważniejsza zasada: dzieci pracują samodzielnie. Prowadzący pomagają i czuwają, ale to mali kucharze wyrabiają, wałkują i układają składniki.</p>
+          </div>
+        </div>
+        <div class="split__b" data-reveal>
+          <dl class="facts" style="margin-top:0">
+            <div><dt>Dla kogo</dt><dd>Dzieci; organizujemy także warsztaty rodzinne z udziałem rodziców</dd></div>
+            <div><dt>Grupy</dt><dd>Przedszkola i szkoły — osobne zajęcia w dni powszednie, zwykle od godz. 10:00</dd></div>
+            <div><dt>Kiedy</dt><dd>Cyklicznie, co najmniej raz w miesiącu, najczęściej w soboty</dd></div>
+            <div><dt>Cena</dt><dd>30 zł / os. (w cenie napój) — cena regularna wg strony</dd></div>
+            <div><dt>Szczegóły 2026</dt><dd>${ext(BRAND.workshopsPdf, 'Oferta warsztatów 2026 (PDF)', '')}</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" aria-labelledby="ws-gal">
+      <div class="container">
+        ${secHead('ii', 'Z naszych zajęć', 'Fotografie <em>warsztatów</em>', '', 'ws-gal')}
+        ${galleryGrid(photos, 'ws')}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="ws-where">
+      <div class="container grid12 split">
+        <div class="split__a" data-reveal>
+          ${secHead('iii', 'Miejsce i terminy', 'Azzurro <em>na Skarpie</em>', '', 'ws-where')}
+          <div class="prose"><p>Warsztaty odbywają się w naszej restauracji przy ul. Wyszyńskiego 19/2. Najbliższe terminy zawsze ogłaszamy na profilu Azzurro na Skarpie na Facebooku oraz na Instagramie — nie publikujemy ich tutaj, żeby zawsze były aktualne.</p></div>
+          <div class="btn-row" style="margin-top:1.75rem">${ext(BRAND.facebook, 'Terminy na Facebooku', 'btn btn--primary')}${ext(BRAND.instagram, 'Instagram', 'btn btn--ghost')}</div>
+        </div>
+        <div class="split__b" data-reveal>
+          <div class="addr-card">
+            <p class="eyebrow">Zapisy i pytania</p>
+            <address style="margin-top:1rem">${esc(skarpa.street)}<br>${esc(skarpa.city)}</address>
+            <div class="contact-lines">
+              <a href="${telHref(BRAND.events.phone)}">${ICON.phone}&nbsp;${BRAND.events.phone}</a>
+              <a href="mailto:${BRAND.events.email}?subject=${encodeURIComponent('Warsztaty kulinarne — pytanie')}">${esc(BRAND.events.email)}</a>
+            </div>
+            <p class="source-note" style="margin-top:1rem">Kontakt wg strony /warsztaty/ — do potwierdzenia przed publikacją.</p>
+          </div>
+        </div>
+      </div>
+    </section>`,
+    mount: root => bindGallery($('[data-gallery="ws"]', root), photos),
+  };
+}
+
+function viewBanquet() {
+  const photos = [PHOTOS.sb1, PHOTOS.sb2, PHOTOS.sb3, PHOTOS.sb4];
+  return {
+    title: 'Sala bankietowa w Toruniu — Azzurro na Skarpie (do 38 osób)',
+    desc: 'Sala bankietowa w Azzurro na Skarpie: rodzinne uroczystości i spotkania firmowe dla maksymalnie 36–38 gości. Menu ustalane indywidualnie.',
+    html: `
+    <section class="page-head" style="padding-bottom:0">
+      <div class="container">
+        <p class="crumbs"><a href="#/">Strona główna</a><span aria-hidden="true">/</span>Sala bankietowa</p>
+        <h1 class="h1" tabindex="-1">Wyjątkowe chwile przy <em>wspólnym stole</em></h1>
+      </div>
+    </section>
+    <section class="section banquet" style="padding-top:clamp(2rem,4vw,3rem)">
+      <div class="container">
+        ${media(PHOTOS.sb4, { cls: 'banquet__photo', eager: true, reveal: false, caption: 'Sala bankietowa — Azzurro na Skarpie' })}
+        <div class="banquet__card" data-reveal>
+          <p class="lead" style="color:var(--text-primary)">Przyjazne miejsce na rodzinną uroczystość albo firmowe spotkanie w kameralnej atmosferze.</p>
+          <dl class="facts">
+            <div><dt>Gdzie</dt><dd>Azzurro na Skarpie, ul. Wyszyńskiego 19/2</dd></div>
+            <div><dt>Ilu gości</dt><dd>Maksymalnie 36–38 osób</dd></div>
+            <div><dt>Menu</dt><dd>Ustalane indywidualnie — według oczekiwań i budżetu</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0" aria-labelledby="sb-char">
+      <div class="container grid12 split">
+        <div class="split__a" data-reveal>
+          ${secHead('i', 'Charakter imprez', 'Rodzinnie <em>i firmowo</em>', '', 'sb-char')}
+        </div>
+        <div class="split__b prose" data-reveal>
+          <p>Okolicznościowe przyjęcia rodzinne, spotkania firmowe, kameralne uroczystości — sala w Azzurro na Skarpie sprawdza się tam, gdzie liczy się dobre jedzenie i swobodna atmosfera.</p>
+          <p>Choć nasze restauracje kojarzą się przede wszystkim z kuchnią włoską, menu na imprezy okolicznościowe nie ogranicza się do dań z Italii — przygotujemy również dania kuchni tradycyjnej.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" aria-labelledby="sb-gal">
+      <div class="container">
+        ${secHead('ii', 'Galeria', 'Zobacz <em>przestrzeń</em>', '', 'sb-gal')}
+        ${galleryGrid(photos, 'sb')}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sb-offer">
+      <div class="container grid12 split">
+        <div class="split__a" data-reveal>
+          ${secHead('iii', 'Oferta', 'Wycena <em>indywidualna</em>', '', 'sb-offer')}
+          <div class="prose"><p>Nie mamy gotowych pakietów — każdą imprezę i jej menu ustalamy indywidualnie. Napisz lub zadzwoń: podaj termin, liczbę gości i charakter spotkania, a przygotujemy propozycję.</p></div>
+        </div>
+        <div class="split__b" data-reveal>
+          <div class="addr-card">
+            <p class="eyebrow">Rezerwacje sali</p>
+            <div class="contact-lines" style="margin-top:1rem">
+              <a href="${telHref(BRAND.events.phone)}">${ICON.phone}&nbsp;${BRAND.events.phone}</a>
+              <a href="mailto:${BRAND.events.email}?subject=${encodeURIComponent('Sala bankietowa — zapytanie o termin')}">${esc(BRAND.events.email)}</a>
+            </div>
+            <div class="btn-row" style="margin-top:1.5rem"><a class="btn btn--primary" href="mailto:${BRAND.events.email}?subject=${encodeURIComponent('Sala bankietowa — zapytanie o termin')}&body=${encodeURIComponent('Dzień dobry,\n\nproszę o informację o dostępności sali bankietowej.\n\nTermin:\nLiczba gości:\nRodzaj uroczystości:\n\nPozdrawiam')}">Napisz w sprawie terminu ${ICON.arrow}</a></div>
+            <p class="source-note" style="margin-top:1rem">Przycisk otwiera Twój program pocztowy. Dane kontaktowe wg strony /sala-bankietowa/ — do potwierdzenia.</p>
+          </div>
+        </div>
+      </div>
+    </section>`,
+    mount: root => bindGallery($('[data-gallery="sb"]', root), photos),
+  };
+}
+
+function viewCatering() {
+  return {
+    title: 'Catering w Toruniu — Azzurro Catering',
+    desc: 'Azzurro Catering: catering okolicznościowy, firmowy i bankietowy oraz zimne patery w Toruniu i okolicy.',
+    html: `
+    <section class="section section--brand on-dark" style="padding-top:clamp(3rem,6vw,5.5rem)">
+      <div class="container grid12 catering__grid">
+        <div class="catering__head">
+          <p class="crumbs" style="color:var(--text-on-dark-2)"><a href="#/">Strona główna</a><span aria-hidden="true">/</span>Catering</p>
+          <h1 class="h1" tabindex="-1" style="margin-top:1.25rem">Smak Azzurro również <em>poza restauracją</em></h1>
+          <p class="lead" style="margin-top:1.5rem">Azzurro Catering przygotowuje dania i przekąski na uroczystości rodzinne, spotkania firmowe i bankiety — w Toruniu i najbliższej okolicy. Menu dobieramy indywidualnie.</p>
+          <div class="btn-row" style="margin-top:2rem">${ext(CATERING.url, 'Pełna oferta na azzurro.catering', 'btn btn--light')}</div>
+        </div>
+        <ul class="catering__list">
+          ${CATERING.offers.map((o, i) => `<li><span class="it">${['i', 'ii', 'iii', 'iv'][i]}</span><strong>${o.name}</strong><p>${o.text}</p></li>`).join('')}
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container grid12 split">
+        <div class="split__a" data-reveal>
+          ${secHead('—', 'Jak zamówić', 'Zapytaj <em>o termin</em>')}
+          <div class="prose"><p>Wszystkie dania przygotowujemy na indywidualne zamówienie, dlatego zapytanie warto wysłać co najmniej dzień przed terminem realizacji. Koszt dowozu zależy od lokalizacji.</p></div>
+        </div>
+        <div class="split__b" data-reveal>
+          <div class="addr-card">
+            <p class="eyebrow">Azzurro Catering</p>
+            <address style="margin-top:1rem;font-size:1.5rem">${esc(CATERING.address)}</address>
+            <div class="contact-lines">
+              <a href="${telHref(CATERING.phone)}">${ICON.phone}&nbsp;${CATERING.phone}</a>
+              <a href="mailto:${CATERING.email}">${esc(CATERING.email)}</a>
+            </div>
+            <p class="source-note" style="margin-top:1rem">Dane z azzurro.catering — do weryfikacji. Pełna oferta, ceny i formularz zapytania pozostają na stronie cateringowej.</p>
+          </div>
+        </div>
+      </div>
+    </section>`,
+  };
+}
+
+function viewGallery(params) {
+  const startFilter = GALLERY_FILTERS.some(f => f.id === params.get('kategoria')) ? params.get('kategoria') : 'all';
+  return {
+    title: 'Galeria — Azzurro Toruń',
+    desc: 'Zdjęcia z restauracji Azzurro w Toruniu: lokale, sala bankietowa, warsztaty kulinarne.',
+    html: `
+    <section class="page-head">
+      <div class="container">
+        <p class="crumbs"><a href="#/">Strona główna</a><span aria-hidden="true">/</span>Galeria</p>
+        <h1 class="h1" tabindex="-1">Zajrzyj do <em>Azzurro</em></h1>
+        <p class="lead">Restauracje, sala bankietowa i warsztaty. Kliknij zdjęcie, aby je powiększyć — strzałkami przełączysz kolejne.</p>
+      </div>
+    </section>
+    <section class="section" style="padding-top:0" aria-label="Zdjęcia">
+      <div class="container">
+        <div class="gal__filters" role="group" aria-label="Filtruj zdjęcia">
+          ${GALLERY_FILTERS.map(f => `<button type="button" class="chip" data-filter="${f.id}" aria-pressed="${f.id === startFilter}">${f.label}</button>`).join('')}
+        </div>
+        <p class="visually-hidden" aria-live="polite" data-gal-status></p>
+        <div data-gal-wrap></div>
+        <div class="notice" style="margin-top:2.5rem"><span class="badge-demo" style="color:var(--brand-accent)">DEMO</span><p><strong>Kategoria „Jedzenie” czeka na sesję zdjęciową.</strong> Na oficjalnej stronie nie ma opisanych zdjęć dań, więc w prototypie stoją oznaczone miejsca. Zdjęcia z zakładki „Najnowsze” po obejrzeniu przypisz do właściwych kategorii.</p></div>
+      </div>
+    </section>`,
+    mount(root) {
+      const wrap = $('[data-gal-wrap]', root);
+      const status = $('[data-gal-status]', root);
+      const apply = f => {
+        const items = f === 'all' ? GALLERY : GALLERY.filter(p => p.cat === f);
+        wrap.innerHTML = galleryGrid(items, 'g');
+        bindGallery(wrap, items);
+        $$('[data-filter]', root).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === f)));
+        const label = GALLERY_FILTERS.find(x => x.id === f).label;
+        status.textContent = `${label}: ${items.length} ${items.length === 1 ? 'zdjęcie' : 'zdjęć'}.`;
+        history.replaceState(null, '', f === 'all' ? '#/galeria' : '#/galeria?kategoria=' + f);
+      };
+      $$('[data-filter]', root).forEach(b => b.addEventListener('click', () => apply(b.dataset.filter)));
+      apply(startFilter);
+    },
+  };
+}
+
+function viewContact() {
+  return {
+    title: 'Kontakt — restauracje Azzurro w Toruniu',
+    desc: 'Adresy, telefony i godziny otwarcia restauracji Azzurro w Toruniu: na Skarpie, Andersa, Włoskie Bistro. Kontakt w sprawie sali, warsztatów i cateringu.',
+    html: `
+    <section class="page-head">
+      <div class="container">
+        <p class="crumbs"><a href="#/">Strona główna</a><span aria-hidden="true">/</span>Kontakt</p>
+        <h1 class="h1" tabindex="-1">Do zobaczenia <em>w Azzurro</em></h1>
+        <p class="lead">Zadzwoń, aby zarezerwować stolik, albo po prostu wpadnij. Na wynos zamówisz przez Jedz Co Chcesz.</p>
+      </div>
+    </section>
+    <section class="section" style="padding-top:0" aria-label="Restauracje">
+      <div class="container cblocks">
+        ${LOCATIONS.map(l => `
+        <article class="cblock" aria-labelledby="c-${l.id}" data-reveal>
+          <h2 id="c-${l.id}"><small>Azzurro</small>${esc(l.short)}</h2>
+          <address>${esc(l.street)}, ${esc(l.city)}</address>
+          ${statusHtml(l)}
+          <div class="contact-lines">${l.phones.map(p => `<a href="${telHref(p)}">${ICON.phone}&nbsp;${p}</a>`).join('')}</div>
+          ${hoursTable(l)}
+          <div class="btn-row">
+            ${ext(mapHref(l.mapQuery), 'Nawiguj', 'btn btn--primary')}
+            <a class="btn btn--ghost" href="#/lokale/${l.id}">Strona lokalu</a>
+          </div>
+          ${ext(l.orderUrl, 'Zamów na wynos')}
+        </article>`).join('')}
+      </div>
+    </section>
+    <section class="section section--soft" aria-label="Pozostałe kontakty">
+      <div class="container cblocks">
+        <div class="cblock" data-reveal>
+          <h2><small>Ogólnie</small>E-mail</h2>
+          <div class="contact-lines"><a href="mailto:${BRAND.email}">${esc(BRAND.email)}</a></div>
+          <div class="btn-row">${ext(BRAND.facebook, 'Facebook', 'btn btn--ghost')}${ext(BRAND.instagram, 'Instagram', 'btn btn--ghost')}</div>
+        </div>
+        <div class="cblock" data-reveal>
+          <h2><small>Sala i warsztaty</small>Imprezy</h2>
+          <div class="contact-lines">
+            <a href="${telHref(BRAND.events.phone)}">${ICON.phone}&nbsp;${BRAND.events.phone}</a>
+            <a href="mailto:${BRAND.events.email}">${esc(BRAND.events.email)}</a>
+          </div>
+          <p class="mini-hours">Sala bankietowa i warsztaty kulinarne — Azzurro na Skarpie.</p>
+        </div>
+        <div class="cblock" data-reveal>
+          <h2><small>Azzurro Catering</small>Catering</h2>
+          <div class="contact-lines">
+            <a href="${telHref(CATERING.phone)}">${ICON.phone}&nbsp;${CATERING.phone}</a>
+            <a href="mailto:${CATERING.email}">${esc(CATERING.email)}</a>
+          </div>
+          ${ext(CATERING.url, 'azzurro.catering')}
+        </div>
+      </div>
+    </section>`,
+  };
+}
+
+function viewNotFound() {
+  return {
+    title: 'Nie znaleziono strony — Azzurro',
+    html: `<section class="page-head"><div class="container">
+      <h1 class="h1" tabindex="-1">Tego dania <em>nie ma w karcie</em></h1>
+      <p class="lead">Strona, której szukasz, nie istnieje. Zajrzyj do menu albo wróć na stronę główną.</p>
+      <div class="btn-row" style="margin-top:2rem"><a class="btn btn--primary" href="#/menu">Zobacz menu ${ICON.arrow}</a><a class="btn btn--ghost" href="#/">Strona główna</a></div>
+    </div></section>`,
+  };
+}
+
+/* =========================================================================
+   6. NAWIGACJA, STOPKA, PASEK AKCJI
+   ========================================================================= */
+const NAV = [
+  { href: '#/menu', label: 'Menu', key: '/menu' },
+  { key: '/lokale', label: 'Restauracje', pop: true },
+  { href: '#/warsztaty', label: 'Warsztaty', key: '/warsztaty' },
+  { href: '#/sala-bankietowa', label: 'Sala bankietowa', key: '/sala-bankietowa' },
+  { href: '#/catering', label: 'Catering', key: '/catering' },
+  { href: '#/kontakt', label: 'Kontakt', key: '/kontakt' },
+];
+
+function renderNav() {
+  $('#nav-list').innerHTML = NAV.map(n => n.pop
+    ? `<li class="nav__item"><button type="button" class="nav__link" aria-expanded="false" aria-controls="pop-lokale" data-key="${n.key}" data-pop-btn>${n.label} ${ICON.caret}</button>
+        <div class="nav__pop" id="pop-lokale" hidden>
+          ${LOCATIONS.map(l => `<a href="#/lokale/${l.id}" data-key="/lokale/${l.id}"><strong>${esc(l.name)}</strong><small>${esc(l.street)}</small></a>`).join('')}
+        </div></li>`
+    : `<li class="nav__item"><a class="nav__link" href="${n.href}" data-key="${n.key}">${n.label}</a></li>`).join('');
+
+  $('#mnav').innerHTML = `
+    <nav aria-label="Nawigacja mobilna">
+      <ul class="mnav__list">
+        <li><a href="#/" data-key="/">Strona główna</a></li>
+        ${NAV.filter(n => !n.pop).map(n => `<li><a href="${n.href}" data-key="${n.key}">${n.label}</a></li>`).join('')}
+        <li><a href="#/galeria" data-key="/galeria">Galeria</a></li>
+      </ul>
+      <div class="mnav__group">
+        <h2>Restauracje</h2>
+        <ul class="mnav__locs">
+          ${LOCATIONS.map(l => `<li><a href="#/lokale/${l.id}" data-key="/lokale/${l.id}"><strong>${esc(l.name)}</strong><span>${esc(l.street)}</span></a></li>`).join('')}
+        </ul>
+      </div>
+      <a class="btn btn--primary" href="#/menu">Zobacz menu ${ICON.arrow}</a>
+    </nav>`;
+}
+
+function renderFooter() {
+  $('#site-footer').innerHTML = `
+  <div class="container">
+    <div class="grid12 footer__top">
+      <div class="footer__brand">
+        <a class="brand" href="#/" aria-label="Azzurro Restauracje — strona główna"><span class="brand__word" aria-hidden="true">azzurro</span><span class="brand__sub" aria-hidden="true">restauracje</span></a>
+        <p>Pizza, makarony i specjały domu w trzech restauracjach w Toruniu. Dobry smak. Dobry czas.</p>
+      </div>
+      <div class="footer__locs">
+        ${LOCATIONS.map(l => `<div class="footer__loc">
+          <h3><a href="#/lokale/${l.id}">${esc(l.name)}</a></h3>
+          <p>${esc(l.street)}, ${esc(l.city)}</p>
+          <p>${hoursCompact(l)}</p>
+          <ul>
+            ${l.phones.map(p => `<li><a href="${telHref(p)}">${p}</a></li>`).join('')}
+            <li><a href="${mapHref(l.mapQuery)}" target="_blank" rel="noopener">Mapa ↗<span class="visually-hidden"> (nowa karta)</span></a></li>
+            <li><a href="${esc(l.orderUrl)}" target="_blank" rel="noopener">Na wynos ↗<span class="visually-hidden"> (nowa karta)</span></a></li>
+          </ul>
+        </div>`).join('')}
+      </div>
+    </div>
+    <div class="footer__mid">
+      <nav class="footer__nav" aria-label="Stopka">
+        <a href="#/menu">Menu</a><a href="#/galeria">Galeria</a><a href="#/warsztaty">Warsztaty</a><a href="#/sala-bankietowa">Sala bankietowa</a><a href="#/catering">Catering</a><a href="#/kontakt">Kontakt</a>
+        <a href="mailto:${BRAND.email}">${esc(BRAND.email)}</a>
+      </nav>
+      <div class="footer__social">
+        <a href="${BRAND.facebook}" target="_blank" rel="noopener">${ICON.fb}Facebook<span class="visually-hidden"> (nowa karta)</span></a>
+        <a href="${BRAND.instagram}" target="_blank" rel="noopener">${ICON.ig}Instagram<span class="visually-hidden"> (nowa karta)</span></a>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <p>© ${new Date().getFullYear()} Azzurro Restauracje · Toruń</p>
+      <p><span class="badge-demo">DEMO</span>&nbsp; Dane rejestrowe firmy, polityka prywatności i informacja o cookies — do uzupełnienia przed wdrożeniem.</p>
+    </div>
+  </div>`;
+}
+
+function renderActionBar(loc) {
+  const bar = $('#actionbar');
+  if (!loc) { document.body.classList.remove('has-actionbar'); bar.innerHTML = ''; return; }
+  document.body.classList.add('has-actionbar');
+  bar.innerHTML = `
+    <a href="${telHref(loc.phones[0])}">${ICON.phone}Zadzwoń</a>
+    <a href="${mapHref(loc.mapQuery)}" target="_blank" rel="noopener">${ICON.pin}Dojazd<span class="visually-hidden"> (nowa karta)</span></a>
+    <button type="button" data-scroll="#menu-lokalu">${ICON.menu}Menu</button>
+    <a href="${esc(loc.orderUrl)}" target="_blank" rel="noopener">${ICON.bag}Na wynos<span class="visually-hidden"> (nowa karta)</span></a>`;
+}
+
+/* Popover „Restauracje” + menu mobilne */
+function setupNavInteractions() {
+  const popBtn = $('[data-pop-btn]');
+  const pop = $('#pop-lokale');
+  const closePop = (focus = false) => { pop.hidden = true; popBtn.setAttribute('aria-expanded', 'false'); if (focus) popBtn.focus(); };
+  popBtn.addEventListener('click', () => {
+    const open = popBtn.getAttribute('aria-expanded') === 'true';
+    pop.hidden = open; popBtn.setAttribute('aria-expanded', String(!open));
+    if (!open) $('a', pop).focus();
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('.nav__item') && !pop.hidden) closePop(); });
+  pop.addEventListener('keydown', e => {
+    const links = $$('a', pop); const i = links.indexOf(document.activeElement);
+    if (e.key === 'Escape') { e.preventDefault(); closePop(true); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); links[(i + 1) % links.length].focus(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); links[(i - 1 + links.length) % links.length].focus(); }
+  });
+  pop.addEventListener('focusout', e => { if (!pop.contains(e.relatedTarget) && e.relatedTarget !== popBtn) closePop(); });
+
+  const burger = $('[data-burger]');
+  const mnav = $('#mnav');
+  const label = $('[data-burger-label]');
+  const setInert = on => ['#main', '#site-footer', '#proto'].forEach(s => { const el = $(s); if (el) el.inert = on; });
+  const closeM = (focus = false) => { mnav.hidden = true; burger.setAttribute('aria-expanded', 'false'); label.textContent = 'Otwórz nawigację'; document.body.style.overflow = ''; setInert(false); if (focus) burger.focus(); };
+  burger.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') === 'true';
+    if (open) return closeM();
+    mnav.style.top = Math.max(0, $('#site-header').getBoundingClientRect().bottom) + 'px';
+    mnav.hidden = false; burger.setAttribute('aria-expanded', 'true'); label.textContent = 'Zamknij nawigację';
+    document.body.style.overflow = 'hidden'; setInert(true);
+    $('a', mnav).focus();
+  });
+  mnav.addEventListener('keydown', e => { if (e.key === 'Escape') closeM(true); });
+  window.addEventListener('resize', () => { if (window.innerWidth >= 1080 && !mnav.hidden) closeM(); });
+  return { closeAll() { closePop(); if (!mnav.hidden) closeM(); } };
+}
+
+/* =========================================================================
+   7. LIGHTBOX
+   ========================================================================= */
+const Lightbox = (() => {
+  const dlg = $('#lightbox');
+  const img = $('[data-lb-img]', dlg);
+  const cap = $('[data-lb-cap]', dlg);
+  const count = $('[data-lb-count]', dlg);
+  let list = [], i = 0, opener = null, startX = null;
+
+  function show() {
+    const p = list[i];
+    dlg.classList.remove('is-missing');
+    img.src = p.src; img.alt = p.alt;
+    cap.textContent = p.caption || p.alt;
+    count.textContent = `${i + 1} / ${list.length}`;
+    const single = list.length < 2;
+    $('[data-lb-prev]', dlg).hidden = single; $('[data-lb-next]', dlg).hidden = single;
+    // wstępne ładowanie sąsiadów
+    [list[(i + 1) % list.length], list[(i - 1 + list.length) % list.length]].forEach(n => { if (n) { const im = new Image(); im.src = n.src; } });
+  }
+  const go = d => { i = (i + d + list.length) % list.length; show(); };
+  img.addEventListener('error', () => dlg.classList.add('is-missing'));
+  $('[data-lb-close]', dlg).addEventListener('click', () => dlg.close());
+  $('[data-lb-prev]', dlg).addEventListener('click', () => go(-1));
+  $('[data-lb-next]', dlg).addEventListener('click', () => go(1));
+  dlg.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+  });
+  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.classList.contains('lb__stage')) dlg.close(); });
+  dlg.addEventListener('pointerdown', e => { startX = e.clientX; });
+  dlg.addEventListener('pointerup', e => { if (startX !== null && Math.abs(e.clientX - startX) > 60 && list.length > 1) go(e.clientX < startX ? 1 : -1); startX = null; });
+  dlg.addEventListener('close', () => { img.removeAttribute('src'); document.body.style.overflow = ''; if (opener && document.contains(opener)) opener.focus(); });
+
+  return {
+    open(items, index, trigger) {
+      if (!items.length) return;
+      list = items; i = Math.max(0, Math.min(index, items.length - 1)); opener = trigger;
+      show();
+      document.body.style.overflow = 'hidden';
+      if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+      $('[data-lb-close]', dlg).focus();
+    },
+  };
+})();
+
+/* =========================================================================
+   8. ROUTER (hash routing: #/…)
+   ========================================================================= */
+const ROUTES = [
+  { re: /^\/$/, key: '/', view: () => viewHome() },
+  { re: /^\/menu$/, key: '/menu', view: p => viewMenu(p) },
+  { re: /^\/lokale\/([a-z-]+)$/, key: '/lokale', view: (p, m) => viewLocation(m[1]) },
+  { re: /^\/warsztaty$/, key: '/warsztaty', view: () => viewWorkshops() },
+  { re: /^\/sala-bankietowa$/, key: '/sala-bankietowa', view: () => viewBanquet() },
+  { re: /^\/catering$/, key: '/catering', view: () => viewCatering() },
+  { re: /^\/galeria$/, key: '/galeria', view: p => viewGallery(p) },
+  { re: /^\/kontakt$/, key: '/kontakt', view: () => viewContact() },
+];
+const DEFAULT_TITLE = document.title;
+const DEFAULT_DESC = $('meta[name="description"]').content;
+const scrollMemory = new Map();
+let currentKey = null;
+let navIntent = 'traverse';
+let firstRender = true;
+let navApi;
+
+function parse() {
+  const raw = location.hash.slice(1) || '/';
+  if (!raw.startsWith('/')) return null;
+  const [path, qs] = raw.split('?');
+  return { path: path.replace(/\/+$/, '') || '/', params: new URLSearchParams(qs || ''), full: raw };
+}
+
+function render() {
+  const r = parse();
+  if (!r) return; // np. #main — zwykła kotwica, nie trasa
+  if (currentKey) scrollMemory.set(currentKey, window.scrollY);
+
+  let route = null, match = null;
+  for (const x of ROUTES) { match = r.path.match(x.re); if (match) { route = x; break; } }
+  const v = route ? route.view(r.params, match) : viewNotFound();
+
+  const main = $('#main');
+  main.innerHTML = `<div class="view">${v.html}</div>`;
+  if (v.mount) v.mount(main);
+
+  document.title = v.title || DEFAULT_TITLE;
+  $('meta[name="description"]').content = v.desc || DEFAULT_DESC;
+  renderActionBar(v.bar || null);
+  setActiveNav(r.path);
+  observeReveals(main);
+  if (navApi) navApi.closeAll();
+
+  const key = r.path;
+  const restore = navIntent === 'traverse' && scrollMemory.has(key);
+  window.scrollTo({ top: restore ? scrollMemory.get(key) : 0, left: 0, behavior: 'instant' });
+  currentKey = key;
+
+  if (!firstRender) {
+    const h1 = $('h1', main);
+    if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
+    $('#route-status').textContent = 'Wczytano stronę: ' + (h1 ? h1.textContent.trim() : document.title);
+  }
+  firstRender = false;
+  navIntent = 'traverse';
+}
+
+function setActiveNav(path) {
+  $$('[data-key]').forEach(a => {
+    const k = a.dataset.key;
+    const active = k === path || (k === '/lokale' && path.startsWith('/lokale/'));
+    if (a.tagName === 'A') { if (k === path) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }
+    a.classList.toggle('is-active', active);
+  });
+}
+
+/* =========================================================================
+   9. EFEKTY: reveal, header, przewijanie, obrazy
+   ========================================================================= */
+let io = null;
+function observeReveals(root) {
+  const els = $$('[data-reveal]:not(.is-visible)', root);
+  if (!('IntersectionObserver' in window) || reduceMotion()) { els.forEach(el => el.classList.add('is-visible')); return; }
+  if (!io) io = new IntersectionObserver(entries => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+  els.forEach(el => io.observe(el));
+}
+
+function setupGlobal() {
+  // Błąd wczytania zdjęcia → elegancki placeholder DEMO zamiast pustej ramki
+  document.addEventListener('error', e => {
+    const t = e.target;
+    if (t.tagName === 'IMG' && t.closest('.media')) t.closest('.media').classList.add('is-missing');
+  }, true);
+
+  // Zamiar nawigacji (push vs. wstecz/dalej) — do przywracania pozycji przewinięcia
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#/"]');
+    if (a) {
+      navIntent = 'push';
+      if (a.getAttribute('href') === location.hash) { e.preventDefault(); render(); }
+    }
+    const s = e.target.closest('[data-scroll]');
+    if (s) {
+      const target = $(s.dataset.scroll);
+      if (target) { target.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' }); target.focus({ preventScroll: true }); }
+    }
+  });
+
+  $('[data-skip]').addEventListener('click', e => { e.preventDefault(); const m = $('#main'); m.focus(); m.scrollIntoView(); });
+
+  const header = $('#site-header');
+  const toTop = $('[data-to-top]');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+      toTop.classList.toggle('is-visible', window.scrollY > 900);
+      ticking = false;
+    });
+  }, { passive: true });
+  toTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: reduceMotion() ? 'auto' : 'smooth' }); $('#main').focus({ preventScroll: true }); });
+
+  // Pasek informacji o prototypie
+  const proto = $('#proto');
+  try { if (sessionStorage.getItem('azzurro-proto-hidden') === '1') proto.hidden = true; } catch (_) {}
+  $('[data-proto-close]').addEventListener('click', () => { proto.hidden = true; try { sessionStorage.setItem('azzurro-proto-hidden', '1'); } catch (_) {} $('#main').focus({ preventScroll: true }); });
+}
+
+/* =========================================================================
+   10. SEO: dane strukturalne Restaurant (z potwierdzonych danych ze strony)
+   ========================================================================= */
+function injectStructuredData() {
+  const dayMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const data = {
+    '@context': 'https://schema.org',
+    '@graph': LOCATIONS.map(l => ({
+      '@type': 'Restaurant',
+      name: l.name,
+      servesCuisine: ['Italian', 'Pizza'],
+      priceRange: '13–60 zł',
+      telephone: '+48' + l.phones[0].replace(/\D/g, ''),
+      email: BRAND.email,
+      image: l.photo.src,
+      address: { '@type': 'PostalAddress', streetAddress: l.street.replace('ul. ', ''), addressLocality: l.city, ...(l.postal ? { postalCode: l.postal } : {}), addressCountry: 'PL' },
+      openingHoursSpecification: l.hours.map((h, d) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: dayMap[d], opens: h[0], closes: h[1] })),
+      hasMenu: SOURCE.site + '/menu/' + (l.id === 'wloskie-bistro' ? 'azzurro-wloskie-bistro' : l.id) + '/',
+      acceptsReservations: 'True',
+      sameAs: [BRAND.facebook, BRAND.instagram],
+    })),
+  };
+  const s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify(data);
+  document.head.appendChild(s);
+}
+
+/* =========================================================================
+   START
+   ========================================================================= */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+renderNav();
+renderFooter();
+navApi = setupNavInteractions();
+setupGlobal();
+injectStructuredData();
+window.addEventListener('hashchange', render);
+if (!location.hash || location.hash === '#') history.replaceState(null, '', '#/');
+render();
+})();
+</script>
+</body>
+</html>
